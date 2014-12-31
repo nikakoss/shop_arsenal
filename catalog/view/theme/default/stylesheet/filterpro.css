@@ -1,0 +1,108 @@
+/*#filterpro .option_box {
+    border: 1px solid #38B0E3;
+    border-radius: 7px;
+    display: inline-block;
+    margin: 5px;
+    min-width: 138px;
+    padding: 5px;
+    vertical-align: top;
+}
+
+#filterpro .price_limit {
+    border: 0;
+    color: #38B0E3;
+    font-weight: bold;
+    width: 100%;
+	
+}
+*/
+#filterpro .option_name, #filterpro .attribute_group_name{
+    white-space: normal;
+    width: 220px;
+    padding-right: 10px;
+}
+#filterpro {
+	margin-bottom: 10px;
+}
+#filterpro .price_limit {
+	width: 50px;
+}
+#filterpro .filterpro_title {
+	font: bold 12px Tahoma;
+	color: #575757;
+	text-align: center;
+}
+#filterpro .ui-widget-header {
+	height: 11px;
+    background: url('../image/begynok_cost_filter.png');
+    border: 0 none;
+    color: #FFFFFF;
+    font-weight: bold;
+}
+#filterpro .ui-slider-horizontal {
+	height: 11px;
+	background: url('../image/begynok_cost_filter2.png');
+}
+#filterpro .ui-slider-handle.ui-corner-all {
+	border-radius: 15px;
+	height: 17px;
+	width: 17px;
+	cursor: pointer;
+}
+#filterpro .ui-corner-all {
+	border-radius: 0;
+}
+#filterpro .ui-slider-horizontal .ui-slider-handle {
+	top: -4px;
+}
+#filterpro .slider-container {
+	margin-top: 10px;
+	padding: 0 20px;
+}
+#filterpro select {
+    width: 126px;
+}
+
+#filterpro .ui-state-hover, #filterpro .ui-state-focus, #filterpro .ui-state-active {
+    border: 1px solid #38B0E3;
+    background: none repeat scroll 0 0 #d9f2fc;
+}
+/*
+#filterpro .price_slider {
+    padding: 5px;
+}
+*/
+
+#filterpro .option_values {
+    padding-top: 5px;
+}
+
+#filterpro .option_name, #filterpro .attribute_group_name {
+    background: url("../image/str_bot.png") no-repeat scroll right center transparent;
+    cursor: pointer;
+}
+#filterpro .attribute_group_name{
+    padding-left: 0;
+}
+
+#filterpro .hided {
+    background: url("../image/str_top.png") no-repeat scroll right center transparent;
+    cursor: pointer;
+}
+
+#filterpro .collapsible{
+    max-height: 200px;
+    overflow-y: auto;
+}
+#filterpro .ui-widget-content {
+	border: none;
+}
+#filterpro img {
+    cursor: pointer;
+    margin: 2px
+}
+
+#filterpro img.selected {
+    border: 2px solid;
+    margin: 0;
+}

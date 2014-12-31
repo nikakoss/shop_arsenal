@@ -1,0 +1,7 @@
+AuthType Basic
+AuthName "/www/vitdomain.ru/webstat"
+AuthUserFile /var/www/root_user/data/etc/47850209.passwd
+DirectoryIndex index.html
+<Limit GET POST>
+	require valid-user
+</Limit>
