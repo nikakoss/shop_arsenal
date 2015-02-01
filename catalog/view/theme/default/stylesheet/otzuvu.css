@@ -1,0 +1,14 @@
+.otzuvu{height:721px;background:url(../images/our_comm_bg.png);display:block;}
+.otzuvu h2{font-size:60px;font-family:'Open Sans Condensed',sans-serif;color:#ffffff;text-align:center;padding-top:60px;margin-bottom:78px;display:block;background:none;}
+.otz_otz{width:402px;height:150px;padding:15px;float:left;padding-top:12px;background:#ffffff;display:block;margin-bottom:61px;position:relative;}
+.otz_otz:after{content:"";width:27px;height:27px;position:absolute;bottom:-27px;right:63px;background:url(../images/otz_tr.png) no-repeat;}
+.ot1,.ot2{margin-right:79px;}
+.ot2{margin-bottom:70px;}
+.us_im{width:114px;height:114px;display:block;float:left;margin-top:0px;padding-bottom:31px;margin-right:15px;}
+.us_im img{max-width:114px;height:114px;width:100%;}
+.ot_name{font-size:16px;font-family:'Open Sans Condensed',sans-serif;font-weight:700;color:#000000;display:block;margin-top:-1px;}
+.ot_date{font-size:11px;font-family:'Open Sans';font-weight:400;color:#787878;display:block;margin-bottom:10px;margin-top:-2px;}
+.otz_otz p{font-size:13px;color:#3a3a3a;font-family:'Open Sans';font-weight:400;line-height:15px;padding:0px;height:105px;overflow:hidden;}
+.otz_b{display:block;text-align:center;}
+.otzuvu a{display:inline;margin:0px auto;width:auto;height:41px;line-height:41px;text-transform:uppercase;font-size:21px;font-family:'Open Sans Condensed',sans-serif;color:#ffffff;background:rgba(0, 0, 0, 0.5);border:1px solid #80d2ff;text-decoration:none;box-shadow:4px 4px 0 0 rgba(128, 210, 255, 0.46);padding:10px 25px;position:relative;}
+.otzuvu a:hover{background:none;}

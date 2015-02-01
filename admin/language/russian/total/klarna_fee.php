@@ -1,18 +1,18 @@
 <?php
 // Heading
-$_['heading_title']    = 'Взнос Klarna';
+$_['heading_title']    = 'Klarna Fee';
 
 // Text
-$_['text_total']       = 'Все заказы';
+$_['text_total']       = 'Общая сумма заказа';
 $_['text_success']     = 'Настройки модуля обновлены!';
 
 // Entry
-$_['entry_total']      = 'Общая сумма заказа:';
-$_['entry_fee']        = 'Взнос:';
-$_['entry_tax_class']  = 'Налоговый класс:';
+$_['entry_total']      = 'Сумма заказа:';
+$_['entry_fee']        = 'Плата:';
+$_['entry_tax_class']  = 'Класс налога:';
 $_['entry_status']     = 'Статус:';
 $_['entry_sort_order'] = 'Порядок сортировки:';
 
 // Error
-$_['error_permission'] = 'У Вас нет прав для управления взносом!';
+$_['error_permission'] = 'У Вас нет прав для управления этим модулем!';
 ?>

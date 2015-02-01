@@ -198,7 +198,8 @@ function subcaptcha(e) {
 	   return false;
 }
 //**************** /subcaptcha() ********************************
-FSelectedText = function() { if (!$('#ctrlcopy').length>0) {
+FSelectedText = function() {
+ if (!$('#ctrlcopy').length>0) {
   $('body').append('<div id=\"ctrlcopy\"><\/div>');
  }
 if ($.isFunction($.fn.on)) {
@@ -347,7 +348,8 @@ var wbbOpt = {
 
 //**************** imageboxinit() ********************************
 imageboxinit = function(str) {
-	if (str=='colorbox') {		$('.imagebox').colorbox({
+	if (str=='colorbox') {
+		$('.imagebox').colorbox({
 			overlayClose: true,
 			opacity: 0.5
 		});
@@ -399,7 +401,8 @@ ratingloader = function (id) {
 
 //**************** remove_success() ********************************
 remove_success = function()
-{	$('.success, .warning, .attention').fadeIn().animate({
+{
+	$('.success, .warning, .attention').fadeIn().animate({
 	   opacity: 0.3
 	 }, 10000, function() {
 	   $('.success, .warning, .attention').remove();
@@ -500,6 +503,11 @@ $.fn.comments = function(acr, acc) {
 }
 //**************** /comments() ********************************
 
+// valid email orest
+function isValidEmailAddress(emailAddress) {
+    var pattern = new RegExp(/^((([a-z]|\d|[!#\$%&'\*\+\-\/=\?\^_`{\|}~]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])+(\.([a-z]|\d|[!#\$%&'\*\+\-\/=\?\^_`{\|}~]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])+)*)|((\x22)((((\x20|\x09)*(\x0d\x0a))?(\x20|\x09)+)?(([\x01-\x08\x0b\x0c\x0e-\x1f\x7f]|\x21|[\x23-\x5b]|[\x5d-\x7e]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(\\([\x01-\x09\x0b\x0c\x0d-\x7f]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]))))*(((\x20|\x09)*(\x0d\x0a))?(\x20|\x09)+)?(\x22)))@((([a-z]|\d|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(([a-z]|\d|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])*([a-z]|\d|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])))\.)+(([a-z]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(([a-z]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])*([a-z]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])))\.?$/i);
+    return pattern.test(emailAddress);
+};
 
 //**************** comment_write() ********************************
 function comment_write(event)
@@ -596,7 +604,33 @@ function comment_write(event)
         var data_form = $('#'+prefix+'form_work_'+myid).serialize();
         var url_end = mark+'='+mark_id+'&parent=' + myid + '&page=' + page+'&mylist_position='+mylist_position+'&mark='+mark;
         var url_str = 'index.php?route=record/treecomments/write&'+url_end;
-
+        var error=true;
+        
+        if($('.comment_name').val().length>3){
+            $('.comment_name').css({'border':'1px solid #4aace8'});
+            error=true;
+        }else{
+            $('.comment_name').css({'border':'1px solid red'});
+            error=false;
+        }
+        
+        
+        if(isValidEmailAddress($('#comment_email').val())){
+            $('#comment_email').css({'border':'1px solid #4aace8'});
+           // error=true;
+        }else{
+            $('#comment_email').css({'border':'1px solid red'});
+            error=false;
+        }
+        
+        if($('.comment-msg').val().length>26){
+            $('.comment-msg').css({'border':'1px solid #4aace8'});            
+        }else{
+            $('.comment-msg').css({'border':'1px solid red'});
+            error=false;
+        }
+        
+        if(error){
 	    $.ajax(
 		{
 			type: 'POST',
@@ -624,34 +658,42 @@ function comment_write(event)
 			},
 			success: function(data)
 			{
-
+                    
+                    $('.comment_name, #comment_email, .comment-msg').val("");
+                    
   	           $('#'+prefix+'comment_work_'+ myid).prepend(data);
 
                $('.success, .attention').remove();
 
 				if (wdata['code']=='error')
 				{
+                                    console.log(wdata['message']);
 					$('#'+prefix+'comment_work_'+myid).show();
 
 					if ( myid == '0') $('#'+prefix+'comment-title').after('<div class="warning">' + wdata['message'] + '</div>');
 					else
 					$('#'+prefix+'comment_work_'+ myid).prepend('<div class="warning">' + wdata['message'] + '</div>');
 				}
-
+                                
+                                console.log(wdata['message']);
 				if (wdata['code']=='success')
 				{
+                                    
+                                    $('.popupSuccess').show();
+                                    $('.popupSuccess .popupTitle').html("Комментарий успешно добавлен");
+                                    $('.popupSuccess .popupDescr').html("Ваш комментарий будет опубликован после проверки модератором");
 
 						//sorting, page, mark, mark_id, thislist, mylist_position
 
 	                   	$.when($('#'+prefix+'comment_'+mark_id).comments(acr,acc)).done(function(){
 
 	 					 if ( myid == '0')  {
-	                     	$('#'+prefix+'comment-title').after('<div class="success">' + wdata['message'] +'</div>');
+	                     //	$('#'+prefix+'comment-title').after('<div class="success">' + wdata['message'] +'</div>');
 	                     }  else  {
 
-	                      $('#'+prefix+'comment_work_' + myid).append('<div class="success">'+ wdata['message'] + '</div>');
+	                    //  $('#'+prefix+'comment_work_' + myid).append('<div class="success">'+ wdata['message'] + '</div>');
 	                     }
-	                      remove_success();
+	                    //  remove_success();
 	                     });
 
 	                $('#tabs').find('a[href=\'#tab-review\']').html(wdata['review_count']);
@@ -681,6 +723,9 @@ function comment_write(event)
 
 			}
 		});
+                
+}
+                
 	}
 
 //**************** /comment_write() ********************************
@@ -841,7 +886,8 @@ if ($.isFunction($.fn.on)) {
 
 
 
-customer_enter = function(thisis) {        var acr = load_acr(thisis);
+customer_enter = function(thisis) {
+        var acr = load_acr(thisis);
  		var html_form_customer =$('#'+acr['prefix']+'form_customer').clone();
 
 
@@ -870,7 +916,8 @@ if ($.isFunction($.fn.on)) {
 
 }
 //*************** /$(document).on('click','.customer_enter') ********************
-comments_sorting = function(thisis) {        var acc = load_acc(thisis);
+comments_sorting = function(thisis) {
+        var acc = load_acc(thisis);
         var acr = load_acr(thisis);
         acc['sorting'] = thisis.value;
 

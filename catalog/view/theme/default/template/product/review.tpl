@@ -1,4 +1,3 @@
-<h2 id="review-title2">Отзывы покупателей</h2>
 <?php if ($reviews) { ?>
 <?php foreach ($reviews as $review) { ?>
 <div class="review-list">

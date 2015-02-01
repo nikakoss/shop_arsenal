@@ -60,11 +60,6 @@
                   <?php } else { ?>
                   <option value="content_top"><?php echo $text_content_top; ?></option>
                   <?php } ?>
-                  <?php if ($module['position'] == 'category_banner') { ?>
-                  <option value="category_banner" selected="selected">Баннер в категории</option>
-                  <?php } else { ?>
-                  <option value="category_banner">Баннер в категории</option>
-                  <?php } ?>
                   <?php if ($module['position'] == 'content_bottom') { ?>
                   <option value="content_bottom" selected="selected"><?php echo $text_content_bottom; ?></option>
                   <?php } else { ?>
@@ -126,7 +121,6 @@ function addModule() {
 	html += '    </select></td>';
 	html += '    <td class="left"><select name="banner_module[' + module_row + '][position]">';
 	html += '      <option value="content_top"><?php echo $text_content_top; ?></option>';
-	html += '      <option value="category_banner">Баннер в категории</option>';
 	html += '      <option value="content_bottom"><?php echo $text_content_bottom; ?></option>';
 	html += '      <option value="column_left"><?php echo $text_column_left; ?></option>';
 	html += '      <option value="column_right"><?php echo $text_column_right; ?></option>';

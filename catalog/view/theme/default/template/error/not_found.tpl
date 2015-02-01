@@ -1,7 +1,24 @@
 <?php echo $header; ?><?php echo $column_left; ?><?php echo $column_right; ?>
-<div class="error404"><?php echo $content_top; ?>
- <img class="error" src="catalog/view/theme/default/images/404.jpg" width="660" height="410" border="0" alt="" />
-<div class="error"><?php echo $text_error; ?></div>
-<a href="<?php echo $continue; ?>" class="back">Перейти на главную</a>
-  <?php echo $content_bottom; ?></div>
-<?php echo $footer; ?>
+<div id="content"><?php echo $content_top; ?>
+  
+  <div class="cont404">
+	<div class="title404">
+		<div class="title404h">
+			Ошибка
+		</div>
+		<div class="title404b">
+			Страницы не существует или она была удалена
+		</div>
+	</div>
+	<div class="contButt404">
+		<a href="#" onclick="history.back();return false;" class="butt404 btn_form">
+			Вернусться назад
+		</a>
+		<a href="http://sb-arsenal.ru/" class="butt404 btn_form">
+			На главную
+		</a>
+	</div>
+</div>
+  </div>
+<?php
+ echo $footer; ?>

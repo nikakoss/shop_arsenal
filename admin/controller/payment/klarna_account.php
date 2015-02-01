@@ -227,7 +227,7 @@ class ControllerPaymentKlarnaAccount extends Controller {
 				if ($klarna_account['server'] == 'live') {
 					$url = 'https://payment.klarna.com';
 				} else {
-					$url = 'https://payment.testdrive.klarna.com';
+					$url = 'https://payment-beta.klarna.com';
 				}
 				
 				$curl = curl_init();

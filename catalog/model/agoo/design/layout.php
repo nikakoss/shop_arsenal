@@ -6,10 +6,20 @@ class agooModelDesignLayout extends Controller
    public function __call($name, array $params)
    {
         $object = 'ModelDesignLayout';
-		$this->Layout =  new $object($this->registry);
-        $data = call_user_func_array(array($this->Layout , $name), $params);
 
-       $route = $this->getRouteByLayoutId($data);
+       $loader_new = $this->registry->get('load');
+       $loader_old = $this->registry->get('load_old');
+       $this->registry->set('load', $loader_old);
+       $this->load->model('design/layout');
+       $this->registry->set('load', $loader_new);
+
+	   $this->Layout =  new $object($this->registry);
+
+
+        $data = call_user_func_array(array($this->Layout , $name), $params);
+        //   print_r($data);
+
+        $route = $this->getRouteByLayoutId($data);
 
        if ($route=='record/blog' || $route=='record/record') {
        	// проверяем схему в настройках для категории или записи

@@ -1,5 +1,4 @@
-<?php
-
+<?php   // orest831@gmail.com
 class ControllerSaleSubscription extends Controller {
 	private $error = array();
      

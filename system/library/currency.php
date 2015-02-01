@@ -83,18 +83,16 @@ class Currency {
 			$decimal_point = '.';
 		}
 		
-		
-	/*	
 		if ($format) {
 			$thousand_point = $this->language->get('thousand_point');
 		} else {
 			$thousand_point = '';
-		}*/
+		}
 		
-    	$string .= round($value, (int)$decimal_place);
+    	$string .= number_format(round($value, (int)$decimal_place), (int)$decimal_place, $decimal_point, $thousand_point);
 
     	if (($symbol_right) && ($format)) {
-      		$string .= ' '.$symbol_right;
+      		$string .= $symbol_right;
     	}
 
     	return $string;

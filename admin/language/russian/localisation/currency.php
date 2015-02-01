@@ -1,13 +1,13 @@
 <?php
 // Heading
-$_['heading_title']        = 'Валюты';  
+$_['heading_title']        = 'Валюты';
 
 // Text
 $_['text_success']         = 'Список валют обновлен';
 
 // Column
 $_['column_title']         = 'Название валюты';
-$_['column_code']          = 'Код'; 
+$_['column_code']          = 'Код:<br /><span class="help">Не изменяйте, если это ваша валюта по умолчанию. Код должен быть стандартным, см. <a href="http://www.xe.com/iso4217.php" target="_blank">список ISO кодов</a>.</span>';
 $_['column_value']         = 'Значение';
 $_['column_date_modified'] = 'Дата последнего обновления';
 $_['column_action']        = 'Действие';

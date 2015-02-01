@@ -1,37 +1,25 @@
-<?php echo $header; ?>
-<?php echo $column_left; ?><?php echo $column_right; ?>
-<div id="content" class="clearfix personal_base"><?php echo $content_top; ?>
-  
-         <div class="dashboard-header clearfix">
-        <div class="left">
-            <h4><?php echo $heading_title; ?></h4>	
-            <?php if (isset($breadcrumbs) && $breadcrumbs) { ?>
-	<ul class="bread_crumbs clearfix">
-		<?php foreach ($breadcrumbs as $breadcrumb) {   ?>
-			<li>
-				<a href="<?php echo $breadcrumb['href']; ?>">
-					<?php echo $breadcrumb['text']; ?>
-				</a>
-			</li>
-		<?php } ?>
-	</ul>
-        <?php } ?>
-        </div>
-    </div>
-    
-    <form action="<?php echo $action; ?>" class="simplecheckout-customer-password" method="post" enctype="multipart/form-data">   
-    <div class="simpleregister-block-content simplecheckout-customer">
-      <table class="form form-password">
+<?php echo $header; ?><?php echo $column_left; ?><?php echo $column_right; ?>
+<div id="content"><?php echo $content_top; ?>
+  <div class="breadcrumb" xmlns:v="http://rdf.data-vocabulary.org/#">
+    <?php foreach ($breadcrumbs as $breadcrumb) { ?>
+    <?php echo $breadcrumb['separator']; ?><span typeof="v:Breadcrumb"><a href="<?php echo $breadcrumb['href']; ?>" rel="v:url" property="v:title"><?php echo $breadcrumb['text']; ?></a></span>
+    <?php } ?>
+  </div>
+  <h1><?php echo $heading_title; ?></h1>
+  <form action="<?php echo $action; ?>" method="post" enctype="multipart/form-data">
+    <h2><?php echo $text_password; ?></h2>
+    <div class="content">
+      <table class="form">
         <tr>
-          <td class="simplecheckout-customer-left"><span class="required">*</span> <?php echo $entry_password; ?></td>
-          <td class="simplecheckout-customer-right"><input type="password" name="password" value="<?php echo $password; ?>" />
+          <td><span class="required">*</span> <?php echo $entry_password; ?></td>
+          <td><input type="password" name="password" value="<?php echo $password; ?>" />
             <?php if ($error_password) { ?>
             <span class="error"><?php echo $error_password; ?></span>
             <?php } ?></td>
         </tr>
         <tr>
-          <td class="simplecheckout-customer-left"><span class="required">*</span> <?php echo $entry_confirm; ?></td>
-          <td class="simplecheckout-customer-right"><input type="password" name="confirm" value="<?php echo $confirm; ?>" />
+          <td><span class="required">*</span> <?php echo $entry_confirm; ?></td>
+          <td><input type="password" name="confirm" value="<?php echo $confirm; ?>" />
             <?php if ($error_confirm) { ?>
             <span class="error"><?php echo $error_confirm; ?></span>
             <?php } ?></td>

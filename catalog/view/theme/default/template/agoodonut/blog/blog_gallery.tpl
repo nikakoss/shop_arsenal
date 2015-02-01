@@ -1,13 +1,13 @@
 <?php echo $header; ?>
 <?php echo $column_left; ?><?php echo $column_right; ?>
-<div id="content"><?php echo $content_top; ?>
+<div id="content">
 
-  <div class="breadcrumb">
+  <div class="breadcrumb" xmlns:v="http://rdf.data-vocabulary.org/#">
     <?php $i=0; foreach ($breadcrumbs as $breadcrumb) { $i++; ?>
     <?php echo $breadcrumb['separator']; ?><?php if (count($breadcrumbs)!= $i) { ?><a href="<?php echo $breadcrumb['href']; ?>"><?php } ?><?php echo $breadcrumb['text']; ?><?php if (count($breadcrumbs)!=$i) { ?></a><?php } ?>
     <?php } ?>
   </div>
-
+<?php echo $content_top; ?>
   <div class="blog-heading_title">
 	  <h1><?php echo $heading_title; ?></h1>
   </div>
@@ -28,9 +28,9 @@
         .acolumns {
             display: table;
             width: 100%;
-            -moz-box-sizing: border-box;      /* фикс проблемы для Firefox       */
-            -webkit-box-sizing: border-box;   /* фикс для старых Chrome и Safari */
-            box-sizing: border-box;           /* не поддерживается в CSS2        */
+            -moz-box-sizing: border-box;      /* ???? ???????? ??? Firefox       */
+            -webkit-box-sizing: border-box;   /* ???? ??? ?????? Chrome ? Safari */
+            box-sizing: border-box;           /* ?? ?????????????? ? CSS2        */
             margin-left: 0;
             margin-right: 0;
             text-align: center;
@@ -38,7 +38,7 @@
 
 
 
-        /* колонки */
+        /* ??????? */
 
         .acolumns > div,
         .acolumns > noindex > div {
@@ -51,13 +51,13 @@
             margin-right: 16px;
             margin-bottom: 5px;
             position: relative;
-            -moz-box-sizing: border-box;      /* фикс проблемы для Firefox       */
-            -webkit-box-sizing: border-box;   /* фикс для старых Chrome и Safari */
+            -moz-box-sizing: border-box;      /* ???? ???????? ??? Firefox       */
+            -webkit-box-sizing: border-box;   /* ???? ??? ?????? Chrome ? Safari */
             box-sizing: border-box;
            /* background-color: #FFF; */
            /* border-right: 1px solid #DDD; */
 
-                       /* не поддерживается в CSS2        */
+                       /* ?? ?????????????? ? CSS2        */
         }
 
 </style>
@@ -166,15 +166,15 @@
     <?php } ?>
 
 
-
-      <?php if ($record['thumb']) { ?>
       <div class="image blog-image">
+      <?php if ($record['thumb']) { ?>
       <div>
 	      <a href="<?php echo $record['popup']; ?>" title="<?php echo $record['name']; ?>" class="imagebox" rel="imagebox">
 	      <img src="<?php echo $record['thumb']; ?>"  title="<?php echo $record['name']; ?>" alt="<?php echo $record['name']; ?>" >
 	      </a>
 
 	       </div>
+      <?php } ?>
 
       <?php if (isset ($record['settings_blog']['images_view']) && $record['settings_blog']['images_view'] ) { ?>
       <?php foreach ($record['images'] as $numi => $images) { ?>
@@ -186,10 +186,8 @@
 
       <?php } ?>
       <?php } ?>
+  </div>
 
-
-      </div>
-      <?php } ?>
 
 
 

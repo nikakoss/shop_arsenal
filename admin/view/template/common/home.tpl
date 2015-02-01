@@ -8,21 +8,21 @@
   <?php if ($error_install) { ?>
   <div class="warning"><?php echo $error_install; ?></div>
   <?php } ?>
-  <?php if ($error_image) { ?>
+  <?php /* if ($error_image) { ?>
   <div class="warning"><?php echo $error_image; ?></div>
-  <?php } ?>
-  <?php if ($error_image_cache) { ?>
+  <?php } */ ?>
+  <?php /*if ($error_image_cache) { ?>
   <div class="warning"><?php echo $error_image_cache; ?></div>
-  <?php } ?>
-  <?php if ($error_cache) { ?>
+  <?php } */?>
+  <?php /* if ($error_cache) { ?>
   <div class="warning"><?php echo $error_cache; ?></div>
-  <?php } ?>
-  <?php if ($error_download) { ?>
+  <?php }  */?>
+  <?php /* if ($error_download) { ?>
   <div class="warning"><?php echo $error_download; ?></div>
-  <?php } ?>
-  <?php if ($error_logs) { ?>
+  <?php } */?>
+  <?php /* if ($error_logs) { ?>
   <div class="warning"><?php echo $error_logs; ?></div>
-  <?php } ?>
+  <?php } */?>
   <div class="box">
     <div class="heading">
       <h1><img src="view/image/home.png" alt="" /> <?php echo $heading_title; ?></h1>

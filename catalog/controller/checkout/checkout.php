@@ -77,10 +77,6 @@ class ControllerCheckoutCheckout extends Controller {
 			'common/footer',
 			'common/header'	
 		);
-        
-        if (isset($this->request->get['quickconfirm'])) {
-            $this->data['quickconfirm'] = $this->request->get['quickconfirm'];
-        }
 				
 		$this->response->setOutput($this->render());
   	}
@@ -106,9 +102,7 @@ class ControllerCheckoutCheckout extends Controller {
 				'status'            => $country_info['status']		
 			);
 		}
-
-
-
+		
 		$this->response->setOutput(json_encode($json));
 	}
 }

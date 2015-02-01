@@ -41,15 +41,15 @@ class ControllerCommonHome extends Controller {
 		} else {
 			$this->data['error_install'] = '';
 		}
-
+/*
 		// Check image directory is writable
 		$file = DIR_IMAGE . 'test';
 		
 		$handle = fopen($file, 'a+'); 
 		
-		fwrite($handle, '');
+		@fwrite($handle);
 			
-		fclose($handle); 		
+		@fclose($handle); 		
 		
 		if (!file_exists($file)) {
 			$this->data['error_image'] = sprintf($this->language->get('error_image'). DIR_IMAGE);
@@ -126,6 +126,8 @@ class ControllerCommonHome extends Controller {
 			
 			unlink($file);
 		}
+		
+		*/
 										
 		$this->data['breadcrumbs'] = array();
 

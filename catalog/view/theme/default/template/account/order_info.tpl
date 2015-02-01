@@ -1,25 +1,11 @@
 <?php echo $header; ?><?php echo $column_left; ?><?php echo $column_right; ?>
-<div id="content" class="clearfix personal_base order-info" ><?php echo $content_top; ?>
-  
-        <div class="dashboard-header clearfix">
-        <div class="left">
-            <h4><?php echo $heading_title; ?> №<?php echo $order_id; ?></h4>	
-            <?php if (isset($breadcrumbs) && $breadcrumbs) { ?>
-	<ul class="bread_crumbs clearfix">
-		<?php $count=1; foreach ($breadcrumbs as $breadcrumb) {  ?>
-             <?php if($count!=3){ ?>
-                <li>
-                    
-				<a href="<?php echo $breadcrumb['href']; ?>">
-					<?php if($count==4){ echo $breadcrumb['text']." №".$order_id; }else{ echo $breadcrumb['text']; } ?>
-				</a>
-		</li>
-		<?php } $count++; } ?>
-	</ul>
-        <?php } ?>
-        </div>
-    </div>
-    
+<div id="content"><?php echo $content_top; ?>
+  <div class="breadcrumb" xmlns:v="http://rdf.data-vocabulary.org/#">
+    <?php foreach ($breadcrumbs as $breadcrumb) { ?>
+    <?php echo $breadcrumb['separator']; ?><span typeof="v:Breadcrumb"><a href="<?php echo $breadcrumb['href']; ?>" rel="v:url" property="v:title"><?php echo $breadcrumb['text']; ?></a></span>
+    <?php } ?>
+  </div>
+  <h1><?php echo $heading_title; ?></h1>
   <table class="list">
     <thead>
       <tr>
@@ -29,16 +15,16 @@
     <tbody>
       <tr>
         <td class="left" style="width: 50%;"><?php if ($invoice_no) { ?>
-            <p><b><?php echo $text_invoice_no; ?></b> <?php echo $invoice_no; ?></p>
+          <b><?php echo $text_invoice_no; ?></b> <?php echo $invoice_no; ?><br />
           <?php } ?>
-         <p> <b><?php echo $text_order_id; ?></b> #<?php echo $order_id; ?></p>
-         <p>  <b><?php echo $text_date_added; ?></b> <?php echo $date_added; ?></td> </p>
+          <b><?php echo $text_order_id; ?></b> #<?php echo $order_id; ?><br />
+          <b><?php echo $text_date_added; ?></b> <?php echo $date_added; ?></td>
         <td class="left" style="width: 50%;"><?php if ($payment_method) { ?>
-         <p> <b><?php echo $text_payment_method; ?></b> <?php echo $payment_method; ?> 
-          <?php } ?> </p>
-       <p>   <?php if ($shipping_method) { ?>
-         <b><?php echo $text_shipping_method; ?></b> <?php echo $shipping_method; ?>
-          <?php } ?></td> </p>
+          <b><?php echo $text_payment_method; ?></b> <?php echo $payment_method; ?><br />
+          <?php } ?>
+          <?php if ($shipping_method) { ?>
+          <b><?php echo $text_shipping_method; ?></b> <?php echo $shipping_method; ?>
+          <?php } ?></td>
       </tr>
     </tbody>
   </table>
@@ -68,7 +54,9 @@
         <td class="right"><?php echo $column_quantity; ?></td>
         <td class="right"><?php echo $column_price; ?></td>
         <td class="right"><?php echo $column_total; ?></td>
-        
+        <?php if ($products) { ?>
+        <td style="width: 1px;"></td>
+        <?php } ?>
       </tr>
     </thead>
     <tbody>
@@ -83,7 +71,7 @@
         <td class="right"><?php echo $product['quantity']; ?></td>
         <td class="right"><?php echo $product['price']; ?></td>
         <td class="right"><?php echo $product['total']; ?></td>
-        
+        <td class="right"><a href="<?php echo $product['return']; ?>"><img src="catalog/view/theme/default/image/return.png" alt="<?php echo $button_return; ?>" title="<?php echo $button_return; ?>" /></a></td>
       </tr>
       <?php } ?>
       <?php foreach ($vouchers as $voucher) { ?>
@@ -93,7 +81,9 @@
         <td class="right">1</td>
         <td class="right"><?php echo $voucher['amount']; ?></td>
         <td class="right"><?php echo $voucher['amount']; ?></td>
-        
+        <?php if ($products) { ?>
+        <td></td>
+        <?php } ?>
       </tr>
       <?php } ?>
     </tbody>
@@ -103,7 +93,9 @@
         <td colspan="3"></td>
         <td class="right"><b><?php echo $total['title']; ?>:</b></td>
         <td class="right"><?php echo $total['text']; ?></td>
-        
+        <?php if ($products) { ?>
+        <td></td>
+        <?php } ?>
       </tr>
       <?php } ?>
     </tfoot>
@@ -123,7 +115,7 @@
   </table>
   <?php } ?>
   <?php if ($histories) { ?>
-  <h4><?php echo $text_history; ?></h4>
+  <h2><?php echo $text_history; ?></h2>
   <table class="list">
     <thead>
       <tr>

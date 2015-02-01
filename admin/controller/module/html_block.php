@@ -76,6 +76,7 @@ class ControllerModuleHtmlBlock extends Controller {
 		$this->data['text_token_language_name'] = $this->language->get('text_token_language_name');
 		$this->data['text_token_block'] = $this->language->get('text_token_block');
 		$this->data['text_help_tokens_customer'] = $this->language->get('text_help_tokens_customer');
+		$this->data['text_default_template'] = $this->language->get('text_default_template');
 		
 		$this->data['entry_html_block'] = $this->language->get('entry_html_block');
 		$this->data['entry_layout'] = $this->language->get('entry_layout');
@@ -89,6 +90,7 @@ class ControllerModuleHtmlBlock extends Controller {
 		$this->data['entry_select_theme'] = $this->language->get('entry_select_theme');
 		$this->data['entry_use_theme'] = $this->language->get('entry_use_theme');
 		$this->data['entry_style'] = $this->language->get('entry_style');
+		$this->data['entry_reset'] = $this->language->get('entry_reset');
 		$this->data['entry_title'] = $this->language->get('entry_title');
 		$this->data['entry_theme_title'] = $this->language->get('entry_theme_title');
 		$this->data['entry_block_title'] = $this->language->get('entry_block_title');
@@ -202,7 +204,7 @@ class ControllerModuleHtmlBlock extends Controller {
 				$value['short_title'] = $this->_getShortTitle($value['machine_name']);
 				$value['default'] = $this->data['text_block'] . ' ' . $block_id;
 				
-				if (isset($value['template']) && $value['theme'] == 'on') {
+				if (isset($value['template']) && isset($value['theme']) && $value['theme'] == 'on') {
 					
 					if (count($old_blocks)) {
 						$theme_id = max(array_keys($old_blocks)) + 1;
@@ -314,11 +316,16 @@ class ControllerModuleHtmlBlock extends Controller {
 			$file_name = DIR_CATALOG . 'view/theme/' . $this->config->get('config_template') . '/stylesheet/html_block.css';
 			
 			$css = '';
+			$reset = FALSE;
 			
 			foreach ($post as $key => $value) {
 				if (strpos($key, 'html_block_') === 0 && is_array($value)) {
 					
 					$block_id = substr($key, 11);
+					
+					if (isset($value['reset'])) {
+						$reset = TRUE;
+					}
 					
 					if (isset($value['style']) && !empty($value['css'])) {
 						$css .= "/* CSS BLOCK #" . $block_id . " */\r\n";
@@ -328,10 +335,11 @@ class ControllerModuleHtmlBlock extends Controller {
 				}
 			}
 			
-			$handle = fopen($file_name, 'w');
-			fwrite($handle,  trim($css));
-			fclose($handle);
-			
+			if ($reset) {
+				$handle = fopen($file_name, 'w');
+				fwrite($handle,  trim($css));
+				fclose($handle);
+			}
 		}
 	}
 	

@@ -1,0 +1,15 @@
+h1{font-size:24px;font-family:'Open Sans Condensed';color:#000000;line-height:28px;margin-bottom:10px;text-transform:uppercase;}
+h2{font-size:24px;font-family:'Open Sans Condensed';color:#004185;line-height:28px;text-transform:uppercase;background:url(../images/h2_lina.png) repeat-x bottom;padding-bottom:2px;margin-bottom:10px;}
+h3{font-size:21px;font-family:'Open Sans Condensed';color:#004185;line-height:25px;margin-bottom:4px;text-transform:uppercase;}
+h4{font-size:15px;font-family:'Open Sans Condensed';color:#004185;line-height:20px;margin-bottom:16px;text-transform:uppercase;}
+p{font-size:14px;font-family:'Open Sans';color:#515151;padding-bottom:16px;}
+a{color:#4aace8;text-decoration:underline;}a:hover{color:#4aace8;text-decoration:none;}
+input[type="text"],input[type="password"]{font-size:16px;font-family:'Open Sans';font-style:italic;color:#003165;line-height:20px;height:20px;padding:8px 16px;border:1px solid;border-color:#4aace8;margin-bottom:15px;}input[type="text"]::-webkit-input-placeholder,input[type="password"]::-webkit-input-placeholder{color:#003165;}
+input[type="text"]:-moz-placeholder,input[type="password"]:-moz-placeholder{color:#003165;opacity:1;}
+input[type="text"]::-moz-placeholder,input[type="password"]::-moz-placeholder{color:#003165;opacity:1;}
+input[type="text"]:-ms-input-placeholder,input[type="password"]:-ms-input-placeholder{color:#003165;}
+textarea{font-size:16px;font-family:'Open Sans';font-style:italic;color:#003165;line-height:20px;height:64px;padding:8px 16px;border:1px solid;border-color:#4aace8;margin-bottom:28px;resize:none;}textarea::-webkit-input-placeholder{color:#003165;}
+textarea:-moz-placeholder{color:#003165;opacity:1;}
+textarea::-moz-placeholder{color:#003165;opacity:1;}
+textarea:-ms-input-placeholder{color:#003165;}
+.btn_form{font-size:21px;font-family:'Open Sans Condensed';color:#fff;line-height:25px;text-transform:uppercase;background:#8a8a8a;border:2px #80d2ff solid;box-shadow:4px 4px 0 0 rgba(128, 210, 255, 0.46);text-decoration:none;padding:6px 22px;}.btn_form:hover{color:#fff;}

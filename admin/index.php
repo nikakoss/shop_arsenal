@@ -1,11 +1,11 @@
 <?php
 // Version
-define('VERSION', '1.5.6');
+define('VERSION', '1.5.5.1');
 
 // Configuration
 if (file_exists('config.php')) {
 	require_once('config.php');
-} 
+}  
 
 // Install
 if (!defined('DIR_APPLICATION')) {
@@ -124,9 +124,6 @@ $language = new Language($languages[$config->get('config_admin_language')]['dire
 $language->load($languages[$config->get('config_admin_language')]['filename']);	
 $registry->set('language', $language);
 
-$multilingual = new multilingual_seo($registry); 
-$registry->set('multilingual_seo', $multilingual);
-
 // Document
 $registry->set('document', new Document()); 		
 		
@@ -141,13 +138,6 @@ $registry->set('length', new Length($registry));
 
 // User
 $registry->set('user', new User($registry));
-
-//OpenBay Pro
-$registry->set('openbay', new Openbay($registry));
-$registry->set('play', new Play($registry));
-$registry->set('ebay', new Ebay($registry));
-$registry->set('amazon', new Amazon($registry));
-$registry->set('amazonus', new Amazonus($registry));
 						
 // Front Controller
 $controller = new Front($registry);

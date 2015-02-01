@@ -5,6 +5,7 @@ $(document).ready(function(){
         opacity: 0.5
     });
 
+    /*
     var acolor = $('a.blog-title').css('color');
 
     if (typeof acolor!='undefined') {
@@ -24,5 +25,5 @@ $(document).ready(function(){
     );
     }
     }
-
+      */
 });

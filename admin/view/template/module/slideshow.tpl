@@ -64,14 +64,7 @@
                   <option value="content_bottom" selected="selected"><?php echo $text_content_bottom; ?></option>
                   <?php } else { ?>
                   <option value="content_bottom"><?php echo $text_content_bottom; ?></option>
-                  <?php } ?> 
-                  
-                  <?php if ($module['position'] == 'column_center') { ?>
-                  <option value="column_center" selected="selected">Акции и спецпредложения</option>
-                  <?php } else { ?>
-                  <option value="column_center">Акции и спецпредложения</option>
                   <?php } ?>
-                  
                   <?php if ($module['position'] == 'column_left') { ?>
                   <option value="column_left" selected="selected"><?php echo $text_column_left; ?></option>
                   <?php } else { ?>
@@ -83,8 +76,7 @@
                   <option value="column_right"><?php echo $text_column_right; ?></option>
                   <?php } ?>
                 </select></td>
-              <td class="left">
-                  <select name="slideshow_module[<?php echo $module_row; ?>][status]">
+              <td class="left"><select name="slideshow_module[<?php echo $module_row; ?>][status]">
                   <?php if ($module['status']) { ?>
                   <option value="1" selected="selected"><?php echo $text_enabled; ?></option>
                   <option value="0"><?php echo $text_disabled; ?></option>
@@ -92,8 +84,7 @@
                   <option value="1"><?php echo $text_enabled; ?></option>
                   <option value="0" selected="selected"><?php echo $text_disabled; ?></option>
                   <?php } ?>
-                </select>
-              </td>
+                </select></td>
               <td class="right"><input type="text" name="slideshow_module[<?php echo $module_row; ?>][sort_order]" value="<?php echo $module['sort_order']; ?>" size="3" /></td>
               <td class="left"><a onclick="$('#module-row<?php echo $module_row; ?>').remove();" class="button"><?php echo $button_remove; ?></a></td>
             </tr>
@@ -131,8 +122,6 @@ function addModule() {
 	html += '    <td class="left"><select name="slideshow_module[' + module_row + '][position]">';
 	html += '      <option value="content_top"><?php echo $text_content_top; ?></option>';
 	html += '      <option value="content_bottom"><?php echo $text_content_bottom; ?></option>';
-        
-	html += '      <option value="column_center">Акции и спецпредложения</option>';
 	html += '      <option value="column_left"><?php echo $text_column_left; ?></option>';
 	html += '      <option value="column_right"><?php echo $text_column_right; ?></option>';
 	html += '    </select></td>';

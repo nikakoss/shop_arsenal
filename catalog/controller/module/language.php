@@ -5,17 +5,7 @@ class ControllerModuleLanguage extends Controller {
 			$this->session->data['language'] = $this->request->post['language_code'];
 		
 			if (isset($this->request->post['redirect'])) {
-				//$this->redirect($this->request->post['redirect']);
-				if (isset($this->request->server['HTTPS']) && (($this->request->server['HTTPS'] == 'on') || ($this->request->server['HTTPS'] == '1'))) {
-          $connection = 'SSL';
-       		 } else {
-				  $connection = 'NONSSL';
-				}
-				$redir_route = $this->request->post['redirect'];
-				if($redir_params = strstr($redir_route, '&'))
-					$redir_route = str_replace($redir_params, '', $redir_route);
-				else $redir_params = '';
-				$this->redirect($this->url->link($redir_route, str_replace('&amp;', '&', $redir_params), $connection));
+				$this->redirect($this->request->post['redirect']);
 			} else {
 				$this->redirect($this->url->link('common/home'));
 			}
@@ -52,13 +42,12 @@ class ControllerModuleLanguage extends Controller {
 		}
 
 		if (!isset($this->request->get['route'])) {
-			//$this->data['redirect'] = $this->url->link('common/home');
-			$this->data['redirect'] = 'common/home';
+			$this->data['redirect'] = $this->url->link('common/home');
 		} else {
 			$data = $this->request->get;
 			
-			//unset($data['_route_']);
-			unset($data['site_language']);
+			unset($data['_route_']);
+			
 			$route = $data['route'];
 			
 			unset($data['route']);
@@ -69,8 +58,7 @@ class ControllerModuleLanguage extends Controller {
 				$url = '&' . urldecode(http_build_query($data, '', '&'));
 			}	
 					
-			//$this->data['redirect'] = $this->url->link($route, $url, $connection);
-			$this->data['redirect'] = $route . $url;
+			$this->data['redirect'] = $this->url->link($route, $url, $connection);
 		}
 		
 		if (file_exists(DIR_TEMPLATE . $this->config->get('config_template') . '/template/module/language.tpl')) {

@@ -26,10 +26,14 @@
 		<div id="<?php echo $prefix;?>record_signer" class="marginbottom5">
 			<div id="<?php echo $prefix;?>js_signer"  style="display:none;"></div>
 			<form id="<?php echo $prefix;?>form_signer">
+
 			<label>
 			<input id="<?php echo $prefix;?>comments_signer" class="comments_signer" type="checkbox" <?php if (isset($signer_status) && $signer_status) echo 'checked'; ?>/>
-			<ins class="fontsize_15 hrefajax"><?php echo $this->language->get('text_signer'); ?></ins>
+			<a class="textdecoration_none comments_signer hrefajax fontsize_15">
+			<?php echo $this->language->get('text_signer'); ?>
+			</a>
 			</label>
+
 			</form>
 		</div>
   	<?php } ?>
@@ -38,21 +42,17 @@
 
   <div id="<?php echo $prefix;?>div_comment_<?php echo $mark_id; ?>" >
 
-    <div id="<?php echo $prefix;?>comment_<?php echo $mark_id; ?>" >
-
-     <?php  echo $html_comment; ?>
-
-    </div>
+ 
 
 	    <div id="<?php echo $prefix;?>comment-title">
-	    <a href="#"  id="<?php echo $prefix;?>comment_id_reply_0" class="comment_reply comment_buttons">
-		    <ins id="<?php echo $prefix;?>reply_0" class="hrefajax text_write_review"><?php echo $this->language->get('text_write'); ?></ins>
+	    <a href="#"  id="<?php echo $prefix;?>comment_id_reply_0" class="comment_reply comment_buttons comments-title">
+                <span id="<?php echo $prefix;?>reply_0" class="hrefajax text_write_review com_tt">Оставить свой комментарий</span>
 	     </a>
 	    </div>
 
-   <div class="<?php echo $prefix;?>comment_work" id="<?php echo $prefix;?>comment_work_0"></div>
+   <div class="<?php echo $prefix;?>comment_work  add_comments" id="<?php echo $prefix;?>comment_work_0"></div>
 
- <div id="<?php echo $prefix;?>reply_comments" style="display:none">
+   <div id="<?php echo $prefix;?>reply_comments" style="display:none" >
 
  <div id="<?php echo $prefix;?>comment_work_" class="<?php echo $prefix;?>form_customer_pointer width100 margintop10">
 	<?php if (isset($customer_id) && !$customer_id)   { ?>
@@ -84,39 +84,20 @@
 
 
 
-   <form id="<?php echo $prefix;?>form_work_">
-    <b><ins class="color_entry_name"><?php   echo $this->language->get('entry_name'); ?></ins></b>
-    <br>
-    <input type="text" name="name"  onblur="if (this.value==''){this.value='<?php echo $text_login; ?>'}" onfocus="if (this.value=='<?php echo $text_login; ?>') this.value='';"  value="<?php echo $text_login; ?>" <?php
+   <form id="<?php echo $prefix;?>form_work_">    
+<input type="text" class="comment_name" name="name"  placeholder="Ваше имя" <?php
 
     if (isset($customer_id) && $customer_id) {
      //echo 'readonly="readonly" style="background-color:#DDD; color: #555;"';
     }
     ?>>
 
-    <?php
-    if (isset($customer_id) && !$customer_id)   {
-     ?>
-<ins><a href="#" class="textdecoration_none hrefajax"><ins class="hrefajax customer_enter" ><?php echo $this->language->get('text_customer_enter'); ?></ins></a>
-     <?php echo $text_welcome; ?>
-</ins>
-
-     <?php   }   ?>
-
+  
     <div style="overflow: hidden; line-height:1px; margin-top: 5px;"></div>
 
 <?php if (isset($fields) && !empty($fields)) { ?>
 <div class="marginbottom5">
 
-<a href="#" class="hrefajax" onclick="$('.addfields').toggle(); return false;"><?php echo $this->language->get('entry_addfields_begin');  ?><ins class="lowercase"><?php
-  $i=0;
-  foreach   ($fields as $af_name => $field) {  	$i++;
- 	if (isset($field['field_description'][$this->config->get('config_language_id')])) {
- 	echo str_replace('?','',$field['field_description'][$this->config->get('config_language_id')]);
- 	if (count($fields)!=$i) echo ", ";
- 	}
-  }
-?></ins></a>
 </div>
 
 <div class="addfields" style="<?php if (!$fields_view) echo 'display: none;'; ?>">
@@ -149,12 +130,11 @@
  <?php  } ?>
 
 <td>
- <b><ins class="color_entry_name"><?php echo $field['field_description'][$this->config->get('config_language_id')]; ?></ins></b><br>
-
+ 
 <?php
 if ((isset($field['field_type']) && $field['field_type']=='textarea') || !isset($field['field_type'])) {
 ?>
-<textarea name="af[<?php echo $field['field_name']; ?>]" cols="40" rows="1" class="blog-record-textarea"></textarea>
+<input name="af[<?php echo $field['field_name']; ?>]" id="comment_email" placeholder="E-mail" class="blog-record-textarea">
 <?php
 }
 ?>
@@ -177,12 +157,10 @@ if (isset($field['field_type']) && $field['field_type']=='text') {
 <?php  } ?>
 
    <?php  if (isset($settings_widget['comment_must']) && $settings_widget['comment_must'])   {   ?>
-    <b><ins class="color_entry_name"><?php echo $this->language->get('entry_comment');  ?></ins></b>
     <br>
 
-    <textarea name="text" id="<?php echo $prefix;?>editor_" class="blog-record-textarea <?php echo $prefix;?>editor blog-textarea_height" cols="40"></textarea>
-    <br>
-    <span class="text_note"><?php echo $this->language->get('text_note'); ?></span>
+    <textarea placeholder="Комментарий" name="text" id="<?php echo $prefix;?>editor_" class=" comment-msg blog-record-textarea <?php echo $prefix;?>editor blog-textarea_height" cols="40"></textarea>
+
     <?php  } ?>
 
   <div class="bordernone overflowhidden margintop5 lineheight1"></div>
@@ -230,7 +208,7 @@ if (isset($field['field_type']) && $field['field_type']=='text') {
     <?php  } ?>
 
     <div class="buttons">
-      <div class="left"><a class="button button-comment" id="<?php echo $prefix;?>button-comment-0"><span><?php echo $this->language->get('button_write'); ?></span></a></div>
+      <div class="left"><a class="button button-comment btn_form" id="<?php echo $prefix;?>button-comment-0"><span>Отправить</span></a></div>
     </div>
 
     </form>
@@ -239,6 +217,15 @@ if (isset($field['field_type']) && $field['field_type']=='text') {
 
    </div>
 
+    
+    
+   
+        <div id="<?php echo $prefix;?>comment_<?php echo $mark_id; ?>" >
+
+            <?php  echo $html_comment; ?>
+
+        </div>
+   
 
   </div>
 

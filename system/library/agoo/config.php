@@ -12,16 +12,26 @@ class agooConfig  extends Controller  {
 	 {
 
 		$this->registry->set('config_work', 1);
+		$settings_general = $this->registry->get('config_generallist');
+
+        if (isset($settings_general['layout_url_status'])) {
+        	$url_status = $settings_general['layout_url_status'];
+        } else {
+        	$url_status = false;
+        }
 
         $layout_id = false;
+        $flag_layout = false;
+        $request_url = ltrim($this->request->server['REQUEST_URI'], '/');
 
-		$this->Config = $this->registry->get('config_old');
+		$this->Config_ = $this->registry->get('config_old');
 
-        $modules = call_user_func_array(array($this->Config , $name), $params);
+        $modules = call_user_func_array(array($this->Config_ , $name), $params);
 
-		unset($this->Config);
+		unset($this->Config_);
 
-        if (($name == 'get' && $params[0]=='blog_module') || ($name == 'get' && $params[0]=='langmark_module')  ) {
+
+        if (($name == 'get' && $params[0]=='blog_module') || ($name == 'get' && $params[0]=='blogurl_module') || ($name == 'get' && $params[0]=='langmark_module')  ) {
 
         	$all_layout_id = $this->registry->get('all_layout_id');
 
@@ -37,32 +47,63 @@ class agooConfig  extends Controller  {
 
 			if ($modules && is_array($modules)) {
 
-	  	//print_r("<PRE>");
-	  	//print_r($layout_id);
-	  //print_r("<PRE>");
-
 				foreach ($modules as $num => $module) {
 					if (isset($module['layout_id']) && (($module['layout_id'] == $all_layout_id) || is_array($module['layout_id']))) {
 
-                     if (is_array($module['layout_id'])) {
 
-                     	foreach ($module['layout_id'] as $key => $value) {
-                     		if ($value == $layout_id) {
-                     		  	$modules[$num]['layout_id'] = $layout_id;
-                     		}
-                     	}
+	                    if (is_array($module['layout_id']) || (!isset($module['layout_id']))) {
 
-                    }
-	                    if ($module['layout_id'] == $all_layout_id) {
-	                     // $modules[$num]['layout_id'] = $layout_id;
+									if (isset($module['url']) && trim($module['url'])!='') {
+
+
+                                        if ($url_status) {
+                                            //echo $request_url."->".trim($module['url'])."<br>";
+                                            //echo utf8_strpos($request_url, trim($module['url']));
+
+											$pos = utf8_strpos($request_url, trim($module['url']));
+
+  											if ($pos === false) {
+
+											} else {
+											  $modules[$num]['layout_id'] = $layout_id;
+											}
+
+                                        } else {
+
+											if (trim($module['url'])== $request_url) {
+	                                         $modules[$num]['layout_id'] = $layout_id;
+											}
+										}
+
+
+
+									} else {
+	                                    foreach ($module['layout_id'] as $key => $value) {
+											if ($value == $layout_id) {
+				                     		  	$modules[$num]['layout_id'] = $layout_id;
+			                     		  	}
+
+		                     			}
+	                     			}
 	                    }
-
 					}
 				}
 			}
 
+
         }
+
+
+
 	   $this->registry->set('config_work', false);
+
+
+       /*
+  		print_r("<PRE>");
+	  	print_r($modules);
+	    print_r("<PRE>");
+         */
+
 
         return $modules;
     }

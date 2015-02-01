@@ -6,9 +6,13 @@ class ControllerModuleSlideshow extends Controller {
 		$this->load->model('design/banner');
 		$this->load->model('tool/image');
 		
-                $this->document->addStyle('catalog/view/javascript/FlexSlider-master/flexslider.css');
-		$this->document->addScript('catalog/view/javascript/FlexSlider-master/jquery.flexslider.js');               
+		$this->document->addScript('catalog/view/javascript/jquery/nivo-slider/jquery.nivo.slider.pack.js');
 		
+		if (file_exists('catalog/view/theme/' . $this->config->get('config_template') . '/stylesheet/slideshow.css')) {
+			$this->document->addStyle('catalog/view/theme/' . $this->config->get('config_template') . '/stylesheet/slideshow.css');
+		} else {
+			$this->document->addStyle('catalog/view/theme/default/stylesheet/slideshow.css');
+		}
 		
 		$this->data['width'] = $setting['width'];
 		$this->data['height'] = $setting['height'];

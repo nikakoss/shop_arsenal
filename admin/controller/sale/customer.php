@@ -820,7 +820,6 @@ class ControllerSaleCustomer extends Controller {
       		$this->data['firstname'] = '';
     	}
 
-
     	if (isset($this->request->post['lastname'])) {
       		$this->data['lastname'] = $this->request->post['lastname'];
     	} elseif (!empty($customer_info)) { 
@@ -860,25 +859,7 @@ class ControllerSaleCustomer extends Controller {
 		} else {
       		$this->data['newsletter'] = '';
     	}
-
-        if (isset($this->request->post['discount_status'])) {
-            $this->data['discount_status'] = $this->request->post['discount_status'];
-        } elseif (!empty($customer_info)) {
-            $this->data['discount_status'] = $customer_info['discount_status'];
-        } else {
-            $this->data['discount_status'] = '';
-        }
-
-
-        $this->load->model('sale/coupon');
-        foreach ($this->model_sale_coupon->getDiscountsData()->rows as  $result) {
-            $this->data['discountData2'][] = array(
-                'name' => $result['name'],
-                'id' => $result['id'],
-            );
-        }
-
-
+		
 		$this->load->model('sale/customer_group');
 			
 		$this->data['customer_groups'] = $this->model_sale_customer_group->getCustomerGroups();

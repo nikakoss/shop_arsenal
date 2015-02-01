@@ -1,14 +1,7 @@
 <?php
 class ModelCatalogCategory extends Model {
-
 	public function getCategory($category_id) {
 		$query = $this->db->query("SELECT DISTINCT * FROM " . DB_PREFIX . "category c LEFT JOIN " . DB_PREFIX . "category_description cd ON (c.category_id = cd.category_id) LEFT JOIN " . DB_PREFIX . "category_to_store c2s ON (c.category_id = c2s.category_id) WHERE c.category_id = '" . (int)$category_id . "' AND cd.language_id = '" . (int)$this->config->get('config_language_id') . "' AND c2s.store_id = '" . (int)$this->config->get('config_store_id') . "' AND c.status = '1'");
-		
-		return $query->row;
-	}
-    
-    public function getCategoryAll() {
-		$query = $this->db->query("SELECT DISTINCT * FROM " . DB_PREFIX . "category c LEFT JOIN " . DB_PREFIX . "category_description cd ON (c.category_id = cd.category_id) LEFT JOIN " . DB_PREFIX . "category_to_store c2s ON (c.category_id = c2s.category_id) WHERE c.category_id = '177'");
 		
 		return $query->row;
 	}
@@ -68,87 +61,6 @@ class ModelCatalogCategory extends Model {
 			return $this->config->get('config_layout_category');
 		}
 	}
-
-	
-	public function getProductPath($product_id) {
-					$path = array();
-					$categories = $this->db->query("SELECT c.category_id, c.parent_id FROM " . DB_PREFIX . "product_to_category p2c LEFT JOIN " . DB_PREFIX . "category c ON (p2c.category_id = c.category_id) WHERE product_id = '" . (int)$product_id . "'")->rows;
-					
-					foreach($categories as $key => $category)
-					{
-						$path[$key] = '';
-						if (!$category) continue;
-						$path[$key] = $category['category_id'];
-						
-						while ($category['parent_id']){
-							$path[$key] = $category['parent_id'] . '_' . $path[$key];
-							$category = $this->db->query("SELECT category_id, parent_id FROM " . DB_PREFIX . "category WHERE category_id = '" . $category['parent_id']. "'")->row;
-						}
-						
-						$path[$key] = $path[$key];
-						$banned_cats = $this->config->get('full_product_path_categories');
-						
-						if(count($banned_cats) && (count($categories) > 1))
-						{
-							//if(preg_match('#[_=](\d+)&$#', $path[$key], $cat))
-							if(preg_match('#[_=](\d+)$#', $path[$key], $cat))
-							{
-								if(in_array($cat[1], $banned_cats))
-									unset($path[$key]);
-							}
-						}
-					}
-					
-					if (!count($path)) return '';
-          
-					// wich one is the largest ?
-					$whichone = array_map('strlen', $path);
-					asort($whichone);
-					$whichone = array_keys($whichone);
-					
-					if ($this->config->get('full_product_path_largest'))
-						$whichone = array_pop($whichone);
-						
-					else $whichone = array_shift($whichone);
-					
-					return $path[$whichone];
-				}
-	
-	
-	public function getProductPathold($product_id) {
-	$category_id = $this->db->query("SELECT category_id FROM " . DB_PREFIX . "product_to_category WHERE product_id = '" . (int)$product_id . "'");
-	var_dump($category_id);
-	if(isset($category_id->rows[0]['category_id']) && ($category_id->rows[0]['category_id'] != 0)){
-	
-		$parent_id = $this->db->query("SELECT parent_id FROM " . DB_PREFIX . "category WHERE category_id = '" . (int)$category_id->rows[0]['category_id'] . "'");
-		
-		
-		
-		if(isset($parent_id->rows[0]['parent_id']) && ($parent_id->rows[0]['parent_id'] != 0)){
-		
-		
-			$category = $parent_id->rows[0]['parent_id'] . "_" . $category_id->rows[0]['category_id'];
-			$path_id_2 = $this->db->query("SELECT parent_id FROM " . DB_PREFIX . "category WHERE category_id = '" . $parent_id->rows[0]['parent_id'] . "'");
-			if(isset($path_id_2->rows[0]['parent_id']) && ($path_id_2->rows[0]['parent_id'] != 0)){
-				$category = $path_id_2->rows[0]['parent_id'] . "_" . $parent_id->rows[0]['parent_id'] . "_" . $category_id->rows[0]['category_id'];
-				$path_id_3 = $this->db->query("SELECT parent_id FROM " . DB_PREFIX . "category WHERE category_id = '" . (int)$path_id_2->rows[0]['parent_id'] . "'");
-				if(isset($path_id_3->rows[0]['parent_id']) && ($path_id_3->rows[0]['parent_id'] != 0)){
-					$category = $path_id_3->rows[0]['parent_id'] . "_" . $path_id_2->rows[0]['parent_id'] . "_" . $parent_id->rows[0]['parent_id'] . "_" . $category_id->rows[0]['category_id'];
-					$path_id_4 = $this->db->query("SELECT parent_id FROM " . DB_PREFIX . "category WHERE category_id = '" . (int)$path_id_3->rows[0]['parent_id'] . "'");
-					if(isset($path_id_4->rows[0]['parent_id']) && ($path_id_4->rows[0]['parent_id'] != 0)){
-						$category = $path_id_4->rows[0]['parent_id'] . "_" . $path_id_3->rows[0]['parent_id'] . "_" . $path_id_2->rows[0]['parent_id'] . "_" . $parent_id->rows[0]['parent_id'] . "_" . $category_id->rows[0]['category_id'];	
-					}						
-				}				
-			}
-		}else{
-			$category = $category_id->rows[0]['category_id'];
-		}
-	}else{
-		$category = false;
-	}
-
-	return $category;
-}
 					
 	public function getTotalCategoriesByCategoryId($parent_id = 0) {
 		$query = $this->db->query("SELECT COUNT(*) AS total FROM " . DB_PREFIX . "category c LEFT JOIN " . DB_PREFIX . "category_to_store c2s ON (c.category_id = c2s.category_id) WHERE c.parent_id = '" . (int)$parent_id . "' AND c2s.store_id = '" . (int)$this->config->get('config_store_id') . "' AND c.status = '1'");

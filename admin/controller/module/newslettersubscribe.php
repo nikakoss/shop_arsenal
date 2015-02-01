@@ -143,18 +143,45 @@ class ControllerModuleNewslettersubscribe extends Controller {
 			$this->data['newslettersubscribe_option_field6'] = $this->config->get('newslettersubscribe_option_field6');
 		}	
 			
+		if (isset($this->request->post['newslettersubscribe_module'])) {
+			$modules = explode(',', $this->request->post['newslettersubscribe_module']);
+		} elseif ($this->config->get('newslettersubscribe_module') != '') { 
+			$modules = explode(',', $this->config->get('newslettersubscribe_module'));
+		} else {
+			$modules = array();
+		}		
 		
 		$this->load->model('design/layout');
 		
 		$this->data['layouts'] = $this->model_design_layout->getLayouts();
-		
-		$this->data['modules'] = array();
 				
-		if (isset($this->request->post['newslettersubscribe_module'])) {
-			$this->data['modules'] = $this->request->post['newslettersubscribe_module'];
-		} elseif ($this->config->get('newslettersubscribe_module')) { 
-			$this->data['modules'] = $this->config->get('newslettersubscribe_module');
-		}	
+		foreach ($modules as $module) {
+			if (isset($this->request->post['newslettersubscribe_' . $module . '_layout_id'])) {
+				$this->data['newslettersubscribe_' . $module . '_layout_id'] = $this->request->post['newslettersubscribe_' . $module . '_layout_id'];
+			} else {
+				$this->data['newslettersubscribe_' . $module . '_layout_id'] = $this->config->get('newslettersubscribe_' . $module . '_layout_id');
+			}	
+			
+			if (isset($this->request->post['newslettersubscribe_' . $module . '_position'])) {
+				$this->data['newslettersubscribe_' . $module . '_position'] = $this->request->post['newslettersubscribe_' . $module . '_position'];
+			} else {
+				$this->data['newslettersubscribe_' . $module . '_position'] = $this->config->get('newslettersubscribe_' . $module . '_position');
+			}	
+			
+			if (isset($this->request->post['newslettersubscribe_' . $module . '_status'])) {
+				$this->data['newslettersubscribe_' . $module . '_status'] = $this->request->post['newslettersubscribe_' . $module . '_status'];
+			} else {
+				$this->data['newslettersubscribe_' . $module . '_status'] = $this->config->get('newslettersubscribe_' . $module . '_status');
+			}	
+						
+			if (isset($this->request->post['newslettersubscribe_' . $module . '_sort_order'])) {
+				$this->data['newslettersubscribe_' . $module . '_sort_order'] = $this->request->post['newslettersubscribe_' . $module . '_sort_order'];
+			} else {
+				$this->data['newslettersubscribe_' . $module . '_sort_order'] = $this->config->get('newslettersubscribe_' . $module . '_sort_order');
+			}				
+		}
+		
+		$this->data['modules'] = $modules;
 		
 		if (isset($this->request->post['newslettersubscribe_module'])) {
 			$this->data['newslettersubscribe_module'] = $this->request->post['newslettersubscribe_module'];

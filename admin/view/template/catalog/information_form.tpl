@@ -76,14 +76,14 @@
               <td><?php echo $entry_keyword; ?></td>
               <td><input type="text" name="keyword" value="<?php echo $keyword; ?>" /></td>
             </tr>
-     <!--       <tr>
+            <tr>
               <td><?php echo $entry_bottom; ?></td>
               <td><?php if ($bottom) { ?>
                 <input type="checkbox" name="bottom" value="1" checked="checked" />
                 <?php } else { ?>
                 <input type="checkbox" name="bottom" value="1" />
                 <?php } ?></td>
-            </tr>     -->       
+            </tr>            
             <tr>
               <td><?php echo $entry_status; ?></td>
               <td><select name="status">
@@ -96,29 +96,6 @@
                   <?php } ?>
                 </select></td>
             </tr>
-            <tr>
-              <td>Категория</td>
-              <td>
-                  <select name="bottom">
-                  <?php                  
-                  if ($category) {                 
-                  foreach($category as $key=>$value){
-                  
-                  if($key==$bottom){
-                  ?>
-                  <option selected="selected" value="<?php echo $key; ?>" ><?php echo $category[$key]; ?></option>
-                  <?php
-                  }else{
-                  ?>
-                   <option  value="<?php echo $key; ?>" ><?php echo $category[$key]; ?></option>                  
-                  <?php
-                  }
-                  
-                  
-                  } } ?>
-                </select></td>
-            </tr>  
-            
             <tr>
               <td><?php echo $entry_sort_order; ?></td>
               <td><input type="text" name="sort_order" value="<?php echo $sort_order; ?>" size="1" /></td>

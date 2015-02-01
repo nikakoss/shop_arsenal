@@ -1,16 +1,16 @@
 <?php
 // Heading
-$_['heading_title']      = 'Бесплатный заказ';
+$_['heading_title']      = 'Free Checkout';
 
 // Text
-$_['text_payment']       = 'Оплата';
-$_['text_success']       = 'Настройки модуля обновлены!';
+$_['text_payment']       = 'Payment';
+$_['text_success']       = 'Success: You have modified Free Checkout payment module!';
 
 // Entry
-$_['entry_order_status'] = 'Статус заказа:';
-$_['entry_status']       = 'Статус:';
-$_['entry_sort_order']   = 'Порядок сортировки:';
+$_['entry_order_status'] = 'Order Status:';
+$_['entry_status']       = 'Status:';
+$_['entry_sort_order']   = 'Sort Order:';
 
 // Error
-$_['error_permission']   = 'У Вас нет прав для управления этим модулем!';
+$_['error_permission']   = 'Warning: You do not have permission to modify payment Free Checkout!';
 ?>

@@ -3,7 +3,7 @@
 $_['heading_title']    = 'Подарочный сертификат';
 
 // Text
-$_['text_account']     = 'Личный кабинет';
+$_['text_account']     = 'Account';
 $_['text_voucher']     = 'Подарочный сертификат';
 $_['text_description'] = 'Этот подарочный сертификат будет отправлен получателю по E-Mail после оплаты заказа.';
 $_['text_agree']       = 'Я понимаю, что подарочные сертификаты не подлежат возврату.';
@@ -12,9 +12,9 @@ $_['text_for']         = '%s Подарочный сертификат для %s
 
 // Entry
 $_['entry_to_name']    = 'Имя Получателя:';
-$_['entry_to_email']   = 'E-Mail Получателя:';
+$_['entry_to_email']   = 'Email Получателя:';
 $_['entry_from_name']  = 'Ваше имя:';
-$_['entry_from_email'] = 'Ваш E-Mail:';
+$_['entry_from_email'] = 'Ваш E-mail:';
 $_['entry_theme']      = 'Тема Подарочного сертификата:';
 $_['entry_message']    = 'Сообщение:<br /><span class="help">(необязательно)</span>';
 $_['entry_amount']     = 'Сумма:<br /><span class="help">(Значение должно быть между %s и %s)</span>';

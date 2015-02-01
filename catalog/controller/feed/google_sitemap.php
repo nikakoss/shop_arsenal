@@ -6,20 +6,6 @@ class ControllerFeedGoogleSitemap extends Controller {
 		 $output .= '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">';
 		 
 		 $this->load->model('catalog/product');
-		 $this->load->model('localisation/language');
-			$languages = array();
-			$results = $this->model_localisation_language->getLanguages();
-			foreach ($results as $result) {
-				if ($result['status']) {
-					$languages[] = array(
-						'language_id'  => $result['language_id'],
-						'code'  => $result['code']
-					);	
-				}
-			}
-      foreach ($languages as $lang) {
-				$this->config->set('config_language_id', $lang['language_id']);
-        $this->session->data['language'] = $lang['code'];
 		 
 		 $products = $this->model_catalog_product->getProducts();
 		 
@@ -69,7 +55,7 @@ class ControllerFeedGoogleSitemap extends Controller {
 			$output .= '</url>';   
 		 }
 		 
-		 $output .= '</urlset>'; }
+		 $output .= '</urlset>';
 		 
 		 $this->response->addHeader('Content-Type: application/xml');
 		 $this->response->setOutput($output);

@@ -13,7 +13,7 @@ class ControllerModuleNewslettersubscribe extends Controller {
 	public function subscribe(){
 	
 	if($this->config->get('newslettersubscribe_thickbox')){
-	  $prefix_eval = "";
+	  $prefix_eval = "#TB_ajaxContent ";
 	}else{
 	  $prefix_eval = "";
 	}

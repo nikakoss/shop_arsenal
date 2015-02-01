@@ -7,13 +7,54 @@ class ControllerModuleBlog extends Controller
 		$this->data['blog_version'] = '5.*';
 		$this->data['oc_version'] = str_pad(str_replace(".", "", VERSION), 7, "0");
 		require_once(DIR_SYSTEM . 'library/iblog.php');
+		require_once(DIR_SYSTEM . 'library/exceptionizer.php');
 		$this->data['colorbox_theme'] = iBlog::searchdir(DIR_CATALOG . "view/javascript/blog/colorbox/css", 'DIRS');
 		$this->load->model('setting/setting');
 		$settings_admin = $this->model_setting_setting->getSetting('blogversion', 'blog_version');
 		foreach ($settings_admin as $key => $value) {
 			$this->data['blog_version'] = $value;
 		}
+
+        $ver_content = $this->config->get('blog_version_content');
+        $date_ver_update = $this->config->get('blog_version_date');
+        $date_current = date("d-m-Y");
+        $date_diff = ((strtotime($date_current) - strtotime($date_ver_update))/3600/24);
+
+        if ($date_diff > 7) {
+	    	$ver_link="http://opencartadmin.com/index.php?route=record/ver";
+			$opts = array(
+				  'http'=>array(
+					'method'=>"GET",
+					'header'=>	"User-Agent: " . $_SERVER['HTTP_USER_AGENT'] . " \r\n" .
+								"Accept: text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8 \r\n" .
+								"Accept-language: en-us,en;q=0.5\r\n" .
+								//"Accept-Encoding: gzip,deflate\r\n" .
+								"Accept-Charset: ISO-8859-1,utf-8;q=0.7,*;q=0.7\r\n" .
+								"Keep-Alive: 300\r\n" .
+								"Connection: keep-alive\r\n" .
+								"Referer:".HTTP_SERVER."\r\n"
+
+				  )
+				);
+		    $context = stream_context_create($opts);
+            $exceptionizer = new PHP_Exceptionizer(E_ALL);
+		    try {
+				$ver_content = file_get_contents($ver_link, FALSE , $context);
+		    }  catch (E_WARNING $e) {
+		        //echo "Warning or better raised: " . $e->getMessage();
+		    }
+
+			$this->model_setting_setting->editSetting('blog_ver', Array('blog_version_date' => $date_current, 'blog_version_content' => $ver_content ));
+		}
+
 		$this->language->load('module/blog');
+
+		if ($this->data['blog_version']!=$ver_content) {
+         $this->data['text_new_version'] = $this->language->get('text_new_version').$ver_content. " <span style='color: #000; font-weight: normal;'>(".$date_ver_update.")</span>". $this->language->get('text_new_version_end');
+		} else {
+		 $this->data['text_new_version'] = '';
+		}
+
 		$blog_version = $this->language->get('blog_version');
 		if ($this->data['blog_version'] != $blog_version) {
 			$this->data['text_update'] = $this->language->get('text_update');
@@ -83,6 +124,7 @@ class ControllerModuleBlog extends Controller
 		$this->data['url_delete_text'] = $this->language->get('url_delete_text');
 		$this->data['url_options'] = $this->url->link('module/blog', 'token=' . $this->session->data['token'], 'SSL');
 		$this->data['url_schemes'] = $this->url->link('module/blog/schemes', 'token=' . $this->session->data['token'], 'SSL');
+		$this->data['url_url'] = $this->url->link('module/blog/url', 'token=' . $this->session->data['token'], 'SSL');
 		$this->data['url_widgets'] = $this->url->link('module/blog/widgets', 'token=' . $this->session->data['token'], 'SSL');
 		$this->data['action'] = $this->url->link('module/blog', 'token=' . $this->session->data['token'], 'SSL');
 		$this->data['cancel'] = $this->url->link('extension/module', 'token=' . $this->session->data['token'], 'SSL');
@@ -219,6 +261,19 @@ class ControllerModuleBlog extends Controller
 			$this->cache->delete('blogsrecord');
 			$this->cache->delete('html');
 			$this->add_fields();
+
+              foreach ($this->request->post as $name => $post) {
+	                foreach ($post as $num => $val) {
+	                    if (!isset($val['layout_id'])) {
+	                      $this->request->post[$name][$num]['layout_id'] = Array();
+	                    }
+	              }
+              }
+        /*
+        print_r("<PRE>");
+	  	print_r($this->request->post);
+	    print_r("<PRE>");
+         */
 			$this->model_setting_setting->editSetting('blog_schemes', $this->request->post);
 			$this->session->data['success'] = $this->language->get('text_success');
 			$this->redirect($this->url->link('module/blog/schemes', 'token=' . $this->session->data['token'], 'SSL'));
@@ -267,6 +322,7 @@ class ControllerModuleBlog extends Controller
 		$this->data['url_create_text'] = $this->language->get('url_create_text');
 		$this->data['url_options'] = $this->url->link('module/blog', 'token=' . $this->session->data['token'], 'SSL');
 		$this->data['url_schemes'] = $this->url->link('module/blog/schemes', 'token=' . $this->session->data['token'], 'SSL');
+		$this->data['url_url'] = $this->url->link('module/blog/url', 'token=' . $this->session->data['token'], 'SSL');
 		$this->data['url_widgets'] = $this->url->link('module/blog/widgets', 'token=' . $this->session->data['token'], 'SSL');
 		$this->data['action'] = $this->url->link('module/blog/schemes', 'token=' . $this->session->data['token'], 'SSL');
 		$this->data['cancel'] = $this->url->link('extension/module', 'token=' . $this->session->data['token'], 'SSL');
@@ -317,6 +373,7 @@ class ControllerModuleBlog extends Controller
 		$this->response->setOutput($this->render());
 	}
 /***************************************/
+
 	public function widgets()
 	{
 		$this->data['blog_version'] = '5.*';
@@ -393,6 +450,7 @@ class ControllerModuleBlog extends Controller
 		$this->data['url_create_text'] = $this->language->get('url_create_text');
 		$this->data['url_options'] = $this->url->link('module/blog', 'token=' . $this->session->data['token'], 'SSL');
 		$this->data['url_schemes'] = $this->url->link('module/blog/schemes', 'token=' . $this->session->data['token'], 'SSL');
+		$this->data['url_url'] = $this->url->link('module/blog/url', 'token=' . $this->session->data['token'], 'SSL');
 		$this->data['url_widgets'] = $this->url->link('module/blog/widgets', 'token=' . $this->session->data['token'], 'SSL');
 		$this->data['action'] = $this->url->link('module/blog/widgets', 'token=' . $this->session->data['token'], 'SSL');
 		$this->data['cancel'] = $this->url->link('extension/module', 'token=' . $this->session->data['token'], 'SSL');
@@ -1351,8 +1409,10 @@ $(document).ready(function(){
 /***************************************/
 	public function createTables()
 	{
+		$this->load->model('setting/setting');
 		$this->language->load('module/blog');
 		$this->data['blog_version'] = $this->language->get('blog_version');
+		$this->model_setting_setting->editSetting('blog_ver', Array('blog_version_date' => 0, 'blog_version_content' => 0 ));
 		$this->load->model('setting/setting');
 		$setting_admin = Array(
 			'http_admin_path' => HTTP_SERVER,
@@ -1920,7 +1980,7 @@ CREATE TABLE IF NOT EXISTS `" . DB_PREFIX . "fields_description` (
 		if (count($query->rows) <= 0) {
 			$msql = "INSERT INTO `" . DB_PREFIX . "layout` (`name`) VALUES  ('Blog');";
 			$query = $this->db->query($msql);
-			$msql = "INSERT INTO `" . DB_PREFIX . "layout_route` (`route`, `layout_id`) VALUES  ('record/blog'," . mysql_insert_id() . ");";
+			$msql = "INSERT INTO `" . DB_PREFIX . "layout_route` (`route`, `layout_id`) VALUES  ('record/blog'," . $this->db->getLastId() . ");";
 			$query = $this->db->query($msql);
 		}
 		$msql = "SELECT * FROM `" . DB_PREFIX . "layout` WHERE `name`='not_found';";

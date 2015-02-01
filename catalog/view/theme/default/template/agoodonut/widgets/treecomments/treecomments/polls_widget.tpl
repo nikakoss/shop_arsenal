@@ -43,7 +43,9 @@ echo  html_entity_decode($mark_info['description'], ENT_QUOTES, 'UTF-8');
 			<form id="<?php echo $prefix;?>form_signer">
 			<label>
 			<input id="<?php echo $prefix;?>comments_signer" class="comments_signer" type="checkbox" <?php if (isset($signer_status) && $signer_status) echo 'checked'; ?>/>
-			<ins class="fontsize_15 hrefajax"><?php echo $this->language->get('text_signer'); ?></ins>
+			<a class="textdecoration_none comments_signer hrefajax fontsize_15">
+			<?php echo $this->language->get('text_signer'); ?>
+			</a>
 			</label>
 			</form>
 		</div>

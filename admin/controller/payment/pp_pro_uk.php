@@ -3,7 +3,7 @@ class ControllerPaymentPPProUK extends Controller {
 	private $error = array(); 
 
 	public function index() {
-		$this->load->language('payment/pp_pro_uk');
+		$this->language->load('payment/pp_pro_uk');
 
 		$this->document->setTitle($this->language->get('heading_title'));
 		
@@ -27,9 +27,10 @@ class ControllerPaymentPPProUK extends Controller {
 		$this->data['text_authorization'] = $this->language->get('text_authorization');
 		$this->data['text_sale'] = $this->language->get('text_sale');
 		
-		$this->data['entry_username'] = $this->language->get('entry_username');
+		$this->data['entry_vendor'] = $this->language->get('entry_vendor');
+		$this->data['entry_user'] = $this->language->get('entry_user');
 		$this->data['entry_password'] = $this->language->get('entry_password');
-		$this->data['entry_signature'] = $this->language->get('entry_signature');
+		$this->data['entry_partner'] = $this->language->get('entry_partner');
 		$this->data['entry_test'] = $this->language->get('entry_test');
 		$this->data['entry_transaction'] = $this->language->get('entry_transaction');
 		$this->data['entry_total'] = $this->language->get('entry_total');	
@@ -47,29 +48,35 @@ class ControllerPaymentPPProUK extends Controller {
 			$this->data['error_warning'] = '';
 		}
 
- 		if (isset($this->error['username'])) {
-			$this->data['error_username'] = $this->error['username'];
+ 		if (isset($this->error['vendor'])) {
+			$this->data['error_vendor'] = $this->error['vendor'];
 		} else {
-			$this->data['error_username'] = '';
+			$this->data['error_vendor'] = '';
 		}
-		
+
+ 		if (isset($this->error['user'])) {
+			$this->data['error_user'] = $this->error['user'];
+		} else {
+			$this->data['error_user'] = '';
+		}
+
  		if (isset($this->error['password'])) {
 			$this->data['error_password'] = $this->error['password'];
 		} else {
 			$this->data['error_password'] = '';
 		}
-		
- 		if (isset($this->error['signature'])) {
-			$this->data['error_signature'] = $this->error['signature'];
+
+ 		if (isset($this->error['partner'])) {
+			$this->data['error_partner'] = $this->error['partner'];
 		} else {
-			$this->data['error_signature'] = '';
+			$this->data['error_partner'] = '';
 		}
 
 		$this->data['breadcrumbs'] = array();
 
    		$this->data['breadcrumbs'][] = array(
        		'text'      => $this->language->get('text_home'),
-			'href'      => $this->url->link('common/home', 'token=' . $this->session->data['token'], 'SSL'),
+			'href'      => $this->url->link('common/home', 'token=' . $this->session->data['token'], 'SSL'),       		
       		'separator' => false
    		);
 
@@ -89,10 +96,16 @@ class ControllerPaymentPPProUK extends Controller {
 		
 		$this->data['cancel'] = $this->url->link('extension/payment', 'token=' . $this->session->data['token'], 'SSL');
 
-		if (isset($this->request->post['pp_pro_uk_username'])) {
-			$this->data['pp_pro_uk_username'] = $this->request->post['pp_pro_uk_username'];
+		if (isset($this->request->post['pp_pro_uk_vendor'])) {
+			$this->data['pp_pro_uk_vendor'] = $this->request->post['pp_pro_uk_vendor'];
 		} else {
-			$this->data['pp_pro_uk_username'] = $this->config->get('pp_pro_uk_username');
+			$this->data['pp_pro_uk_vendor'] = $this->config->get('pp_pro_uk_vendor');
+		}
+		
+		if (isset($this->request->post['pp_pro_uk_user'])) {
+			$this->data['pp_pro_uk_user'] = $this->request->post['pp_pro_uk_user'];
+		} else {
+			$this->data['pp_pro_uk_user'] = $this->config->get('pp_pro_uk_user');
 		}
 		
 		if (isset($this->request->post['pp_pro_uk_password'])) {
@@ -100,11 +113,13 @@ class ControllerPaymentPPProUK extends Controller {
 		} else {
 			$this->data['pp_pro_uk_password'] = $this->config->get('pp_pro_uk_password');
 		}
-				
-		if (isset($this->request->post['pp_pro_uk_signature'])) {
-			$this->data['pp_pro_uk_signature'] = $this->request->post['pp_pro_uk_signature'];
+		
+		if (isset($this->request->post['pp_pro_uk_partner'])) {
+			$this->data['pp_pro_uk_partner'] = $this->request->post['pp_pro_uk_partner'];
+		} elseif ($this->config->has('pp_pro_uk_partner')) {
+			$this->data['pp_pro_uk_partner'] = $this->config->get('pp_pro_uk_partner');
 		} else {
-			$this->data['pp_pro_uk_signature'] = $this->config->get('pp_pro_uk_signature');
+			$this->data['pp_pro_uk_partner'] = 'PayPal';
 		}
 		
 		if (isset($this->request->post['pp_pro_uk_test'])) {
@@ -166,21 +181,25 @@ class ControllerPaymentPPProUK extends Controller {
 		$this->response->setOutput($this->render());
 	}
 
-	private function validate() {
+	protected function validate() {
 		if (!$this->user->hasPermission('modify', 'payment/pp_pro_uk')) {
 			$this->error['warning'] = $this->language->get('error_permission');
 		}
+
+		if (!$this->request->post['pp_pro_uk_vendor']) {
+			$this->error['vendor'] = $this->language->get('error_vendor');
+		}
 		
-		if (!$this->request->post['pp_pro_uk_username']) {
-			$this->error['username'] = $this->language->get('error_username');
+		if (!$this->request->post['pp_pro_uk_user']) {
+			$this->error['user'] = $this->language->get('error_user');
 		}
 
 		if (!$this->request->post['pp_pro_uk_password']) {
 			$this->error['password'] = $this->language->get('error_password');
 		}
 
-		if (!$this->request->post['pp_pro_uk_signature']) {
-			$this->error['signature'] = $this->language->get('error_signature');
+		if (!$this->request->post['pp_pro_uk_partner']) {
+			$this->error['partner'] = $this->language->get('error_partner');
 		}
 		
 		if (!$this->error) {

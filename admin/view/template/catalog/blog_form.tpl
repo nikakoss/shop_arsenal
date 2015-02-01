@@ -233,6 +233,17 @@
       <input type="text" name="blog_design[images][height]" value="<?php if (isset($blog_design['images']['height'])) echo $blog_design['images']['height']; ?>" size="3" />
      </td>
     </tr>
+
+    <tr>
+     <td class="left"><?php echo $this->language->get('entry_product_image_dim'); ?></td>
+     <td class="left">
+      <input type="text" name="blog_design[product_image][width]" value="<?php  if (isset($blog_design['product_image']['width'])) echo $blog_design['product_image']['width']; ?>" size="3" />x
+      <input type="text" name="blog_design[product_image][height]" value="<?php if (isset($blog_design['product_image']['height'])) echo $blog_design['product_image']['height']; ?>" size="3" />
+     </td>
+    </tr>
+
+
+
 	<tr>
 
           <tr>
@@ -553,7 +564,7 @@
     </div>
   </div>
 </div>
-<script type="text/javascript" src="view/javascript/ckeditor/ckeditor.js"></script>
+<script type="text/javascript" src="view/javascript/ckeditor-v2/ckeditor.js"></script>
 <script type="text/javascript"><!--
 <?php foreach ($languages as $language) { ?>
 CKEDITOR.replace('description<?php echo $language['language_id']; ?>', {

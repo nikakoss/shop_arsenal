@@ -53,16 +53,21 @@ class ControllerRecordTreeComments extends Controller
 
 			if (isset($this->request->post['thislist'])) {
 				$str                    = base64_decode($this->request->post['thislist']);
-				$this->data['thislist'] = unserialize($str);
+				$this->data['cmswidget'] = unserialize($str);
 			} else {
 
 			    $numargs = func_num_args();
+
 			    if ($numargs >= 1) {
-			        $this->data['thislist']= func_get_arg(0);
+			        $this->data['cmswidget']= func_get_arg(0);
 			    } else {
-				  $this->data['thislist'] = Array();
+				  $this->data['cmswidget'] = false;
 				}
 			}
+
+			$this->data['mylist']   = $this->config->get('mylist');
+
+            $this->data['thislist'] = $this->data['mylist'][$this->data['cmswidget']];
 
 			$this->language->load('record/blog');
 			$this->language->load('record/record');

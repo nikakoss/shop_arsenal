@@ -49,7 +49,7 @@ class ModelTotalReward extends Model {
 
 				$total -= $discount_total;
 			} 
-		}                
+		}
 	}
 	
 	public function confirm($order_info, $order_total) {

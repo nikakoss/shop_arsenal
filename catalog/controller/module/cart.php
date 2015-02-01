@@ -27,14 +27,14 @@ class ControllerModuleCart extends Controller {
 			}
 			
 			array_multisort($sort_order, SORT_ASC, $results);
-			//var_dump($results); exit;
+			
 			foreach ($results as $result) {
 				if ($this->config->get($result['code'] . '_status')) {
 					$this->load->model('total/' . $result['code']);
-		//echo 'total/' . $result['code']."  ".$total."<br>";
+		
 					$this->{'model_total_' . $result['code']}->getTotal($total_data, $total, $taxes);
 				}
-        			
+				
 				$sort_order = array(); 
 			  
 				foreach ($total_data as $key => $value) {
@@ -44,25 +44,15 @@ class ControllerModuleCart extends Controller {
 				array_multisort($sort_order, SORT_ASC, $total_data);			
 			}		
 		}
-		   
-                
+		
 		$this->data['totals'] = $total_data;
 		
 		$this->data['heading_title'] = $this->language->get('heading_title');
 		
 		$this->data['text_items'] = sprintf($this->language->get('text_items'), $this->cart->countProducts() + (isset($this->session->data['vouchers']) ? count($this->session->data['vouchers']) : 0), $this->currency->format($total));
-		
-		
-		
-		$this->data['order_all_count'] = $this->cart->countProducts() + (isset($this->session->data['vouchers']) ? count($this->session->data['vouchers']) : 0);
-		$this->data['order_all_total'] = $total;
-		
-		
-		
-        $this->data['text_empty'] = $this->language->get('text_empty');
+		$this->data['text_empty'] = $this->language->get('text_empty');
 		$this->data['text_cart'] = $this->language->get('text_cart');
 		$this->data['text_checkout'] = $this->language->get('text_checkout');
-		$this->data['text_payment_profile'] = $this->language->get('text_payment_profile');
 		
 		$this->data['button_remove'] = $this->language->get('button_remove');
 		
@@ -110,17 +100,15 @@ class ControllerModuleCart extends Controller {
 			}
 													
 			$this->data['products'][] = array(
-				'key'       => $product['key'],
-				'thumb'     => $image,
-				'name'      => $product['name'],
-				'model'     => $product['model'], 
-				'option'    => $option_data,
-				'quantity'  => $product['quantity'],
-				'price'     => $price,	
-				'total'     => $total,	
-				'href'      => $this->url->link('product/product', 'product_id=' . $product['product_id']),
-                'recurring' => $product['recurring'],
-                'profile'   => $product['profile_name'],
+				'key'      => $product['key'],
+				'thumb'    => $image,
+				'name'     => $product['name'],
+				'model'    => $product['model'], 
+				'option'   => $option_data,
+				'quantity' => $product['quantity'],
+				'price'    => $price,	
+				'total'    => $total,	
+				'href'     => $this->url->link('product/product', 'product_id=' . $product['product_id'])		
 			);
 		}
 		

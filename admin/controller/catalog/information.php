@@ -383,17 +383,8 @@ class ControllerCatalogInformation extends Controller {
 		} else {
 			$this->data['bottom'] = 0;
 		}
-                
-                if (isset($this->request->post['bottom'])) {
-			$this->data['bottom'] = $this->request->post['bottom'];
-		} elseif (!empty($information_info)) {
-			$this->data['bottom'] = $information_info['bottom'];
-		} else {
-			$this->data['bottom'] = 0;
-		}
-                $this->data['category']=array(1=>"О магазине",2=>"Доставка",3=>"Важно",4=>"Сервис",0=>"Без категории");
-
-                if (isset($this->request->post['status'])) {
+		
+		if (isset($this->request->post['status'])) {
 			$this->data['status'] = $this->request->post['status'];
 		} elseif (!empty($information_info)) {
 			$this->data['status'] = $information_info['status'];

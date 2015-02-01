@@ -1,64 +1,64 @@
-
  <?php
  if ($records) {
  ?>
-<div class="news_article" id="cmswidget-<?php echo $cmswidget; ?>">
- <h2><?php echo $heading_title; ?></h2>
-	<div class="clearfix">
+<div class="box" id="cmswidget-<?php echo $cmswidget; ?>">
+  <div class="box-heading"><?php echo $heading_title; ?></div>
+	<div class="box-content">
 
+  <div class="blog-record-list-small">
     <?php foreach ($records as $record) { ?>
-    <div class="news_1 clearfix" >
-	
-	
-	      <?php if ($record['thumb'] || count($record['images']) > 0) { ?>
-      
-      <?php if ($record['thumb']) { ?>
-     
-      <img src="<?php echo $record['thumb']; ?>" title="<?php echo $record['name']; ?>" alt="<?php echo $record['name']; ?>" />
-      
-       <?php } ?>
-      <?php if (isset ($record['settings_blog']['images_view']) && $record['settings_blog']['images_view'] ) { ?>
-      <?php if (isset ($record['settings']['images_view']) && $record['settings']['images_view'] ) { ?>
-      <?php foreach ($record['images'] as $numi => $images) { ?>
-     
-	
-	<img alt="<?php echo $images['title']; ?>" title="<?php echo $images['title']; ?>" src="<?php echo $images['thumb']; ?>">
-	
-	
+    <div>
 
-      <?php } ?>
-      <?php } ?>
-      <?php } ?>
-      
-      <?php } ?>
-	
-	
-	<div class="opisanie_news">
-
-				   <?php if (isset ($record['settings_blog']['view_date']) && $record['settings_blog']['view_date'] ) { ?> 
+				    <?php if (isset ($record['settings_blog']['view_date']) && $record['settings_blog']['view_date'] ) { ?>
 				    <?php if (isset ($record['settings']['view_date']) && $record['settings']['view_date'] ) { ?>
 				      <?php if ($record['date_available']) { ?>
-				        <span><?php echo $record['date_available']; ?></span>
+				        <div class="blog-date"><?php echo $record['date_available']; ?></div>
 				      <?php } ?>
 				    <?php } ?>
 				    <?php } ?>
 
 
-     
+     <div class="name marginbottom5">
+					    <?php
+					    //if (isset ($record['settings_blog']['category_status']) && $record['settings_blog']['category_status'] ) {
+					    ?>
+					    <?php if (isset ($record['settings']['category_status']) && $record['settings']['category_status'] ) { ?>
+					    <a href="<?php echo $record['blog_href']; ?>" class="blog-title"><?php echo $record['blog_name']; ?></a><ins class="blog-arrow">&nbsp;&rarr;&nbsp;</ins>
+					    <?php } ?>
+					    <?php
+					    //	}
+					    ?>
+					    <a href="<?php echo $record['href']; ?>" class="blog-title"><?php echo $record['name']; ?></a>
 
-					    <a href="<?php echo $record['href']; ?>"><?php echo $record['name']; ?></a>
+     </div>
 
-    
+      <?php if ($record['thumb'] || count($record['images']) > 0) { ?>
+      <div class="image blog-image">
+      <?php if ($record['thumb']) { ?>
+      <div>
+      <a href="<?php echo $record['href']; ?>"><img src="<?php echo $record['thumb']; ?>" title="<?php echo $record['name']; ?>" alt="<?php echo $record['name']; ?>" /></a>
+      </div>
+       <?php } ?>
+      <?php if (isset ($record['settings_blog']['images_view']) && $record['settings_blog']['images_view'] ) { ?>
+      <?php if (isset ($record['settings']['images_view']) && $record['settings']['images_view'] ) { ?>
+      <?php foreach ($record['images'] as $numi => $images) { ?>
+     <div class="image blog-image">
+	<a class="imagebox" rel="imagebox" title="<?php echo $images['title']; ?>" href="<?php echo $images['popup']; ?>">
+	<img alt="<?php echo $images['title']; ?>" title="<?php echo $images['title']; ?>" src="<?php echo $images['thumb']; ?>">
+	</a>
+	</div>
+
+      <?php } ?>
+      <?php } ?>
+      <?php } ?>
+      </div>
+      <?php } ?>
 
 
 
 
-
-
-          	<?php echo $record['description']; ?>&nbsp;
-          	<a href="<?php echo $record['href']; ?>" class="blog_further"><?php if (isset($settings_general['further'][$this->config->get('config_language_id')])) echo html_entity_decode($settings_general['further'][$this->config->get('config_language_id')]); ?></a>
-			
-				</div>
+          	<div class="description"><?php echo $record['description']; ?>&nbsp;
+          	<a href="<?php echo $record['href']; ?>" class="blog_further"><?php if (isset($settings_general['further'][$this->config->get('config_language_id')])) echo html_entity_decode($settings_general['further'][$this->config->get('config_language_id')]); ?></a></div>
 
      <div class="overflowhidden width100 lineheight1">&nbsp;</div>
       <div>
@@ -95,9 +95,9 @@
 				        <?php } ?>
       </div>
 
-      
+      <div class="overflowhidden lineheight1">&nbsp;</div>
       </div>
-<!--  	<?php
+ 	<?php
 	 if ($userLogged)    {
 	?>
 	<div class="blog-edit_container">
@@ -105,29 +105,17 @@
 	 </div>
 	<?php
 	 }
-	?> -->
+	?>
 
-
-
+  <div class="blog-child_divider">&nbsp;</div>
+ <div class="overflowhidden lineheight1 width100">&nbsp;</div>
     </div>
     <?php } ?>
-
+  </div>
  		<?php if (isset ($settings_widget['pagination']) && $settings_widget['pagination'] ) { ?>
 		<div class="pagination margintop5"><?php echo $pagination; ?></div>
 		<?php } ?>
  </div>
- 
- 					    <?php
-					    //if (isset ($record['settings_blog']['category_status']) && $record['settings_blog']['category_status'] ) {
-					    ?>
-					    <?php if (isset ($record['settings']['category_status']) && $record['settings']['category_status'] ) { ?>
-					    <a href="<?php echo $record['blog_href']; ?>">Все <?php echo $record['blog_name']; ?></a>
-					    <?php } ?>
-					    <?php
-					    //	}
-					    ?>
- 
-
 </div>
 
 <?php if (isset($settings_widget['anchor']) && $settings_widget['anchor']!='') { ?>

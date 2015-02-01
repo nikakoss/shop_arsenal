@@ -100,10 +100,11 @@ class ControllerCommonFileManager extends Controller {
 		}
 		
 		$allowed = array(
-			'.JPG.',
 			'.jpg',
 			'.jpeg',
 			'.png',
+			'.xls',
+			'.pdf',
 			'.gif'
 		);
 		
@@ -147,7 +148,6 @@ class ControllerCommonFileManager extends Controller {
 				}
 			}
 		}
-		
 		
 		$this->response->setOutput(json_encode($json));	
 	}	
@@ -435,7 +435,7 @@ class ControllerCommonFileManager extends Controller {
 					$json['error'] = $this->language->get('error_directory');
 				}
 				
-				if ($this->request->files['image']['size'] > 300000) {
+				if ($this->request->files['image']['size'] > 3000000) {
 					$json['error'] = $this->language->get('error_file_size');
 				}
 				

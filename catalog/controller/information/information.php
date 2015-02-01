@@ -22,10 +22,7 @@ class ControllerInformationInformation extends Controller {
 		$information_info = $this->model_catalog_information->getInformation($information_id);
    		
 		if ($information_info) {
-	  		$this->document->setTitle(($information_info['seo_title'] ? $information_info['seo_title'] : $information_info['title'])); 
-			
-			$this->document->setKeywords($information_info['meta_keyword']);
-				$this->document->setDescription($information_info['meta_description']);
+	  		$this->document->setTitle($information_info['title']); 
 
       		$this->data['breadcrumbs'][] = array(
         		'text'      => $information_info['title'],
@@ -41,10 +38,20 @@ class ControllerInformationInformation extends Controller {
       		
 			$this->data['continue'] = $this->url->link('common/home');
 
-			if (file_exists(DIR_TEMPLATE . $this->config->get('config_template') . '/template/information/information.tpl')) {
-				$this->template = $this->config->get('config_template') . '/template/information/information.tpl';
+                        if($information_id==7){
+                            $template='contacts.tpl';
+                        }elseif($information_id==8){
+                            $template='faq.tpl';
+                        }elseif($information_id==10){
+                            $template='jobs.tpl';
+                        }else{
+                            $template='information.tpl';
+                        }
+                        
+			if (file_exists(DIR_TEMPLATE . $this->config->get('config_template') . '/template/information/'.$template)) {
+				$this->template = $this->config->get('config_template') . '/template/information/'.$template;
 			} else {
-				$this->template = 'default/template/information/information.tpl';
+				$this->template = 'default/template/information/'.$template;
 			}
 			
 			$this->children = array(
@@ -53,7 +60,11 @@ class ControllerInformationInformation extends Controller {
 				'common/content_top',
 				'common/content_bottom',
 				'common/footer',
-				'common/header'
+				'common/header',				
+				'common/column_blockone',
+				'common/column_there',
+				'common/column_four',
+                                'common/column_two'
 			);
 						
 	  		$this->response->setOutput($this->render());

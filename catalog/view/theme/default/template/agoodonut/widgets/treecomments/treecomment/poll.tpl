@@ -23,13 +23,13 @@ $karma_all = 0;
 $voted_all = 0;
 
 
-foreach ($mycomments as $num => $comment) {	$karma_all = $karma_all + $comment['customer_delta'];
+foreach ($mycomments as $number => $comment) {	$karma_all = $karma_all + $comment['customer_delta'];
 	$voted_all = $voted_all + $comment['rate_count'];
 }
 reset($mycomments);
 
 	$opendiv=0;
-	foreach ($mycomments as $num => $comment) {
+	foreach ($mycomments as $number => $comment) {
     	$opendiv++;
 ?>
 

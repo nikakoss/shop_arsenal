@@ -253,7 +253,9 @@ margin-left: 5px;
 
 .mytable thead, tfoot  {background: #ddefd9; height: 40px; }
 .mytable thead td { padding-left: 10px; font-size: 17px; font-weight: normal;}
-.mytable tbody tr:nth-child(2n+1) {background: #f8f8f8;}
+
+.mytable tbody tr:nth-child(2n-1) {background: #f8f8f8;}
+
 .mytable td { padding: 5px;}
 .mynotable td {padding: 5px;}
 
@@ -281,4 +283,9 @@ margin-left: 5px;
 	-khtml-border-radius: 2px 2px 2px 2px;
 	border-radius: 2px 2px 2px 2px;
 	*/
+}
+
+a.hrefajax {
+ text-decoration: none;
+ border-bottom:1px dashed;
 }

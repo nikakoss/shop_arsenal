@@ -53,7 +53,7 @@ class ControllerModuleBlog extends Controller
 		foreach ($settings_admin as $key => $value) {
 			$this->data['admin_path'] = $value;
 		}
-		$position_block = $this->data['position'] = $arg['position'];
+		$position_widget_block = $this->data['position'] = $arg['position'];
 		$this->language->load('module/blog');
 		$this->data['button_continue'] = $this->language->get('button_continue');
 		$template                      = '/template/agoodonut/widgets/blogs/blog.tpl';
@@ -108,14 +108,14 @@ class ControllerModuleBlog extends Controller
 			$layout_id = $this->config->get('config_layout_id');
 		}
 		$this->data['lang_code'] = $this->config->get('config_language');
-		if (!$this->registry->has('blog_position_' . $position_block)) {
-			$this->registry->set('blog_position_' . $position_block, 0);
+		if (!$this->registry->has('blog_position_' . $position_widget_block)) {
+			$this->registry->set('blog_position_' . $position_widget_block, 0);
 		} else {
-			$pos = $this->registry->get('blog_position_' . $position_block);
-			$this->registry->set('blog_position_' . $position_block, $pos + 1);
+			$pos = $this->registry->get('blog_position_' . $position_widget_block);
+			$this->registry->set('blog_position_' . $position_widget_block, $pos + 1);
 		}
-		$position                = $this->registry->get('blog_position_' . $position_block);
-		$this->data['position']  = $position;
+		$position_widget                = $this->registry->get('blog_position_' . $position_widget_block);
+		$this->data['position']  = $position_widget;
 		$this->data['layout_id'] = $layout_id;
 		$module_data             = array();
 		$this->load->model('setting/extension');
@@ -124,7 +124,7 @@ class ControllerModuleBlog extends Controller
 			$modules = $this->config->get($extension['code'] . '_module');
 			if ($modules) {
 				foreach ($modules as $num => $module) {
-					if ($module['layout_id'] == $layout_id && $extension['code'] == 'blog' && $module['position'] == $position_block && $module['status']) {
+					if ($module['layout_id'] == $layout_id && $extension['code'] == 'blog' && $module['position'] == $position_widget_block && $module['status']) {
 						if ($extension['code'] != '') {
 							$module_data[] = array(
 								'code' => $extension['code'],
@@ -165,25 +165,28 @@ class ControllerModuleBlog extends Controller
 		} else {
 			$this->data['userLogged'] = false;
 		}
-		if (!isset($module_data[$position])) {
-			$this->registry->set('blog_position_' . $position_block, 0);
-			$position = 0;
+		if (!isset($module_data[$position_widget])) {
+			$this->registry->set('blog_position_' . $position_widget_block, 0);
+			$position_widget = 0;
 		}
-		if (isset($module_data[$position]['setting']['what']) && $module_data[$position]['setting']['what'] != 'what_hook') {
-			$type = $this->data['mylist'][$module_data[$position]['setting']['what']]['type'];
+
+		//print_r( $module_data[$position_widget]['setting']['what']); echo "<br>";
+
+		if (isset($module_data[$position_widget]['setting']['what']) && $module_data[$position_widget]['setting']['what'] != 'what_hook') {
+			$type = $this->data['mylist'][$module_data[$position_widget]['setting']['what']]['type'];
 		}
-		if (isset($module_data[$position]['setting']['what']) && $module_data[$position]['setting']['what'] == 'what_hook') {
+		if (isset($module_data[$position_widget]['setting']['what']) && $module_data[$position_widget]['setting']['what'] == 'what_hook') {
 			$type = "hook";
 		}
-		if (isset($module_data[$position]['setting']['what']) && isset($this->data['mylist'][$module_data[$position]['setting']['what']]))
-			$thislist = $this->data['mylist'][$module_data[$position]['setting']['what']];
+		if (isset($module_data[$position_widget]['setting']['what']) && isset($this->data['mylist'][$module_data[$position_widget]['setting']['what']]))
+			$thislist = $this->data['mylist'][$module_data[$position_widget]['setting']['what']];
 		else
 			$thislist = null;
 		$this->data['thislist']        = $thislist;
 		$this->data['settings_widget'] = $this->data['thislist'];
 		$this->registry->set('thislist', serialize($thislist));
-		if (isset($module_data[$position])) {
-			$this->registry->set('mylist_position', $module_data[$position]['setting']['what']);
+		if (isset($module_data[$position_widget])) {
+			$this->registry->set('mylist_position', $module_data[$position_widget]['setting']['what']);
 		}
 		if (((isset($this->data['thislist']['visual_editor']) && isset($this->data['thislist']['comment_must']) && $this->data['thislist']['comment_must'] && $this->data['thislist']['visual_editor'])) || !isset($this->data['thislist']['visual_editor'])) {
 			$this->data['visual_editor'] = true;
@@ -224,29 +227,38 @@ class ControllerModuleBlog extends Controller
 		$prefix_array         = preg_split('//', $prefix_str, -1, PREG_SPLIT_NO_EMPTY);
 		shuffle($prefix_array);
 		$this->data['prefix'] = substr(implode($prefix_array), 0, 7);
+
 		if (!isset($module_view_cache[$hash_cache]) || (isset($thislist['cached']) && $thislist['cached'] == 0)) {
 			$this->data['type'] = false;
-			$cmswidget = $this->data['cmswidget'] = $module_data[$position]['setting']['what'];
+			$cmswidget = $this->data['cmswidget'] = $module_data[$position_widget]['setting']['what'];
+
 			if (!empty($module_data) && $type == 'html') {
+
 				$this->data['type'] = $type;
-				$this->data['html'] = html_entity_decode($this->data['mylist'][$module_data[$position]['setting']['what']]['html'][$this->config->get('config_language_id')], ENT_QUOTES, 'UTF-8');
-				$html_name          = "html." . md5(serialize($this->data['mylist'][$module_data[$position]['setting']['what']])) . "." . $this->config->get('config_language_id') . ".php";
+				$this->data['html'] = html_entity_decode($this->data['mylist'][$module_data[$position_widget]['setting']['what']]['html'][$this->config->get('config_language_id')], ENT_QUOTES, 'UTF-8');
+				$html_name          = "html." . md5(serialize($this->data['mylist'][$module_data[$position_widget]['setting']['what']])) . "." . $this->config->get('config_language_id') . ".php";
 				$file               = DIR_CACHE . $html_name;
+
 				if (!file_exists($file)) {
 					$handle = fopen($file, 'w');
 					fwrite($handle, $this->data['html']);
 					fclose($handle);
 				}
+
 				if (file_exists($file)) {
-					extract($this->data);
+				$this->data['mark'] = "Mark";
+				    extract($this->data);
 					ob_start();
 					require($file);
 					$this->output = ob_get_contents();
 					ob_end_clean();
+
 				}
+
 				$this->data['html'] = $this->output;
-				if (isset($this->data['mylist'][$module_data[$position]['setting']['what']]['title_list_latest'][$this->config->get('config_language_id')]))
-					$this->data['heading_title'] = $this->data['mylist'][$module_data[$position]['setting']['what']]['title_list_latest'][$this->config->get('config_language_id')];
+
+				if (isset($this->data['mylist'][$module_data[$position_widget]['setting']['what']]['title_list_latest'][$this->config->get('config_language_id')]))
+					$this->data['heading_title'] = $this->data['mylist'][$module_data[$position_widget]['setting']['what']]['title_list_latest'][$this->config->get('config_language_id')];
 				else
 					$this->data['heading_title'] = '';
 				if (isset($thislist['template']) && $thislist['template'] != '') {
@@ -453,17 +465,17 @@ class ControllerModuleBlog extends Controller
 				}
 
 
-				if (isset($this->request->get['wpage']) && isset($this->request->get['cmswidget']) && $this->request->get['cmswidget'] == $module_data[$position]['setting']['what']) {
+				if (isset($this->request->get['wpage']) && isset($this->request->get['cmswidget']) && $this->request->get['cmswidget'] == $module_data[$position_widget]['setting']['what']) {
 					$page = $this->request->get['wpage'];
 				} else {
 					$page = 1;
 				}
-				if (isset($this->request->get['wsort']) && isset($this->request->get['cmswidget']) && $this->request->get['cmswidget'] == $module_data[$position]['setting']['what']) {
+				if (isset($this->request->get['wsort']) && isset($this->request->get['cmswidget']) && $this->request->get['cmswidget'] == $module_data[$position_widget]['setting']['what']) {
 					$sort = $this->request->get['wsort'];
 				} else {
 					$sort = "sort";
 				}
-				if (isset($this->request->get['worder']) && isset($this->request->get['cmswidget']) && $this->request->get['cmswidget'] == $module_data[$position]['setting']['what']) {
+				if (isset($this->request->get['worder']) && isset($this->request->get['cmswidget']) && $this->request->get['cmswidget'] == $module_data[$position_widget]['setting']['what']) {
 					$order = $this->request->get['worder'];
 				} else {
 					$order = "DESC";
@@ -475,7 +487,7 @@ class ControllerModuleBlog extends Controller
 					$thislist['number_per_widget'] = 4;
 				}
 
-				if (isset($this->request->get['wlimit']) && isset($this->request->get['cmswidget']) && $this->request->get['cmswidget'] == $module_data[$position]['setting']['what']) {
+				if (isset($this->request->get['wlimit']) && isset($this->request->get['cmswidget']) && $this->request->get['cmswidget'] == $module_data[$position_widget]['setting']['what']) {
 					$thislist['number_per_widget'] = $this->request->get['wlimit'];
 				}
 
@@ -805,11 +817,16 @@ class ControllerModuleBlog extends Controller
 					$this->data['text_welcome'] = sprintf($this->language->get('text_welcome'), $this->url->link('account/register', '', 'SSL'));
 					$this->data['text_wait']    = $this->language->get('text_wait');
 					$this->cont('record/treecomments');
-					$this->request->post['thislist'] = base64_encode(serialize($thislist));
+					// Убрано, чтобы не мешать ->comment
+					//$this->request->post['thislist'] = base64_encode(serialize($thislist));
 					$mark                            = $this->data['mark'];
 					$this->data                      = $this->getMarkReviews($thislist, $type, $this->data['mark']);
 					$this->data['mark']              = $mark;
-					$this->data['html_comment']      = $this->controller_record_treecomments->comment($this->data['thislist']);
+
+
+
+					$this->data['html_comment']      = $this->controller_record_treecomments->comment($this->data['cmswidget']);
+
 					if (isset($thislist['view_captcha']) && $thislist['view_captcha'] == 0) {
 						$this->data['captcha_status'] = false;
 					}
@@ -858,7 +875,10 @@ class ControllerModuleBlog extends Controller
 							}
 						}
 					}
+
+
 					$this->data['settings_widget'] = $this->data['thislist'];
+					$this->data['thislist'] = $this->data['cmswidget'];
 					if (isset($thislist['template']) && $thislist['template'] != '') {
 						$template = '/template/agoodonut/widgets/treecomments/treecomments/' . $thislist['template'];
 					} else {
@@ -868,6 +888,9 @@ class ControllerModuleBlog extends Controller
 					}
 				}
 			}
+
+
+
 			if (!empty($module_data) && $type == 'hook') {
 				$this->data['type'] = $type;
 				if (isset($thislist['template']) && $thislist['template'] != '') {
@@ -915,6 +938,8 @@ class ControllerModuleBlog extends Controller
 		$findme                 = 'colorbox';
 		$this->data['imagebox'] = '';
 		$scripts                = $this->document->getScripts();
+
+
 		$colorbox_flag          = false;
 		foreach ($scripts as $num => $val) {
 			if (strpos($val, $findme) !== FALSE) {
@@ -928,7 +953,11 @@ class ControllerModuleBlog extends Controller
 				$colorbox_flag = true;
 			}
 		}
+
+
+
 		if (!$colorbox_flag) {
+
 			if (file_exists(DIR_TEMPLATE . $this->config->get('config_template') . '/template/common/header.tpl')) {
 				$product_file = file_get_contents(DIR_TEMPLATE . $this->config->get('config_template') . '/template/common/header.tpl');
 			} else {
@@ -938,16 +967,22 @@ class ControllerModuleBlog extends Controller
 					$product_file = "";
 				}
 			}
+
+
+
 			$pos = strpos($product_file, $findme);
 			if ($pos !== false) {
 				$colorbox_flag = true;
 			}
 		}
-		if (!$colorbox_flag) {
-			//$this->document->addScript('catalog/view/javascript/blog/colorbox/jquery.colorbox.js');
-			//$this->document->addScript('catalog/view/javascript/blog/colorbox/lang/jquery.colorbox-' . $this->config->get('config_language') . '.js');
-			//$this->document->addStyle('catalog/view/javascript/blog/colorbox/css/' . $theme . '/colorbox.css');
-		}
+
+
+		if (!$colorbox_flag || $this->config->get('config_template') == 'journal2') {
+
+			$this->document->addScript('catalog/view/javascript/blog/colorbox/jquery.colorbox.js');
+			$this->document->addScript('catalog/view/javascript/blog/colorbox/lang/jquery.colorbox-' . $this->config->get('config_language') . '.js');
+			$this->document->addStyle('catalog/view/javascript/blog/colorbox/css/' . $theme . '/colorbox.css');
+	 	}
 		$this->data['imagebox'] = 'colorbox';
 		if ($this->data['imagebox'] == 'colorbox') {
 			$this->document->addScript('catalog/view/javascript/blog/blog.color.js');
@@ -1075,8 +1110,9 @@ class ControllerModuleBlog extends Controller
 							$amount    = $thislist['desc_pred'];
 							$flag_desc = 'pred';
 						}
-						if ($flag_desc != 'none')
-							$comment['text'] = preg_replace('/\[(.*?)\]/', '', $comment['text']);
+						//if ($flag_desc != 'none')
+							//$comment['text'] = preg_replace('/\[(.*?)\]/', '', $comment['text']);
+
 						switch ($flag_desc) {
 							case 'symbols':
 								$pattern = ('/((.*?)\S){0,' . $amount . '}/isu');

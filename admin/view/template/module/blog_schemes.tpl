@@ -65,6 +65,7 @@ unset($this->session->data['success']);
 <div style="float: left; margin-left: 7px; margin-top: 4px; "><?php echo $tab_general; ?></div></a>
 </div>
 
+
 <div style="margin-right:5px; float:left;">
 <a href="<?php echo $url_widgets; ?>" class="markbutton"><div style="float: left;"><img src="view/image/agoodonut-widgets-m.png"  style="" ></div>
 <div style="float: left; margin-left: 7px; margin-top: 4px; "><?php echo $tab_list; ?></div></a>
@@ -125,7 +126,24 @@ function delayer(){
          }
         ?>
 
-          <tr id="module-row<?php echo $module_row; ?>">
+
+         <tr class="module-row<?php echo $module_row; ?>" >
+
+   	           <td style="border-top: 1px solid #DDEFD9;"><?php echo $this->language->get('entry_url'); ?></td>
+	            <td class="left" colspan="5" style="border-top: 1px solid #DDEFD9;">
+	         	 <input type="text" name="blog_module[<?php echo $module_row; ?>][url]" value="<?php if (isset($module['url'])) echo trim($module['url']); ?>" style="width:100%" />
+	           </td>
+         </tr>
+           <tr class="module-row<?php echo $module_row; ?>" style="display: none;" >
+           <td>&nbsp;</td>
+           </tr>
+          <tr class="module-row<?php echo $module_row; ?>">
+
+
+
+
+
+
 
 
             <td class="left"><!-- <?php echo $module_row; ?>&nbsp; -->
@@ -149,10 +167,12 @@ function delayer(){
                   <?php $class = ($class == 'even' ? 'odd' : 'even'); ?>
                   <div class="<?php echo $class; ?>">
                     <?php
-                    if (!is_array($module['layout_id'])) {
-                     $module_array = Array();
-                     $module_array[] = $module['layout_id'];
-                     $module['layout_id'] = $module_array;
+                    if (isset($module['layout_id']) && !is_array($module['layout_id'])) {
+                     	$module_array = Array();
+                     	$module_array[] = $module['layout_id'];
+                     	$module['layout_id'] = $module_array;
+                    } else {
+                    $module_array[] = Array();
                     }
 
                     if ((isset($module['layout_id']) && is_array($module['layout_id']) ) && in_array($layout['layout_id'], $module['layout_id'])) { ?>
@@ -174,10 +194,12 @@ function delayer(){
                 <div style="color: #777; font-size: 12px; line-height: 14px; ">
                 <?php foreach ($layouts as $layout) { ?>
                     <?php
-                    if (!is_array($module['layout_id'])) {
+                    if (isset($module['layout_id']) && !is_array($module['layout_id'])) {
                      $module_array = Array();
                      $module_array[] = $module['layout_id'];
                      $module['layout_id'] = $module_array;
+                    } else {
+                    	$module_array[] = Array();
                     }
 
                     if ((isset($module['layout_id']) && is_array($module['layout_id']) ) && in_array($layout['layout_id'], $module['layout_id'])) { ?>
@@ -197,13 +219,6 @@ function delayer(){
                 <?php } else { ?>
                 <option value="content_top"><?php echo $text_content_top; ?></option>
                 <?php } ?>
-                
-                <?php if ($module['position'] == 'footer_menu') { ?>
-                <option value="footer_menu" selected="selected">Меню в футере</option>
-                <?php } else { ?>
-                <option value="footer_menu">Меню в футере</option>
-                <?php } ?>
-                
                 <?php if ($module['position'] == 'content_bottom') { ?>
                 <option value="content_bottom" selected="selected"><?php echo $text_content_bottom; ?></option>
                 <?php } else { ?>
@@ -219,6 +234,56 @@ function delayer(){
                 <?php } else { ?>
                 <option value="column_right"><?php echo $text_column_right; ?></option>
                 <?php } ?>
+                
+                <?php if ($module['position'] == 'column_header') { ?>
+                <option value="column_header" selected="selected">Хедер</option>
+                <?php } else { ?>
+                <option value="column_header">Хедер</option>
+                <?php } ?>
+                
+                                <?php if ($module['position'] == 'column_blockone') { ?>
+                <option value="column_blockone" selected="selected">Cистемы контроля доступа</option>
+                <?php } else { ?>
+                <option value="column_blockone">Cистемы контроля доступа</option>
+                <?php } ?>
+                
+                <?php if ($module['position'] == 'column_two') { ?>
+                <option value="column_two" selected="selected">Системы пожарной безопасности</option>
+                <?php } else { ?>
+                <option value="column_two">Системы пожарной безопасности</option>
+                <?php } ?>
+                
+                <?php if ($module['position'] == 'column_there') { ?>
+                <option value="column_there" selected="selected">Системы охраны имущества.</option>
+                <?php } else { ?>
+                <option value="column_there">Системы охраны имущества.</option>
+                <?php } ?>
+                
+                  <?php if ($module['position'] == 'column_four') { ?>
+                <option value="column_four" selected="selected">Cистемы видеонаблюдения</option>
+                <?php } else { ?>
+                <option value="column_four">Cистемы видеонаблюдения</option>
+                <?php } ?>
+				
+				<?php if ($module['position'] == 'column_news_blog') { ?>
+                <option value="column_news_blog" selected="selected">Под рубрики</option>
+                <?php } else { ?>
+                <option value="column_news_blog">Под рубрики</option>
+                <?php } ?>
+				
+				<?php if ($module['position'] == 'news_and_blog') { ?>
+                <option value="news_and_blog" selected="selected">Нововсти главная</option>
+                <?php } else { ?>
+                <option value="news_and_blog">Нововсти главная</option>
+                <?php } ?>
+				
+				<?php if ($module['position'] == 'news_and_blog_two') { ?>
+                <option value="news_and_blog_two" selected="selected">Блог главная</option>
+                <?php } else { ?>
+                <option value="news_and_blog_two">Блог главная</option>
+                <?php } ?>
+                
+                
               </select></td>
             <td class="left"><select name="blog_module[<?php echo $module_row; ?>][status]">
                 <?php if ($module['status']) { ?>
@@ -276,7 +341,7 @@ function delayer(){
            	}
              ?>
            <div style="float:left; width: 100px;">
-             <a onclick="$('#module-row<?php echo $module_row; ?>').remove();" class="<?php echo $button_class; ?>"><?php echo $button_remove; ?></a>
+             <a onclick="$('.module-row<?php echo $module_row; ?>').remove();" class="<?php echo $button_class; ?>"><?php echo $button_remove; ?></a>
            </div>
 
              <?php if ($button_class =='markbuttono') {
@@ -294,6 +359,7 @@ function delayer(){
 
           </td>
          </tr>
+
         <?php
          $module_row++;
         }
@@ -342,8 +408,20 @@ function addModule() {
 	module_row = aindex;
 	amodule_row.push(aindex);
 
-	html  = '<tbody id="module-row' + module_row + '">';
+	html  = '<tbody class="module-row' + module_row + '">';
+
+    html += '       <tr>';
+    html += '       <td><?php echo $this->language->get('entry_url'); ?></td>';
+    html += '        <td class="left" colspan="5">';
+    html += '     	 <input type="text" name="blog_module[' + module_row + '][url]" value="" style="width:100%" />';
+    html += '       </td>';
+    html += '       </tr>';
+
 	html += '  <tr>';
+
+
+
+
 	html += '    <td class="left">';
 
 
@@ -368,9 +446,16 @@ function addModule() {
 	html += '    </td>';
 	html += '    <td class="left"><select name="blog_module[' + module_row + '][position]">';
 	html += '      <option value="content_top"><?php echo $text_content_top; ?></option>';
-	html += '      <option value="footer_menu">Меню в футере</option>';
 	html += '      <option value="content_bottom"><?php echo $text_content_bottom; ?></option>';
 	html += '      <option value="column_left"><?php echo $text_column_left; ?></option>';
+	html += '      <option value="column_header">Хедер</option>';
+	html += '      <option value="column_blockone">Cистемы контроля доступа</option>';
+	html += '      <option value="column_two">Системы пожарной безопасности</option>';
+	html += '      <option value="column_there">Системы охраны имущества</option>';
+	html += '      <option value="column_four">Cистемы видеонаблюдения</option>';
+	html += '      <option value="column_news_blog">Под рубрики</option>';
+	html += '      <option value="news_and_blog">Новости главная</option>';
+	html += '      <option value="news_and_blog_two">Блог главная</option>';
 	html += '      <option value="column_right"><?php echo $text_column_right; ?></option>';
 	html += '    </select></td>';
 	html += '    <td class="left"><select name="blog_module[' + module_row + '][status]">';
@@ -408,7 +493,7 @@ function addModule() {
 
 
 	html += '    <td class="right"><input type="text" name="blog_module[' + module_row + '][sort_order]" value="" size="3" /></td>';
-	html += '    <td class="left"><a onclick="$(\'#module-row' + module_row + '\').remove();" class="mbuttonr"><?php echo $button_remove; ?></a></td>';
+	html += '    <td class="left"><a onclick="$(\'.module-row' + module_row + '\').remove();" class="mbuttonr"><?php echo $button_remove; ?></a></td>';
 	html += '  </tr>';
 	html += '</tbody>';
 

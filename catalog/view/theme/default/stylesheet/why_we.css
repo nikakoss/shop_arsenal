@@ -1,0 +1,51 @@
+.why_we{height:843px;background:url(../images/why_we_bg.jpg) no-repeat;background-size:cover;}
+.we h2{background:none!important;}
+.why_we2{height:410px;background:url(../images/why_we_bg2.jpg) no-repeat;background-size:cover;position:relative;background-position:50% 100%;}
+.why_we_h2{height:115px;text-align:center;display:block;background:url(../images/why_we_line.png) repeat-x bottom;margin-bottom:44px;}
+.why_we_h2 h2{padding-top:49px;font-size:60px;margin-bottom:0px;font-family:'Open Sans Condensed',sans-serif;}
+.why_we_text1{float:left;width:330px;height:123px;margin-right:30px;overflow:hidden;padding-top:5px;}
+.why_we_text2{float:left;width:295px;height:123px;margin-right:30px;margin-bottom:58px;overflow:hidden;padding-top:5px;}
+.why_we_text3{float:left;width:258px;height:123px;overflow:hidden;padding-top:5px;}
+.why_we_bigtext1{width:175px;float:left;text-align:left;}
+.why_we_bigtext span{text-transform:uppercase;}
+.why_we_bigtext2{width:140px;text-align:left;float:left;}
+.why_we_bigtext3{width:125px;text-align:left;float:left;}
+.why_we_bigtext3 .text_18{margin-bottom:-1px;}
+.why_we_bigtext1 .text_40{margin-top:2px;margin-bottom:4px;}
+.why_we_lowtext{font-size:14px;font-family:'Open Sans',sans-serif;font-weight:600;display:block;width:155px;float:left;line-height:16px;}
+.why_we_text3 .why_we_lowtext{width:130px;}
+.why_we_text span{display:block;line-height:20px;}
+.text_24{font-size:24px;font-family:'Open Sans Condensed',sans-serif;display:block;}
+.text_60{font-size:60px;font-family:'Open Sans Condensed',sans-serif;display:block;}
+.text_30{font-size:30px;font-family:'Open Sans Condensed',sans-serif;display:block;}
+.text_72{font-size:72px;font-family:'Open Sans Condensed',sans-serif;display:block;}
+.text_18{font-size:18px;font-family:'Open Sans Condensed',sans-serif;display:block;line-height:10px;margin-bottom:8px;}
+.text_48{font-size:48px;font-family:'Open Sans Condensed',sans-serif;display:block;}
+.text_23{font-size:23px;font-family:'Open Sans Condensed',sans-serif;display:block;}
+.text_16{font-size:16px;font-family:'Open Sans Condensed',sans-serif;display:block;}
+.text_23{font-size:23px;font-family:'Open Sans Condensed',sans-serif;display:block;}
+.text_40{font-size:40px;font-family:'Open Sans Condensed',sans-serif;display:block;}
+.text_34{font-size:34px;font-family:'Open Sans Condensed',sans-serif;display:block;}
+.t1{line-height:56px;}
+.t2{line-height:68px;}
+.t3{line-height:48px;}
+.t4{line-height:44px;}
+.t5{line-height:56px;}
+.t6{line-height:48px;}
+.form{float:left;width:340px;margin-right:54px;display:block;margin-top:12px;}
+.ppl1{float:left;width:507px;display:block;margin-top:-57px;}
+.form h2{font-size:50px;}
+.form h2+h2{font-size:36px;margin-bottom:30px;margin-top:-2px;}
+.we input[type="text"]{display:block;width:284px;padding-top:14px;padding-bottom:14px;background:#027ecd;border:1px solid #ffffff;color:#c0e9ff;height:14px;font-size:14px;font-family:'Open Sans',sans-serif;font-style:italic;}.we input[type="text"]::-webkit-input-placeholder{color:#c0e9ff!important;}
+.we input[type="text"]::-moz-placeholder{color:#c0e9ff!important;opacity:1;}
+.form .btn_form{font-family:'Open Sans',sans-serif;font-weight:600;font-size:14px;background:#4aace8;display:block;float:right;height:35px;padding:2px 12px;margin-top:9px;margin-left:25px;text-transform:none;cursor:pointer;margin-right:22px;}
+.form .btn_form:hover{background:#515151;}
+.why_we2 .wrap{position:relative;min-height:410px;}
+.why_we2 p{font-family:'Open Sans',sans-serif;font-weight:300;font-size:18px;color:#000000;line-height:20px;}
+.ppl2{position:absolute;height:319px;width:393px;display:block;bottom:0;left:0;margin-left:-47px;}
+.why_we_numbers{width:723px;display:block;float:right;}
+.why_we_numbers div{display:block;width:290px;padding-left:100px;height:82px;margin-bottom:35px;}
+.why_we_one{background:url(../images/why_we_one.png) left top no-repeat;margin-top:40px;margin-left:4px;padding-left:105px!important;margin-bottom:37px!important;}
+.why_we_two{background:url(../images/why_we_two.png) left top no-repeat;margin-left:121px;padding-left:107px!important;}
+.why_we_three{background:url(../images/why_we_three.png) left top no-repeat;margin-left:242px;padding-left:110px!important;}
+.why_we_cam{width:145px;height:100px;position:absolute;display:block;background:url(../images/why_we_cam.png) 0px -38px no-repeat;right:0;top:0;margin-right:117px;}

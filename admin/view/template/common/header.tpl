@@ -39,6 +39,7 @@ $(document).ready(function(){
             }
         }
     });
+    	
     // Confirm Uninstall
     $('a').click(function(){
         if ($(this).attr('href') != null && $(this).attr('href').indexOf('uninstall', 1) != -1) {
@@ -47,12 +48,12 @@ $(document).ready(function(){
             }
         }
     });
-        });
-    </script>
+});
+</script>
 </head>
 <body>
 <div id="container">
-    <div id="header">
+<div id="header">
   <div class="div1">
     <div class="div2"><img src="view/image/logo.png" title="<?php echo $heading_title; ?>" onclick="location = '<?php echo $home; ?>'" /></div>
     <?php if ($logged) { ?>
@@ -68,7 +69,6 @@ $(document).ready(function(){
           <li><a href="<?php echo $category; ?>"><?php echo $text_category; ?></a></li>
           <li><a href="<?php echo $product; ?>"><?php echo $text_product; ?></a></li>
           <li><a href="<?php echo $filter; ?>"><?php echo $text_filter; ?></a></li>
-          <li><a href="<?php echo $profile; ?>"><?php echo $text_profile; ?></a></li>
           <li><a class="parent"><?php echo $text_attribute; ?></a>
             <ul>
               <li><a href="<?php echo $attribute; ?>"><?php echo $text_attribute; ?></a></li>
@@ -77,6 +77,7 @@ $(document).ready(function(){
           </li>
           <li><a href="<?php echo $option; ?>"><?php echo $text_option; ?></a></li>
           <li><a href="<?php echo $manufacturer; ?>"><?php echo $text_manufacturer; ?></a></li>
+          <li><a href="<?php echo $gallimage; ?>"><?php echo $text_gallimage; ?></a></li>
           <li><a href="<?php echo $download; ?>"><?php echo $text_download; ?></a></li>
           <li><a href="<?php echo $review; ?>"><?php echo $text_review; ?></a></li>
           <li><a href="<?php echo $information; ?>"><?php echo $text_information; ?></a></li>
@@ -89,61 +90,11 @@ $(document).ready(function(){
           <li><a href="<?php echo $payment; ?>"><?php echo $text_payment; ?></a></li>
           <li><a href="<?php echo $total; ?>"><?php echo $text_total; ?></a></li>
           <li><a href="<?php echo $feed; ?>"><?php echo $text_feed; ?></a></li>
-		  <?php $this->load->model('setting/extension'); if(in_array('complete_seo', $this->model_setting_extension->getInstalled('module'))){ ?>
-			<li><a href="<?php echo $this->url->link('module/complete_seo', 'token=' . $this->session->data['token'], 'SSL'); ?>"><img style="vertical-align:top" src="view/seo_package/img/icon.png"/> Complete SEO</a></li>
-			<?php }else{ ?>
-			<li><a href="<?php echo $this->url->link('extension/module/install', 'extension=complete_seo&token=' . $this->session->data['token'], 'SSL'); ?>"><img style="vertical-align:top" src="../seo_package/img/icon.png"/> Install Complete SEO</a></li>
-			<?php } ?>
-            <li><a class="parent"><?php echo $text_openbay_extension; ?></a>
-                <ul>
-                    <li><a href="<?php echo $openbay_link_extension; ?>"><?php echo $text_openbay_dashboard; ?></a></li>
-                    <li><a href="<?php echo $openbay_link_orders; ?>"><?php echo $text_openbay_orders; ?></a></li>
-                    <li><a href="<?php echo $openbay_link_items; ?>"><?php echo $text_openbay_items; ?></a></li>
-
-                    <?php if($openbay_markets['ebay'] == 1){ ?>
-                    <li><a class="parent" href="<?php echo $openbay_link_ebay; ?>"><?php echo $text_openbay_ebay; ?></a>
-                        <ul>
-                            <li><a href="<?php echo $openbay_link_ebay_settings; ?>"><?php echo $text_openbay_settings; ?></a></li>
-                            <li><a href="<?php echo $openbay_link_ebay_links; ?>"><?php echo $text_openbay_links; ?></a></li>
-                            <li><a href="<?php echo $openbay_link_ebay_orderimport; ?>"><?php echo $text_openbay_order_import; ?></a></li>
-                       </ul>
-                    </li>
-                    <?php } ?>
-
-                    <?php if($openbay_markets['amazon'] == 1){ ?>
-                    <li><a class="parent" href="<?php echo $openbay_link_amazon; ?>"><?php echo $text_openbay_amazon; ?></a>
-                        <ul>
-                            <li><a href="<?php echo $openbay_link_amazon_settings; ?>"><?php echo $text_openbay_settings; ?></a></li>
-                            <li><a href="<?php echo $openbay_link_amazon_links; ?>"><?php echo $text_openbay_links; ?></a></li>
-                        </ul>
-                    </li>
-                    <?php } ?>
-
-                    <?php if($openbay_markets['amazonus'] == 1){ ?>
-                    <li><a class="parent" href="<?php echo $openbay_link_amazonus; ?>"><?php echo $text_openbay_amazonus; ?></a>
-                        <ul>
-                            <li><a href="<?php echo $openbay_link_amazonus_settings; ?>"><?php echo $text_openbay_settings; ?></a></li>
-                            <li><a href="<?php echo $openbay_link_amazonus_links; ?>"><?php echo $text_openbay_links; ?></a></li>
-                        </ul>
-                    </li>
-                    <?php } ?>
-
-                    <?php if($openbay_markets['play'] == 1){ ?>
-                    <li><a class="parent" href="<?php echo $openbay_link_play; ?>"><?php echo $text_openbay_play; ?></a>
-                        <ul>
-                            <li><a href="<?php echo $openbay_link_play_settings; ?>"><?php echo $text_openbay_settings; ?></a></li>
-                            <li><a href="<?php echo $openbay_link_play_report_price; ?>"><?php echo $text_openbay_report_price; ?></a></li>
-                        </ul>
-                    </li>
-                    <?php } ?>
-                </ul>
-            </li>
         </ul>
       </li>
       <li id="sale"><a class="top"><?php echo $text_sale; ?></a>
         <ul>
           <li><a href="<?php echo $order; ?>"><?php echo $text_order; ?></a></li>
-          <li><a href="<?php echo $recurring_profile; ?>"><?php echo $text_recurring_profile; ?></a></li>
           <li><a href="<?php echo $return; ?>"><?php echo $text_return; ?></a></li>
           <li><a class="parent"><?php echo $text_customer; ?></a>
             <ul>
@@ -160,17 +111,8 @@ $(document).ready(function(){
               <li><a href="<?php echo $voucher_theme; ?>"><?php echo $text_voucher_theme; ?></a></li>
             </ul>
           </li>
-          <!-- PAYPAL MANAGE NAVIGATION LINK -->
-          <?php if ($pp_express_status) { ?>
-           <li><a class="parent" href="<?php echo $paypal_express; ?>"><?php echo $text_paypal_express; ?></a>
-             <ul>
-               <li><a href="<?php echo $paypal_express_search; ?>"><?php echo $text_paypal_express_search; ?></a></li>
-             </ul>
-           </li>
-          <?php } ?>
-          <!-- PAYPAL MANAGE NAVIGATION LINK END -->
           <li><a href="<?php echo $contact; ?>"><?php echo $text_contact; ?></a></li>
-          <li><a href="<?php echo $subscription; ?>">Подписчики</a></li>
+		  <li><a href="<?php echo $subscription; ?>">Подписчики</a></li>
         </ul>
       </li>
       <li id="system"><a class="top"><?php echo $text_system; ?></a>
@@ -180,9 +122,6 @@ $(document).ready(function(){
             <ul>
               <li><a href="<?php echo $layout; ?>"><?php echo $text_layout; ?></a></li>
               <li><a href="<?php echo $banner; ?>"><?php echo $text_banner; ?></a></li>
-			  <?php if(isset($coin_slider_installed)) { ?> 
-					<li><a href="<?php echo $coin_slider; ?>"><?php echo $this->language->get('text_coin_slider'); ?></a></li>
-			  <?php } ?>
             </ul>
           </li>
           <li><a class="parent"><?php echo $text_users; ?></a>

@@ -1,7 +1,7 @@
 <?php
-$_['blog_version']              = '5.8.7 (Professional)';
+$_['blog_version']              = '5.11.0 (Professional)';
 
-$_['url_module_text']           = 'ocCMS';
+$_['url_module_text']           = 'SEO CMS';
 $_['url_create_text']           = '<div style="text-align: center; text-decoration: none;">Создание и обновление<br>таблиц и данных для модуля<br><ins style="text-align: center; text-decoration: none; font-size: 13px;">(при установке и обновлении модуля)</ins></div>';
 $_['url_delete_text']           = '<div style="text-align: center; text-decoration: none;">Удалить настройки старых версий<br><ins style="text-align: center; text-decoration: none; font-size: 13px;">(при установке и обновлении модуля, после <br>пересохранения "настроек", "схем" и "виджетов")</ins></div>';
 $_['url_back_text']             = 'В настройки модуля';
@@ -22,9 +22,10 @@ $_['url_forum_buy']             = 'http://opencartforum.ru/files/file/1435-occms
 $_['url_forum']                 = 'http://opencartforum.ru/topic/27277-occms-5-pro-блог-новости-отзывы-галерея-faq/unread/';
 $_['url_opencartadmin']         = 'http://opencartadmin.com';
 
-$_['heading_title']             = ' <div style="height: 21px; margin-top:5px; text-decoration:none;"><ins style="height: 24px;"><img src="view/image/blog-icon.png" style="height: 16px; margin-bottom: -3px; "></ins><ins style="margin-bottom: 0px; text-decoration:none; margin-left: 9px; font-size: 13px; font-weight: 600; color: green;">Блог | Новости | Статьи | Отзывы | Галерея | FAQ</ins></div>';
-$_['heading_dev']               = 'Разработчик модуля <a href="mailto:admin@opencartadmin.com" target="_blank">opencartadmin.com</a><br>&copy; 2011-2013 All Rights Reserved.';
-
+$_['heading_title']             = ' <div style="height: 21px; margin-top:5px; text-decoration:none;"><ins style="height: 24px;"><img src="view/image/blog-icon.png" style="height: 16px; margin-bottom: -3px; "></ins><ins style="margin-bottom: 0px; text-decoration:none; margin-left: 9px; font-size: 13px; font-weight: 600; color: green;">SEO CMS: Блог | Новости | Статьи | Отзывы | Галерея | FAQ</ins></div>';
+$_['heading_dev']               = 'Разработчик модуля <a href="mailto:admin@opencartadmin.com" target="_blank">opencartadmin.com</a><br>&copy; 2011-'.date('Y') .' All Rights Reserved.';
+$_['text_new_version']          = "<div style='background: #FFCFCE; border: 2px solid red; padding: 10px;'>Установленная версия модуля: <b><span style='color: red;'>".$_['blog_version']."</span></b><br>"."Последняя версия модуля: <span style='color: green;'><b>";
+$_['text_new_version_end']      = '</b></span><br>Рекомендуется: <span style="color: green;"><b>обновите модуль до последней версии</b></span></div>';
 $_['text_loading']              = "<div style=\'padding-left: 30%; padding-top: 10%; font-size: 21px; color: #008000;\'>Загружается...<\/div>";
 $_['text_update']               = 'Нажмите на кнопку.<br>Вы обновили модуль';
 $_['text_module']               = 'Модули';
@@ -92,6 +93,8 @@ $_['text_today']                = "Сегодня";
 $_['text_date']                 = "d M Y";
 $_['text_hours']                = " в H:i:s";
 
+$_['entry_layout_url_status']   = 'В схемах URL шаблон<br/><span class="help">Если опция включена то будет происходить поиск словосочетания в URL, <br>а не точное соотвествие URL</span>';
+$_['entry_url']  				= 'URL';
 $_['entry_description_status']  = 'Краткое описание';
 $_['entry_avatar_status']       = 'Аватар';
 $_['entry_widget_pagination']	= 'Пагинация';
@@ -193,4 +196,140 @@ $_['access_777']                = 'Не установлены права на �
 $_['ok_create_tables']          = 'Данные успешно обновлены';
 $_['hook_not_delete']           = 'Данную схему нельзя удалять, она нужна для сервисных функций модуля (seo)<br>В случае, если вы случайно удалили, добавьте такую же схему с такими же параметрами<br>';
 $_['type_list']                 = 'Виджет:';
+
+
+$_['entry_about'] 			    = 'О модуле';
+$_['text_about']              	= <<<EOF
+<a href="#" onclick="$('#about_license').toggle(); return false;" class="hrefajax">Лицензия</a>
+<div id="about_license" style="display: none;">
+Все права на модуль принадлежат разработчикам <a href="http://opencartadmin.com">http://opencartadmin.com</a><br>
+Данная лицензия распространяется на один домен.<br>
+Запрещена передача данного ПО третьим лицам, распространение от своего имени без получения разрешения автора модуля.<br>
+Запрещается публикация, распространение модуля без согласия автора в любых целях, будь то ознакомительных или любых других.<br>
+Модуль имеет принцип распространения "as is".
+</div>
+<br>
+<a href="#" onclick="$('#about_1551').toggle(); return false;" class="hrefajax">Всем у кого версия opencart 1.5.5.1 или сборки на базе неё</a>
+<div id="about_1551" style="display: none;">
+Внимание!<br>
+В версии 1.5.5.1 opencart и всех сборках на ней есть досадный баг разработчика!<br>
+<a href="http://forum.opencart.com/viewtopic.php?f=19&t=94250">http://forum.opencart.com/viewtopic.php?f=19&t=94250</a><br><br>
+А именно в <b>index.php</b><br>
+со строки 211<br>
+Стоит такой порядок<br>
+<br>
+// SEO URL's<br>
+\$controller->addPreAction(new Action('common/seo_url'));<br>
+<br>
+// Maintenance Mode<br>
+\$controller->addPreAction(new Action('common/maintenance'));<br>
+<br>
+Этот порядок не правильный - баг разработчика opencart, во всех других версиях до него и в версии 1.5.6 исправлено - порядок восстановлен<br>
+<br>
+Правильный порядок вызова<br>
+<br>
+// Maintenance Mode<br>
+\$controller->addPreAction(new Action('common/maintenance'));<br>
+<br>
+// SEO URL's<br>
+\$controller->addPreAction(new Action('common/seo_url'));<br>
+<br>
+<br>
+Т.е. строка <b>\$controller->addPreAction(new Action('common/maintenance'));</b><br>
+должна находиться <b>сразу после \$controller = new Front(\$registry);</b><br>
+и перед вызовом seo.<br>
+<br>
+<br>
+Сделайте изменения согласно правильного порядка в файле index.php
+</div>
+<br>
+<a href="#" onclick="$('#about_install').toggle(); return false;" class="hrefajax">Установка</a><br>
+<div id="about_install" style="display: none;"><br>
+Распакуйте архив и перепишите файлы в корневую папку сайта<br>
+Зайдите в меню Дополнения -> Модули (url: /admin/index.php?route=extension/module )<br>
+и напротив модуля нажмите ссылку [Установить]<br>
+Зайдите в административную часть модуля (ссылка [Изменить])<br>
+(url: /admin/index.php?route=module/blog ) ,<br>
+Далее согласно видео FAQ<br>
+<a href="/ustanovka-modulja-occms-versii-5-dlja-opencart.html" target="_blank">Установка модуля ocCMS версии 5 для opencart</a><br>
+<a href="/kak-proizvesti-update-s-versii-4-na-5.html" target="_blank">Как произвести обновление со старой версии на новую или после переноса сайта</a><br>
+
+</div>
+<br>
+EOF;
+
+$_['entry_faq'] 			    = 'FAQ';
+$_['text_faq']              	= <<<EOF
+
+<a href="#" onclick="$('#faq_faq').toggle(); return false;" class="hrefajax">FAQ</a>
+<div id="faq_faq" style="display: none;">
+<a href="/ustanovka-modulja-occms-versii-5-dlja-opencart.html" target="_blank">Установка модуля ocCMS версии 5 для opencart</a><br>
+<a href="/kak-proizvesti-update-s-versii-4-na-5.html" target="_blank">Как произвести обновление со старой версии на новую или после переноса сайта</a><br>
+<a href="/faq-5-u-menja-propali-otzyvy-dlja-zapisej-chto-delat.html" target="_blank">FAQ ocCMS 5: у меня отсутствуют (пропали) отзывы для записей, что делать?</a><br>
+<a href="/occms-5-kak-sdelat-zakazat-obratnyj-zvonok.html" target="_blank">FAQ ocCMS 5: как сделать "Заказать обратный звонок"?</a><br>
+<a href="/occms-5-kak-dobavit-v-kartochku-produkta-obzor-tab.html" target="_blank">FAQ ocCMS 5: как добавить в карточку продукта обзор (таб)?</a><br>
+<a href="/vyvod-punktov-v-menju-dlja-kategorij-i-zapisej-occms-versii-5.html" target="_blank"> FAQ ocCMS 5: как вывести пункты в меню для категорий и записей?</a><br>
+<a href="/faq-occms-5-zaprashivaemaja-stranitsa-ne-najdena.html" target="_blank">FAQ ocCMS 5: Запрашиваемая страница не найдена!</a><br>
+</div>
+<br>
+
+<a href="#" onclick="$('#faq_license').toggle(); return false;" class="hrefajax">Лицензия</a>
+<div id="faq_license" style="display: none;">
+Все права на модуль принадлежат разработчикам <a href="http://opencartadmin.com">http://opencartadmin.com</a><br>
+Данная лицензия распространяется на один домен.<br>
+Запрещена передача данного ПО третьим лицам, распространение от своего имени без получения разрешения автора модуля.<br>
+Запрещается публикация, распространение модуля без согласия автора в любых целях, будь то ознакомительных или любых других.<br>
+Модуль имеет принцип распространения "as is".
+</div>
+<br>
+<a href="#" onclick="$('#faq_1551').toggle(); return false;" class="hrefajax">Всем у кого версия opencart 1.5.5.1 или сборки на базе неё</a>
+<div id="faq_1551" style="display: none;">
+Внимание!<br>
+В версии 1.5.5.1 opencart и всех сборках на ней есть досадный баг разработчика!<br>
+<a href="http://forum.opencart.com/viewtopic.php?f=19&t=94250">http://forum.opencart.com/viewtopic.php?f=19&t=94250</a><br><br>
+А именно в <b>index.php</b><br>
+со строки 211<br>
+Стоит такой порядок<br>
+<br>
+// SEO URL's<br>
+\$controller->addPreAction(new Action('common/seo_url'));<br>
+<br>
+// Maintenance Mode<br>
+\$controller->addPreAction(new Action('common/maintenance'));<br>
+<br>
+Этот порядок не правильный - баг разработчика opencart, во всех других версиях до него и в версии 1.5.6 исправлено - порядок восстановлен<br>
+<br>
+Правильный порядок вызова<br>
+<br>
+// Maintenance Mode<br>
+\$controller->addPreAction(new Action('common/maintenance'));<br>
+<br>
+// SEO URL's<br>
+\$controller->addPreAction(new Action('common/seo_url'));<br>
+<br>
+<br>
+Т.е. строка <b>\$controller->addPreAction(new Action('common/maintenance'));</b><br>
+должна находиться <b>сразу после \$controller = new Front(\$registry);</b><br>
+и перед вызовом seo.<br>
+<br>
+<br>
+Сделайте изменения согласно правильного порядка в файле index.php
+</div>
+<br>
+<a href="#" onclick="$('#faq_install').toggle(); return false;" class="hrefajax">Установка</a><br>
+<div id="faq_install" style="display: none;"><br>
+Распакуйте архив и перепишите файлы в корневую папку сайта<br>
+Зайдите в меню Дополнения -> Модули (url: /admin/index.php?route=extension/module )<br>
+и напротив модуля нажмите ссылку [Установить]<br>
+Зайдите в административную часть модуля (ссылка [Изменить])<br>
+(url: /admin/index.php?route=module/blog ) ,<br>
+Далее согласно видео FAQ<br>
+<a href="/ustanovka-modulja-occms-versii-5-dlja-opencart.html" target="_blank">Установка модуля ocCMS версии 5 для opencart</a><br>
+<a href="/kak-proizvesti-update-s-versii-4-na-5.html" target="_blank">Как произвести обновление со старой версии на новую или после переноса сайта</a><br>
+
+</div>
+<br>
+EOF;
+
+
 ?>

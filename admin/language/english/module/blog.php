@@ -1,6 +1,6 @@
 <?php
-$_['blog_version']              = '5.8.7 (Professional)';
-$_['url_module_text']           = 'ocCMS';
+$_['blog_version']              = '5.11.0 (Professional)';
+$_['url_module_text']           = 'SEO CMS';
 $_['url_create_text']           = '<div style="text-align: center; text-decoration: none;">Create and update<br>tables and data for module<br><ins style="text-align: center; text-decoration: none; font-size: 13px;">(when you install and update module)</ins></div>';
 
 $_['url_delete_text'] = '<div style="text-align: center; text-decoration: none;">Delete the settings of older versions<br><ins style="text-align: center; text-decoration: none; font-size: 13px;">(to install and upgrade module, after <br>re-saving "settings", "layouts" and "widgets")</ins></div>';
@@ -8,7 +8,7 @@ $_['error_delete_old_settings'] = '<div style="color: red; text-align: left; tex
 $_['entry_reserved']            = 'Reserved';
 $_['text_update']               = 'Click on button.<br>You have updated module';
 $_['heading_title']             = ' <div style="height: 21px; margin-top:5px; text-decoration:none;"><ins style="height: 24px;"><img src="view/image/blog-icon.png" style="height: 16px; margin-bottom: -3px; "></ins><ins style="margin-bottom: 0px; text-decoration:none; margin-left: 9px; font-size: 13px; font-weight: 600; color: green;">Blog | News | Article | Reviews | Gallery | FAQ</ins></div>';
-$_['heading_dev']               = 'Developer <a href="mailto:admin@opencartadmin.com" target="_blank">opencartadmin.com</a><br>&copy; 2011-2013 All Rights Reserved.';
+$_['heading_dev']               = 'Developer <a href="mailto:admin@opencartadmin.com" target="_blank">opencartadmin.com</a><br>&copy; 2011-'.date('Y') .' All Rights Reserved.';
 $_['text_loading']              = "<div style=\'padding-left: 30%; padding-top: 10%; font-size: 21px; color: #008000;\'>Loading...<\/div>";
 
 $_['text_module']               = 'Modules';
@@ -38,6 +38,8 @@ $_['text_what_blog']            = 'The list of selected categories of blog';
 $_['text_what_blogsall']        = 'List all categories of blog';
 $_['text_what_latest']          = 'Date';
 
+$_['text_new_version'] = "<div style='background: #FFCFCE; border: 2px solid red; padding: 10px;'>Installed version of the module: <b><span style='color: red;'>".$_['blog_version']."</span></b><br>"."Last module version: <span style='color: green; '><b>";
+$_['text_new_version_end'] = '</b></span><br>it is Recommended: <span style="color: green;"><b>update the module to the latest version</b></span></div>';
 
 $_['text_what_popular']         = 'Popular';
 $_['text_what_rating']          = 'Rating';
@@ -72,7 +74,7 @@ $_['text_widget_related'] = 'Related';
 
 $_['text_widget_loader']        = 'Loader (beta)';
 
-
+$_['entry_url']  				= 'URL';
 
 $_['entry_widget_sort']			= 'Sort';
 $_['entry_widget_limit']		= 'Limit';
@@ -209,4 +211,137 @@ $_['text_date']                 = ' d M Y';
 $_['text_hours']                = " H:i:s";
 $_['entry_comment_signer']      = 'Subscribe';
 $_['entry_pagination']      = 'Pagination';
+$_['entry_about'] = 'About module';
+$_['text_about'] = <<<EOF
+<a href="#" onclick="$('#about_license').toggle(); return false;" class="hrefajax">License</a>
+<div id="about_license" style="display: none;">
+All rights belong to the module developers <a href="http://opencartadmin.com">http://opencartadmin.com</a><br>
+This license is valid for one domain.<br>
+You may not assign the software to third parties, the spread on his behalf without permission of the author of the module.<br>
+It is prohibited the publication, distribution module without the author's consent for any purpose, be it the evaluation or any other.<br>
+The module has a distributive principle "as is".
+</div>
+<br>
+<a href="#" onclick="$('#about_1551').toggle(); return false;" class="hrefajax">Everyone who version opencart the company or Assembly on the basis of her</a>
+<div id="about_1551" style="display: none;">
+Attention!<br>
+In the version of the company opencart and all assemblies, there is an annoying bug developer!<br>
+<a href="http://forum.opencart.com/viewtopic.php?f=19&t=94250">http://forum.opencart.com/viewtopic.php?f=19&t=94250</a><br><br>
+Namely, in <b>index.php</b><br>
+with a line 211<br>
+There is such a manner<br>
+<br>
+// SEO URLS's<br>
+\$controller->addPreAction(new Action('common/seo_url'));<br>
+<br>
+// Maintenance Mode<br>
+\$controller->addPreAction(new Action('common/maintenance"));<br>
+<br>
+This order is not correct - bug a developer opencart, all other versions before him and in version 1.5.6 fixed - order was restored<br>
+<br>
+The correct procedure call<br>
+<br>
+// Maintenance Mode<br>
+\$controller->addPreAction(new Action('common/maintenance"));<br>
+<br>
+// SEO URL's<br>
+\$controller->addPreAction(new Action('common/seo_url'));<br>
+<br>
+<br>
+I.e. line <b>\$controller->addPreAction(new Action('common/maintenance"));</b><br>
+should be <b>immediately after the \$controller = new Front(\$registry);</b><br>
+and before calling seo.<br>
+<br>
+<br>
+Make the changes according to the right order in the file index.php
+</div>
+<br>
+<a href="#" onclick="$('#about_install').toggle(); return false;" class="hrefajax">Installation</a><br>
+<div id="about_install" style="display: none;"><br>
+Unzip the archive and copy the files to the root folder of the website. < br>
+Go to Extras -> Modules (url: /admin/index.php?route=extension/module )<br>
+and in front of the module click [Install]<br>
+Go to the administrative part of the module (reference [Edit])<br>
+(url: /admin/index.php?route=module/blog ) ,<br>
+tab: Installation and upgrade - click on the left-hand orange button<br>
+"Create and update data to the module<br>
+(when installing and updating module)"<br>
+The installation is now complete.<br>
+</div>
+<br>
+EOF;
+
+$_['entry_faq'] = 'FAQ';
+$_['text_faq'] = <<<EOF
+
+<a href="#" onclick="$('#faq_faq').toggle(); return false;" class="hrefajax">FAQ</a>
+<div id="faq_faq" style="display: none;">
+<a href="/ustanovka-modulja-occms-versii-5-dlja-opencart.html" target="_blank">Install module ocCMS version 5 for opencart</a><br>
+<a href="/kak-proizvesti-update-s-versii-4-na-5.html" target="_blank">How to upgrade from an old version to a new or after transfer site</a><br>
+<a href="/faq-5-u-menja-propali-otzyvy-dlja-zapisej-chto-delat.html" target="_blank">FAQ ocCMS 5: I missing (missing) reviews for records that do?</a><br>
+<a href="/occms-5-kak-sdelat-zakazat-obratnyj-zvonok.html" target="_blank">FAQ ocCMS 5: how to make a "call back"?</a><br>
+<a href="/occms-5-kak-dobavit-v-kartochku-produkta-obzor-tab.html" target="_blank">FAQ ocCMS 5: how to add in card product overview (tab)?</a><br>
+<a href="/vyvod-punktov-v-menju-dlja-kategorij-i-zapisej-occms-versii-5.html" target="_blank"> FAQ ocCMS 5: how to display items in a menu of categories and records?</a><br>
+<a href="/faq-occms-5-zaprashivaemaja-stranitsa-ne-najdena.html" target="_blank">FAQ ocCMS 5: the Requested page was not found!</a><br>
+</div>
+<br>
+
+<a href="#" onclick="$('#faq_license').toggle(); return false;" class="hrefajax">License</a>
+<div id="faq_license" style="display: none;">
+All rights belong to the module developers <a href="http://opencartadmin.com">http://opencartadmin.com</a><br>
+This license is valid for one domain.<br>
+You may not assign the software to third parties, the spread on his behalf without permission of the author of the module.<br>
+It is prohibited the publication, distribution module without the author's consent for any purpose, be it study or any other.<br>
+The module has a distributive principle "as is".
+</div>
+<br>
+<a href="#" onclick="$('#faq_1551').toggle(); return false;" class="hrefajax">Everyone who version opencart the company or Assembly on the basis of her</a>
+<div id="faq_1551" style="display: none;">
+Attention!<br>
+In the version of the company opencart and all assemblies, there is an annoying bug developer!<br>
+<a href="http://forum.opencart.com/viewtopic.php?f=19&t=94250">http://forum.opencart.com/viewtopic.php?f=19&t=94250</a><br><br>
+Namely, in <b>index.php</b><br>
+with a line 211<br>
+There is such a manner<br>
+<br>
+// SEO URL's<br>
+\$controller->addPreAction(new Action('common/seo_url'));<br>
+<br>
+// Maintenance Mode<br>
+\$controller->addPreAction(new Action('common/maintenance"));<br>
+<br>
+This order is not correct - bug a developer opencart, all other versions before him and in version 1.5.6 fixed - order was restored<br>
+<br>
+The correct procedure call<br>
+<br>
+// Maintenance Mode<br>
+\$controller->addPreAction(new Action('common/maintenance"));<br>
+<br>
+// SEO URL's<br>
+\$controller->addPreAction(new Action('common/seo_url'));<br>
+<br>
+<br>
+I.e. line <b>\$controller->addPreAction(new Action('common/maintenance"));</b><br>
+should be <b>immediately after the \$controller = new Front(\$registry);</b><br>
+and before calling seo.<br>
+<br>
+<br>
+Make the changes according to the right order in the file index.php
+</div>
+<br>
+<a href="#" onclick="$('#faq_install').toggle(); return false;" class="hrefajax">Installation</a><br>
+<div id="faq_install" style="display: none;"><br>
+Unzip the archive and copy the files to the root folder of the website. < br>
+Go to Extras -> Modules (url: /admin/index.php?route=extension/module )<br>
+and in front of the module click [Install]<br>
+Log in to the administration part of the module (reference [Edit])<br>
+(url: /admin/index.php?route=module/blog ) ,<br>
+Further, according video FAQ<br>
+<a href="/ustanovka-modulja-occms-versii-5-dlja-opencart.html" target="_blank">Install module SEO CMS version 5 for opencart</a><br>
+<a href="/kak-proizvesti-update-s-versii-4-na-5.html" target="_blank">How to upgrade from an old version to a new or after transfer site</a><br>
+
+</div>
+<br>
+EOF;
+
 ?>

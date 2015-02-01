@@ -674,7 +674,7 @@
 		controlNavThumbs: false,
         controlNavThumbsFromRel: false,
 		controlNavThumbsSearch: '.jpg',
-		controlNavThumbsReplace: '.jpg',
+		controlNavThumbsReplace: '_thumb.jpg',
 		keyboardNav: true,
 		pauseOnHover: true,
 		manualAdvance: false,

@@ -1,4 +1,4 @@
-<?php 
+<?php
 class ControllerRecordBlog extends Controller
 {
 	public function index()
@@ -47,13 +47,13 @@ class ControllerRecordBlog extends Controller
 			} //$pos !== false
 		} //!$colorbox_flag
 		if (!$colorbox_flag) {
-			//$this->document->addScript('catalog/view/javascript/blog/colorbox/jquery.colorbox.js');
-			//$this->document->addScript('catalog/view/javascript/blog/colorbox/lang/jquery.colorbox-' . $this->config->get('config_language') . '.js');
-			//$this->document->addStyle('catalog/view/javascript/blog/colorbox/css/' . $this->data['settings_general']['colorbox_theme'] . '/colorbox.css');
+			$this->document->addScript('catalog/view/javascript/blog/colorbox/jquery.colorbox.js');
+			$this->document->addScript('catalog/view/javascript/blog/colorbox/lang/jquery.colorbox-' . $this->config->get('config_language') . '.js');
+			$this->document->addStyle('catalog/view/javascript/blog/colorbox/css/' . $this->data['settings_general']['colorbox_theme'] . '/colorbox.css');
 		} //!$colorbox_flag
 		$this->data['imagebox'] = 'colorbox';
 		if ($this->data['imagebox'] == 'colorbox') {
-			//$this->document->addScript('catalog/view/javascript/blog/blog.color.js');
+			$this->document->addScript('catalog/view/javascript/blog/blog.color.js');
 		} //$this->data['imagebox'] == 'colorbox'
 		if (!class_exists('User')) {
 			require_once(DIR_SYSTEM . 'library/user.php');
@@ -184,15 +184,19 @@ class ControllerRecordBlog extends Controller
 			} else {
 			  	$this->document->setTitle($blog_info['name'].$paging." - ".$this->config->get('config_title'));
 			}
-
+/*
 			if (isset($blog_info['meta_h1']) && $blog_info['meta_h1']!='') {
              $this->data['heading_title']   = $blog_info['meta_h1'];
 			} else {
 			  $this->data['heading_title']   = $blog_info['name'];
-			}
-
+			} */
+			$this->data['heading_title']   = $blog_info['name'];
+			 $this->data['heading_title_2']   = $blog_info['meta_h1'];
+			 
+			
             $this->data['name']   = $blog_info['name'];
 
+			
 			$this->document->setDescription($blog_info['meta_description'].$paging);
 			$this->document->setKeywords($blog_info['meta_keyword']);
 
@@ -247,8 +251,6 @@ class ControllerRecordBlog extends Controller
 					$order = 'DESC';
 				} //strtoupper($this->data['blog_design']['order']) == 'DESC'
 			} //isset($this->data['blog_design']['order_ad'])
-			
-			
 			if ($blog_info['image']) {
 				if (isset($this->data['blog_design']['blog_big']) && $this->data['blog_design']['blog_big']['width'] != '' && $this->data['blog_design']['blog_big']['height'] != '') {
 					$dimensions = $this->data['blog_design']['blog_big'];
@@ -300,8 +302,6 @@ class ControllerRecordBlog extends Controller
 					'filter_sub_blog' => true
 				);
 				$record_total = $this->model_catalog_record->getTotalRecords($data);
-				
-				
 				if ($result['image']) {
 					if (isset($this->data['blog_design']['blog_small']) && $this->data['blog_design']['blog_small']['width'] != '' && $this->data['blog_design']['blog_small']['height'] != '') {
 						$dimensions = $this->data['blog_design']['blog_small'];
@@ -309,17 +309,12 @@ class ControllerRecordBlog extends Controller
 					else {
 						$dimensions = $this->config->get('blog_small');
 					}
-					$dimensions = $this->data['blog_design']['blog_small'];
-					
 					if ($dimensions['width'] == '') {
 						if ($this->config->get('config_image_category_width') != '')
 							$dimensions['width'] = $this->config->get('config_image_category_width');
 						else
 							$dimensions['width'] = 100;
 					} //$dimensions['width'] == ''
-					
-			
-					
 					if ($dimensions['height'] == '') {
 						if ($this->config->get('config_image_category_height') != '')
 							$dimensions['height'] = $this->config->get('config_image_category_height');
@@ -333,8 +328,6 @@ class ControllerRecordBlog extends Controller
 					$image                   = '';
 					$this->data['image_dim'] = false;
 				}
-				
-			
 				$this->data['categories'][] = array(
 					'name' => $result['name'],
 					'meta_description' => $result['meta_description'],
@@ -376,7 +369,7 @@ class ControllerRecordBlog extends Controller
 					$dimensions['width'] = 300;
 				if (!isset($dimensions['height']) || $dimensions['height'] == '')
 					$dimensions['height'] = 200;
-
+				
 					$image                   = $this->model_tool_image->resize($result['image'], $dimensions['width'], $dimensions['height']);
 					$this->data['image_dim'] = $dimensions;
 				} //$result['image']
@@ -629,6 +622,7 @@ class ControllerRecordBlog extends Controller
 			$this->data['order']      = $order;
 			$this->data['limit']      = $limit;
 			$this->data['continue']   = $this->url->link('common/home');
+			$this->data['podrobnie']       = 'Подробнее';
 
 
 
@@ -664,6 +658,7 @@ class ControllerRecordBlog extends Controller
 				'common/column_right',
 				'common/content_top',
 				'common/content_bottom',
+				'common/column_news_blog',
 				'common/footer',
 				'common/header'
 			);

@@ -7,13 +7,11 @@ class ModelAccountCustomer extends Model {
 			$customer_group_id = $this->config->get('config_customer_group_id');
 		}
 		
-		if ($data['customer_group_id'] == 4 ){ $data['firstname'] = 'Юридическое'; $data['lastname'] = 'лицо';}
-		
 		$this->load->model('account/customer_group');
 		
-		$customer_group_info = $this->model_account_customer_group->getCustomerGroup($customer_group_id);		
+		$customer_group_info = $this->model_account_customer_group->getCustomerGroup($customer_group_id);
 		
-		$this->db->query("INSERT INTO " . DB_PREFIX . "customer SET store_id = '" . (int)$this->config->get('config_store_id') . "', firstname = '" . $this->db->escape($data['firstname']) . "', lastname = '" . $this->db->escape($data['lastname']) . "', email = '" . $this->db->escape($data['email']) . "', telephone = '" . $this->db->escape($data['telephone']) . "', fax = '" . $this->db->escape($data['fax']) . "', salt = '" . $this->db->escape($salt = substr(md5(uniqid(rand(), true)), 0, 9)) . "', password = '" . $this->db->escape(sha1($salt . sha1($salt . sha1($data['password'])))) . "', newsletter = '" . (isset($data['newsletter']) ? (int)$data['newsletter'] : 0) . "', customer_group_id = '" . (int)$customer_group_id . "', ip = '" . $this->db->escape($this->request->server['REMOTE_ADDR']) . "', status = '1', approved = '" . (int)!$customer_group_info['approval'] . "', date_added = NOW()");
+      	$this->db->query("INSERT INTO " . DB_PREFIX . "customer SET store_id = '" . (int)$this->config->get('config_store_id') . "', firstname = '" . $this->db->escape($data['firstname']) . "', lastname = '" . $this->db->escape($data['lastname']) . "', email = '" . $this->db->escape($data['email']) . "', telephone = '" . $this->db->escape($data['telephone']) . "', fax = '" . $this->db->escape($data['fax']) . "', salt = '" . $this->db->escape($salt = substr(md5(uniqid(rand(), true)), 0, 9)) . "', password = '" . $this->db->escape(sha1($salt . sha1($salt . sha1($data['password'])))) . "', newsletter = '" . (isset($data['newsletter']) ? (int)$data['newsletter'] : 0) . "', customer_group_id = '" . (int)$customer_group_id . "', ip = '" . $this->db->escape($this->request->server['REMOTE_ADDR']) . "', status = '1', approved = '" . (int)!$customer_group_info['approval'] . "', date_added = NOW()");
       	
 		$customer_id = $this->db->getLastId();
 			
@@ -88,28 +86,7 @@ class ModelAccountCustomer extends Model {
 	}
 	
 	public function editCustomer($data) {
-        if(isset($data["y_organization_name"])){
-		$this->db->query("UPDATE " . DB_PREFIX . "customer SET "
-                //. "firstname = '" . $this->db->escape($data['firstname']) . "',"
-                //. " lastname = '" . $this->db->escape($data['lastname']) . "', "
-                . "email = '" . $this->db->escape($data['email']) . "', "
-                . "telephone = '" . $this->db->escape($data['telephone']) . "', "
-                . "y_organization_name = '" .$this->db->escape($data['y_organization_name']). "',"
-                . "y_inn = '" .$this->db->escape($data['y_inn']) . "',"
-                . "y_kpp = '" . $this->db->escape($data['y_kpp']) . "',"
-                . "y_cal_account = '" . $this->db->escape($data['y_cal_account']) . "',"
-                . "y_bank_details = '" . $this->db->escape($data['y_bank_details']) . "',"
-                . "y_y_address = '" . $this->db->escape($data['y_y_address']) . "',"
-                . "y_f_address = '" . $this->db->escape($data['y_f_address']) . "',"
-                . "y_contact_person = '" . $this->db->escape($data['y_contact_person']) . "'"
-                . "WHERE customer_id = '" . (int)$this->customer->getId() . "'");
-        //return true;
-        }
-        else 
-        {
-        $this->db->query("UPDATE " . DB_PREFIX . "customer SET firstname = '" . $this->db->escape($data['firstname']) . "', lastname = '" . $this->db->escape($data['lastname']) . "', email = '" . $this->db->escape($data['email']) . "', telephone = '" . $this->db->escape($data['telephone']) . "', fax = '" . $this->db->escape($data['fax']) . "' WHERE customer_id = '" . (int)$this->customer->getId() . "'");
-        //return true;
-        }
+		$this->db->query("UPDATE " . DB_PREFIX . "customer SET firstname = '" . $this->db->escape($data['firstname']) . "', lastname = '" . $this->db->escape($data['lastname']) . "', email = '" . $this->db->escape($data['email']) . "', telephone = '" . $this->db->escape($data['telephone']) . "', fax = '" . $this->db->escape($data['fax']) . "' WHERE customer_id = '" . (int)$this->customer->getId() . "'");
 	}
 
 	public function editPassword($email, $password) {
@@ -231,130 +208,6 @@ class ModelAccountCustomer extends Model {
 		$query = $this->db->query("SELECT * FROM `" . DB_PREFIX . "customer_ban_ip` WHERE ip = '" . $this->db->escape($ip) . "'");
 		
 		return $query->num_rows;
-	}
-    ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    public function addCustomerAjaxModel($data) {
-        if (isset($data['email']) && isset($data['password'])) {
-            $query = $this->db->query("SELECT * FROM `" . DB_PREFIX . "customer` WHERE email = '" . $data['email'] . "'");
-            $emails = $query->rows;
-            if ($emails) {
-                echo 'false';
-            } else {
-                if ($this->db->query("INSERT INTO " . DB_PREFIX . "customer SET email = '" . $this->db->escape($data['email']) . "', salt = '" . $this->db->escape($salt = substr(md5(uniqid(rand(), true)), 0, 9)) . "', password = '" . $this->db->escape(sha1($salt . sha1($salt . sha1($data['password'])))) . "', ip = '" . $this->db->escape($this->request->server['REMOTE_ADDR']) . "', status = '1', customer_group_id = '1', approved = '1'")) {                   
-					$this->language->load('mail/customer');
-		
-					$subject = sprintf($this->language->get('text_subject'), $this->config->get('config_name'));
-					
-					$message = sprintf($this->language->get('text_welcome'), $this->config->get('config_name')) . "\n\n";
-
-					$message .= $this->language->get('text_login') . "\n";
-					
-					$message .= $this->url->link('account/login', '', 'SSL') . "\n\n";
-					$message .= $this->language->get('text_services') . "\n\n";
-					$message .= $this->language->get('text_thanks') . "\n";
-					$message .= $this->language->get('text_kuvalda2') . "\n";
-					$message .= $this->language->get('text_telephone_kuvalda') . "\n";
-					$message .= $this->language->get('text_email_kuvalda');
-					
-					$mail = new Mail();
-					$mail->protocol = $this->config->get('config_mail_protocol');
-					$mail->parameter = $this->config->get('config_mail_parameter');
-					$mail->hostname = $this->config->get('config_smtp_host');
-					$mail->username = $this->config->get('config_smtp_username');
-					$mail->password = $this->config->get('config_smtp_password');
-					$mail->port = $this->config->get('config_smtp_port');
-					$mail->timeout = $this->config->get('config_smtp_timeout');				
-					$mail->setTo($data['email']);
-					$mail->setFrom($this->config->get('config_email'));
-					$mail->setSender($this->config->get('config_name'));
-					$mail->setSubject(html_entity_decode($subject, ENT_QUOTES, 'UTF-8'));
-					$mail->setText(html_entity_decode($message, ENT_QUOTES, 'UTF-8'));
-					$mail->send();
-					echo 'true';
-										
-                }
-            }
-        }
-    }
-    ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    public function addYCustomerAjaxModel($data) {
-        if (isset($data)) {            
-            $query = $this->db->query("SELECT * FROM `" . DB_PREFIX . "customer` WHERE email = '" . $data['y_email'] . "'");
-            $emails = $query->rows;
-            if ($emails) {
-                echo 'false';
-            } else {
-                if ($this->db->query("INSERT INTO " . DB_PREFIX . "customer SET email = '" . $data['y_email'] . "', "
-                        . "salt = '" . $this->db->escape($salt = substr(md5(uniqid(rand(), true)), 0, 9)) . "', "
-                        . "password = '" . $this->db->escape(sha1($salt . sha1($salt . sha1($data['y_password'])))) . "', "
-                        . "ip = '" . $this->db->escape($this->request->server['REMOTE_ADDR']) . "', "
-                        . "status = '1', "
-                        . "customer_group_id = '4', "
-                        . "approved = '1', "
-                        . "telephone = '" . $data['y_phone']."',"
-                        . "y_organization_name = '" .$data['y_organization_name']. "',"
-                        . "y_inn = '" .$data['y_inn'] . "',"
-                        . "y_kpp = '" . $data['y_kpp'] . "',"
-                        . "y_cal_account = '" . $data['y_cal_account'] . "',"
-                        . "y_bank_details = '" . $data['y_bank_details'] . "',"
-                        . "y_y_address = '" . $data['y_y_address'] . "',"
-                        . "y_f_address = '" . $data['y_f_address'] . "',"
-						. "firstname = 'Юридическое',"
-						. "lastname = 'лицо',"
-                        . "y_contact_person = '" . $data['y_contact_person'] . "'")) {
-					//text email	
-					$this->language->load('mail/customer');
-		
-					$subject = sprintf($this->language->get('text_subject'), $this->config->get('config_name'));
-					
-					$message = sprintf($this->language->get('text_welcome'), $this->config->get('config_name')) . "\n\n";
-
-					$message .= $this->language->get('text_login') . "\n";
-					
-					$message .= $this->url->link('account/login', '', 'SSL') . "\n\n";
-					$message .= $this->language->get('text_services') . "\n\n";
-					$message .= $this->language->get('text_thanks') . "\n";
-					$message .= $this->language->get('text_kuvalda2') . "\n";
-					$message .= $this->language->get('text_telephone_kuvalda') . "\n";
-					$message .= $this->language->get('text_email_kuvalda');
-					
-					$mail = new Mail();
-					$mail->protocol = $this->config->get('config_mail_protocol');
-					$mail->parameter = $this->config->get('config_mail_parameter');
-					$mail->hostname = $this->config->get('config_smtp_host');
-					$mail->username = $this->config->get('config_smtp_username');
-					$mail->password = $this->config->get('config_smtp_password');
-					$mail->port = $this->config->get('config_smtp_port');
-					$mail->timeout = $this->config->get('config_smtp_timeout');				
-					$mail->setTo($data['y_email']);
-					$mail->setFrom($this->config->get('config_email'));
-					$mail->setSender($this->config->get('config_name'));
-					$mail->setSubject(html_entity_decode($subject, ENT_QUOTES, 'UTF-8'));
-					$mail->setText(html_entity_decode($message, ENT_QUOTES, 'UTF-8'));
-					$mail->send();
-					
-                    echo 'true';
-                }
-            }
-        }
-    }
-    /*------------------------------promocode----------------------------*/
-    public function checkPromoCode($data) {
-            $query1 = $this->db->query("SELECT id, status_id FROM `" . DB_PREFIX . "coupon_promo` WHERE code = '" . $data. "' AND uses != 0");
-            if(isset($query1->row['status_id'])){
-                $queryStarusName = $this->db->query("SELECT name FROM `" . DB_PREFIX . "coupon_name` WHERE id = " . $query1->row['status_id']);          
-                if($this->db->query("UPDATE " . DB_PREFIX . "customer SET discount_code = '" . $data . "', discount_status = '" . (int)$query1->row['status_id'] . "' WHERE customer_id = '" . $this->session->data['customer_id'] . "' AND discount_code != '" . $data . "'")){
-                   if(mysql_affected_rows() >=1){ 
-                       if($this->db->query("UPDATE " . DB_PREFIX . "coupon_promo SET uses = uses - 1 WHERE id = '" . $query1->row['id'] . "'")){$arr = array ('success'=>true,'statusName'=>$queryStarusName->row['name']); echo json_encode($arr);}                   
-                   }
-                   else {$arr = array ('success'=>false); echo json_encode($arr); }
-                }
-                else {$arr = array ('success'=>false); echo json_encode($arr); }
-            }
-            else {$arr = array ('success'=>false); echo json_encode($arr); }
-    }
-    
-
+	}	
 }
-
 ?>

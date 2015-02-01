@@ -85,14 +85,27 @@ function delayer(){
 }
 </script>
 
- <div id="tabs" class="htabs"><a href="#tab-options"><?php echo $this->language->get('tab_options'); ?></a><a href="#tab-install"><?php echo $this->language->get('entry_install_update'); ?></a><a href="#tab-fields"><?php echo $this->language->get('entry_service'); ?></a></div>
+ <div id="tabs" class="htabs"><a href="#tab-options"><?php echo $this->language->get('tab_options'); ?></a><a href="#tab-install"><?php echo $this->language->get('entry_install_update'); ?></a><a href="#tab-fields"><?php echo $this->language->get('entry_service'); ?></a><a href="#tab-about"><?php echo $this->language->get('entry_about'); ?></a><a href="#tab-faq"><?php echo $this->language->get('entry_faq'); ?></a></div>
 
 <div id="tab-fields">
 <a href="<?php echo $url_fields; ?>" class="markbutton"><div style="float: left;"><img src="view/image/blog-rec-m.png"  style="" ></div><div style="float: left; margin-left: 7px; margin-top: 3px; "><?php echo $this->language->get('entry_fields'); ?></div></a>
 </div>
 
+<div id="tab-about">
+
+<?php echo $this->language->get('text_about'); ?>
+
+</div>
+
+<div id="tab-faq">
+
+<?php echo $this->language->get('text_faq'); ?>
+
+</div>
 
   <div id="tab-options">
+
+  <?php echo $text_new_version; ?>
 
    <table class="mynotable" style="margin-bottom:20px; background: white; vertical-align: center;">
 
@@ -229,6 +242,21 @@ function delayer(){
                   <?php } ?>
                 </select></td>
             </tr>
+
+
+          <tr>
+              <td><?php echo $this->language->get('entry_layout_url_status'); ?></td>
+              <td><select name="generallist[layout_url_status]">
+                  <?php if (isset($generallist['layout_url_status']) && $generallist['layout_url_status']) { ?>
+                  <option value="1" selected="selected"><?php echo $text_enabled; ?></option>
+                  <option value="0"><?php echo $text_disabled; ?></option>
+                  <?php } else { ?>
+                  <option value="1"><?php echo $text_enabled; ?></option>
+                  <option value="0" selected="selected"><?php echo $text_disabled; ?></option>
+                  <?php } ?>
+                </select></td>
+            </tr>
+
 
 
     <tr>

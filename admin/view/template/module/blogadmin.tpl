@@ -18,7 +18,7 @@
 
 
 </div>
-<a href="http://opencartadmin.com">ocCMS <?php echo $blog_version;?></a>
+<a href="http://opencartadmin.com">SEO CMS <?php echo $blog_version;?></a>
 
 <script>
 $(document).ready(function(){

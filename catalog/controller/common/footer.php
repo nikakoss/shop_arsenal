@@ -18,15 +18,18 @@ class ControllerCommonFooter extends Controller {
 		$this->data['text_wishlist'] = $this->language->get('text_wishlist');
 		$this->data['text_newsletter'] = $this->language->get('text_newsletter');
 		
-		$this->load->model('catalog/information');		
+		$this->load->model('catalog/information');
+		
 		$this->data['informations'] = array();
 
-        	$this->data['informations']['1']=$this->model_catalog_information->getCategoryInformation(1);
-        	$this->data['informations']['2']=$this->model_catalog_information->getCategoryInformation(2);
-        	$this->data['informations']['3']=$this->model_catalog_information->getCategoryInformation(3);
-        	$this->data['informations']['4']=$this->model_catalog_information->getCategoryInformation(4);
-        
-        
+		foreach ($this->model_catalog_information->getInformations() as $result) {
+			if ($result['bottom']) {
+				$this->data['informations'][] = array(
+					'title' => $result['title'],
+					'href'  => $this->url->link('information/information', 'information_id=' . $result['information_id'])
+				);
+			}
+    	}
 
 		$this->data['contact'] = $this->url->link('information/contact');
 		$this->data['return'] = $this->url->link('account/return/insert', '', 'SSL');
@@ -38,7 +41,8 @@ class ControllerCommonFooter extends Controller {
 		$this->data['account'] = $this->url->link('account/account', '', 'SSL');
 		$this->data['order'] = $this->url->link('account/order', '', 'SSL');
 		$this->data['wishlist'] = $this->url->link('account/wishlist', '', 'SSL');
-		$this->data['newsletter'] = $this->url->link('account/newsletter', '', 'SSL');		
+		$this->data['newsletter'] = $this->url->link('account/newsletter', '', 'SSL');
+	    $this->data['scripts'] = $this->document->getScripts();
 
 		$this->data['powered'] = sprintf($this->language->get('text_powered'), $this->config->get('config_name'), date('Y', time()));
 		
@@ -65,20 +69,14 @@ class ControllerCommonFooter extends Controller {
 			}
 						
 			$this->model_tool_online->whosonline($ip, $this->customer->getId(), $url, $referer);
-		}	
-                
-
-                
+		}		
+		
 		if (file_exists(DIR_TEMPLATE . $this->config->get('config_template') . '/template/common/footer.tpl')) {
 			$this->template = $this->config->get('config_template') . '/template/common/footer.tpl';
 		} else {
 			$this->template = 'default/template/common/footer.tpl';
 		}
 		
-                $this->children = array(
-			'common/footer_menu'
-		);
-                
 		$this->render();
 	}
 }

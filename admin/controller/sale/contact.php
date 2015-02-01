@@ -114,7 +114,22 @@ class ControllerSaleContact extends Controller {
 				
 				switch ($this->request->post['to']) {
 					case 'newsletter':
-						$results = $this->model_sale_customer->ourCustomer();
+						/*$customer_data = array(
+							'filter_newsletter' => 1,
+							'start'             => ($page - 1) * 10,
+							'limit'             => 10
+						);
+						
+						$email_total = $this->model_sale_customer->getTotalCustomers($customer_data);
+							
+						$results = $this->model_sale_customer->getCustomers($customer_data);
+					
+						foreach ($results as $result) {
+							$emails[] = $result['email'];
+						}*/
+                                                
+                                                
+                                                $results = $this->model_sale_customer->ourCustomer();
                                                 foreach ($results as $result) {
 							$emails[] = $result['email_sub'];
 						}
@@ -220,7 +235,8 @@ class ControllerSaleContact extends Controller {
 					$message .= '  </head>' . "\n";
 					$message .= '  <body>' . html_entity_decode($this->request->post['message'], ENT_QUOTES, 'UTF-8') . '</body>' . "\n";
 					$message .= '</html>' . "\n";
-					
+                                    
+
 					foreach ($emails as $email) {
 						$mail = new Mail();	
 						$mail->protocol = $this->config->get('config_mail_protocol');

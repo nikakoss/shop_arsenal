@@ -65,11 +65,11 @@ class agooLoader  extends Controller{
 			$class = 'Model' . preg_replace('/[^a-zA-Z0-9]/', '', $model);
 		}
 		if (file_exists($file)) {
-			if (!class_exists($class)) {
+			//if (!class_exists($class)) {
 				include_once($file);
 
 				$this->registry->set('model_' . str_replace('/', '_', $model), new $class($this->registry));
-			}
+			//}
 		}
 		else {
 			trigger_error('Error: Could not load model ' . $model . '!');

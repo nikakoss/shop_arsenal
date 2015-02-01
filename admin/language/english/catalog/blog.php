@@ -91,4 +91,5 @@ $_['column_id']                   = 'ID';
 $_['entry_reserved']			  = 'Reserved';
 $_['entry_meta_title']			  = 'Tag Title HTML';
 $_['entry_meta_h1']				  = 'Tag H1 body';
+$_['entry_product_image_dim'] 	  = 'Image size of recommended products';
 ?>

@@ -71,8 +71,7 @@ if (count($myblogs) > 0) {
 	</div>
 </div>
 <style>
-ul.box-category ul  {
-	border: none;
+ul.box-category ul  {	border: none;
 	padding: 0px;
 }
 .box-category > li > ul ul {

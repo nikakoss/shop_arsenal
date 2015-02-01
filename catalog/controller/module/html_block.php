@@ -26,6 +26,10 @@ class ControllerModuleHtmlBlock extends Controller {
 		
 		if ($block = $this->config->get('html_block_' . $setting['html_block_id'])) {
 			
+			if (!isset($block['store']) || !in_array($this->config->get('config_store_id'), $block['store'])) {
+				return;
+			}
+			
 			if (isset($block['style']) && !empty($block['css'])) {
 				
 				$file_name = '/catalog/view/theme/' . $this->config->get('config_template') . '/stylesheet/html_block.css';
@@ -45,9 +49,7 @@ class ControllerModuleHtmlBlock extends Controller {
 			}
 			
 			$this->data['message'] = $message;
-			
 		}
-		
 		
 		if (file_exists(DIR_TEMPLATE . $this->config->get('config_template') . '/template/module/html_block.tpl')) {
 			$this->template = $this->config->get('config_template') . '/template/module/html_block.tpl';

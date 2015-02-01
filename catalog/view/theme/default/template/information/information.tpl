@@ -1,18 +1,28 @@
-<?php echo $header; ?><?php echo $column_left; ?><?php echo $column_right; ?>
-<div id="content"><?php echo $content_top; ?>
-    <div class="line_razd"></div>
-    <h1><?php echo $heading_title; ?></h1>
+<?php echo $header; ?>
+<!-- CONTENT -->
+	<div id="content"><section class="bread_crumps">
+	<div class="wrap">
+		
+		<nav xmlns:v="http://rdf.data-vocabulary.org/#">
+                    <?php  $count=1; foreach ($breadcrumbs as $breadcrumb) { 
+                    if(sizeof($breadcrumbs)==$count){ ?>
+                    <?php echo $breadcrumb['separator']; ?><span typeof="v:Breadcrumb"><span property="v:title"><?php echo $breadcrumb['text']; ?></span></span>
+                   <?php }else{?>
+                   <?php echo $breadcrumb['separator']; ?><span typeof="v:Breadcrumb"><a href="<?php echo $breadcrumb['href']; ?>" rel="v:url" property="v:title"><?php echo $breadcrumb['text']; ?></a></span>
+                    <?php } $count++; } ?>
+		</nav>
+		<h1><?php echo $heading_title; ?></h1>
+	</div>
+</section><section class="news_page">
+  	<div class="news_wrap">
+  		<div class="wrap">
+                    <div class="text">
+  			<?php echo $description; ?>
+		</div>
+		</div>
+  	</div>
 
-    <ul class="bread_crumbs clearfix">
-        <?php foreach ($breadcrumbs as $breadcrumb) { ?>
-        <li>
-            <a href="<?php echo $breadcrumb['href']; ?>"><?php echo $breadcrumb['text']; ?></a>
-        </li>
-        <?php } ?>   
-    </ul>
-  <div class="line_razd_2"></div>
-  <div class="content_text clearfix">
-  <?php echo $description; ?>  
-  </div>
-  <?php echo $content_bottom; ?></div>
+  	
+</section>            <div class="clr"></div>        
+        </div><!-- end CONTENT -->
 <?php echo $footer; ?>

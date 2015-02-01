@@ -3,14 +3,14 @@ class Pagination {
 	public $total = 0;
 	public $page = 1;
 	public $limit = 20;
-	public $num_links = 5;
+	public $num_links = 10;
 	public $url = '';
 	public $text = 'Showing {start} to {end} of {total} ({pages} Pages)';
-	public $text_first = '|&lt;';
-	public $text_last = '&gt;|';
-	public $text_next = 'Следующая &raquo;';
-	public $text_prev = '&laquo; Предыдущая';
-	public $style_links = 'links';
+	public $text_first = 'В начало';
+	public $text_last = 'В конец';
+	public $text_next = 'Следующая';
+	public $text_prev = 'Предыдующая';
+	public $style_links = 'wrap';
 	public $style_results = 'results';
 	 
 	public function render() {
@@ -32,14 +32,11 @@ class Pagination {
 		$num_pages = ceil($total / $limit);
 		
 		$output = '';
-		$ul = '';
 		
 		if ($page > 1) {
-			$output .= '<a class="pred" href="' . str_replace('{page}', $page - 1, $this->url) . '">' . $this->text_prev . '</a>';
-			if ($page >= $this->num_links) {
-				$ul .= '<li><a href="' . str_replace('{page}', 1, $this->url) . '">' . '1' . '</a></li>';
-			}
-    	}
+			$output .= ' <li class="prev_page"><a href="' . str_replace('{page}', $page - 1, $this->url) . '">' . $this->text_prev . '</a> </li>';
+		//	$output .= '<li class="prev_page"> <a  href="' . str_replace('{page}', 1, $this->url) . '"> ' . $this->text_first . '</a></li> <li class="prev_page"><a href="' . str_replace('{page}', $page - 1, $this->url) . '">' . $this->text_prev . '</a> </li>';
+                }
 
 		if ($num_pages > 1) {
 			if ($num_pages <= $num_links) {
@@ -61,27 +58,25 @@ class Pagination {
 			}
 
 			if ($start > 1) {
-				$ul .= '<li><b>...</b></li>';
+				$output .= ' .... ';
 			}
 
 			for ($i = $start; $i <= $end; $i++) {
 				if ($page == $i) {
-					$ul .= '<li><b class="active">' . $i . '</b></li>';
+					$output .= '<li class="active_page"> <a href="javascript:void(0);">' . $i . '</a></li> ';
 				} else {
-					$ul .= '<li><a href="' . str_replace('{page}', $i, $this->url) . '">' . $i . '</a></li>';
+					$output .= '<li> <a href="' . str_replace('{page}', $i, $this->url) . '">' . $i . '</a> </li>';
 				}	
 			}
 							
 			if ($end < $num_pages) {
-				$ul .= '<li><b>...</b></li>';
+				$output .= ' .... ';
 			}
 		}
 		
    		if ($page < $num_pages) {
-			if ($num_pages + 1 != $i) {
-				$ul .= '<li><a href="' . str_replace('{page}', $num_pages, $this->url) . '">' . $num_pages . '</a></li>';
-			}
-			$output .= '<a class="next" href="' . str_replace('{page}', $page + 1, $this->url) . '">' . $this->text_next . '</a>';
+			$output .= '<li class="next_page" > <a href="' . str_replace('{page}', $page + 1, $this->url) . '">' . $this->text_next . '</a></li>';
+			//$output .= '<li class="next_page" > <a href="' . str_replace('{page}', $page + 1, $this->url) . '">' . $this->text_next . '</a></li><li class="next_page"> <a href="' . str_replace('{page}', $num_pages, $this->url) . '">' . $this->text_last . '</a> </li>';
 		}
 		
 		$find = array(
@@ -98,12 +93,7 @@ class Pagination {
 			$num_pages
 		);
 		
-		//return ($output ? '<div class="' . $this->style_links . '">' . $output . '</div>' : '') . '<div class="' . $this->style_results . '">' . str_replace($find, $replace, $this->text) . '</div>';
-		if ($output && $ul) {
-			return '<div class="page_nav clearfix">'.$output.'<ul>'.$ul.'</ul></div>';
-		} else {
-			return false;
-		}
+		return ($output ? '<div class="' . $this->style_links . '"> <ul>' . $output . '</ul></div>' : '') . '<div class="' . $this->style_results . '">' . str_replace($find, $replace, $this->text) . '</div>';
 	}
 }
 ?>

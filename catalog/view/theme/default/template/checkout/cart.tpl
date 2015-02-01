@@ -9,16 +9,17 @@
 <div class="warning"><?php echo $error_warning; ?><img src="catalog/view/theme/default/image/close.png" alt="" class="close" /></div>
 <?php } ?>
 <?php echo $column_left; ?><?php echo $column_right; ?>
-<div id="content"><?php echo $content_top; ?>	
-
+<div id="content"><?php echo $content_top; ?>
+  <div class="breadcrumb" xmlns:v="http://rdf.data-vocabulary.org/#">
+    <?php foreach ($breadcrumbs as $breadcrumb) { ?>
+    <?php echo $breadcrumb['separator']; ?><span typeof="v:Breadcrumb"><a href="<?php echo $breadcrumb['href']; ?>" rel="v:url" property="v:title"><?php echo $breadcrumb['text']; ?></a></span>
+    <?php } ?>
+  </div>
   <h1><?php echo $heading_title; ?>
     <?php if ($weight) { ?>
     &nbsp;(<?php echo $weight; ?>)
     <?php } ?>
   </h1>
-  
-  <?php include('catalog/view/theme/'.$this->config->get('config_template').'/template/new_elements/breadcrumb.tpl'); ?>
-  
   <form action="<?php echo $action; ?>" method="post" enctype="multipart/form-data">
     <div class="cart-info">
       <table>
@@ -34,14 +35,6 @@
         </thead>
         <tbody>
           <?php foreach ($products as $product) { ?>
-            <?php if($product['recurring']): ?>
-              <tr>
-                  <td colspan="6" style="border:none;"><image src="catalog/view/theme/default/image/reorder.png" alt="" title="" style="float:left;" /><span style="float:left;line-height:18px; margin-left:10px;"> 
-                      <strong><?php echo $text_recurring_item ?></strong>
-                      <?php echo $product['profile_description'] ?>
-                  </td>
-                </tr>
-            <?php endif; ?>
           <tr>
             <td class="image"><?php if ($product['thumb']) { ?>
               <a href="<?php echo $product['href']; ?>"><img src="<?php echo $product['thumb']; ?>" alt="<?php echo $product['name']; ?>" title="<?php echo $product['name']; ?>" /></a>
@@ -54,9 +47,6 @@
                 <?php foreach ($product['option'] as $option) { ?>
                 - <small><?php echo $option['name']; ?>: <?php echo $option['value']; ?></small><br />
                 <?php } ?>
-                <?php if($product['recurring']): ?>
-                - <small><?php echo $text_payment_profile ?>: <?php echo $product['profile_name'] ?></small>
-                <?php endif; ?>
               </div>
               <?php if ($product['reward']) { ?>
               <small><?php echo $product['reward']; ?></small>

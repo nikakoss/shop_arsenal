@@ -14,7 +14,7 @@
       <div class="buttons"><a onclick="$('#form').submit();" class="button"><?php echo $button_save; ?></a><a href="<?php echo $cancel; ?>" class="button"><?php echo $button_cancel; ?></a></div>
     </div>
     <div class="content">
-      <div id="tabs" class="htabs"><a href="#tab-general"><?php echo $tab_general; ?></a><a href="#tab-data"><?php echo $tab_data; ?></a><a href="#tab-links"><?php echo $tab_links; ?></a><a href="#tab-attribute"><?php echo $tab_attribute; ?></a><a href="#tab-option"><?php echo $tab_option; ?></a><a href="#tab-profile"><?php echo $tab_profile; ?></a><a href="#tab-discount"><?php echo $tab_discount; ?></a><a href="#tab-special"><?php echo $tab_special; ?></a><a href="#tab-image"><?php echo $tab_image; ?></a><a href="#tab-reward"><?php echo $tab_reward; ?></a><a href="#tab-design"><?php echo $tab_design; ?></a></div>
+      <div id="tabs" class="htabs"><a href="#tab-general"><?php echo $tab_general; ?></a><a href="#tab-data"><?php echo $tab_data; ?></a><a href="#tab-links"><?php echo $tab_links; ?></a><a href="#tab-attribute"><?php echo $tab_attribute; ?></a><a href="#tab-option"><?php echo $tab_option; ?></a><a href="#tab-discount"><?php echo $tab_discount; ?></a><a href="#tab-special"><?php echo $tab_special; ?></a><a href="#tab-image"><?php echo $tab_image; ?></a><a href="#tab-reward"><?php echo $tab_reward; ?></a><a href="#tab-design"><?php echo $tab_design; ?></a></div>
       <form action="<?php echo $action; ?>" method="post" enctype="multipart/form-data" id="form">
         <div id="tab-general">
           <div id="languages" class="htabs">
@@ -32,16 +32,13 @@
                   <span class="error"><?php echo $error_name[$language['language_id']]; ?></span>
                   <?php } ?></td>
               </tr>
+              <tr>
                 <td><?php echo $entry_meta_description; ?></td>
                 <td><textarea name="product_description[<?php echo $language['language_id']; ?>][meta_description]" cols="40" rows="5"><?php echo isset($product_description[$language['language_id']]) ? $product_description[$language['language_id']]['meta_description'] : ''; ?></textarea></td>
               </tr>
               <tr>
                 <td><?php echo $entry_meta_keyword; ?></td>
                 <td><textarea name="product_description[<?php echo $language['language_id']; ?>][meta_keyword]" cols="40" rows="5"><?php echo isset($product_description[$language['language_id']]) ? $product_description[$language['language_id']]['meta_keyword'] : ''; ?></textarea></td>
-              </tr>
-              <tr>
-                <td>Комплектация</td>
-                <td><textarea name="product_description[<?php echo $language['language_id']; ?>][grade]" id="grade<?php echo $language['language_id']; ?>"><?php echo isset($product_description[$language['language_id']]) ? $product_description[$language['language_id']]['grade'] : ''; ?></textarea></td>
               </tr>
               <tr>
                 <td><?php echo $entry_description; ?></td>
@@ -92,13 +89,9 @@
               <td><?php echo $entry_location; ?></td>
               <td><input type="text" name="location" value="<?php echo $location; ?>" /></td>
             </tr>
-			<tr>
-              <td>Код видео на ютуб (например: GUvErrzyw_o)</td>
-              <td><input type="text" name="youtube" value="<?php echo $youtube; ?>" /></td>
-            </tr>
             <tr>
-                <td><?php echo $entry_price; ?></td>
-                <td><input type="text" name="price" value="<?php echo $price; ?>" /></td>
+              <td><?php echo $entry_price; ?></td>
+              <td><input type="text" name="price" value="<?php echo $price; ?>" /></td>
             </tr>
             <tr>
               <td><?php echo $entry_tax_class; ?></td>
@@ -525,58 +518,6 @@
           <?php $option_row++; ?>
           <?php } ?>
         </div>
-        <div id="tab-profile">
-            <table class="list">
-                <thead>
-                    <tr>
-                        <td class="left"><?php echo $entry_profile ?></td>
-                        <td class="left"><?php echo $entry_customer_group ?></td>
-                        <td class="left"></td>
-                    </tr>
-                </thead>
-                <tbody>
-                    <?php $profileCount = 0; ?>
-                    <?php foreach ($product_profiles as $product_profile): ?>
-                        <?php $profileCount++ ?>
-                    
-                        <tr id="profile-row<?php echo $profileCount ?>">
-                            <td class="left">
-                                <select name="product_profiles[<?php echo $profileCount ?>][profile_id]">
-                                    <?php foreach ($profiles as $profile): ?>
-                                        <?php if ($profile['profile_id'] == $product_profile['profile_id']): ?>
-                                            <option value="<?php echo $profile['profile_id'] ?>" selected="selected"><?php echo $profile['name'] ?></option>
-                                        <?php else: ?>
-                                            <option value="<?php echo $profile['profile_id'] ?>"><?php echo $profile['name'] ?></option>
-                                        <?php endif; ?>
-                                    <?php endforeach; ?>
-                                </select>
-                            </td>
-                            <td class="left">
-                                <select name="product_profiles[<?php echo $profileCount ?>][customer_group_id]">
-                                    <?php foreach ($customer_groups as $customer_group): ?>
-                                        <?php if ($customer_group['customer_group_id'] == $product_profile['customer_group_id']): ?>
-                                            <option value="<?php echo $customer_group['customer_group_id'] ?>" selected="selected"><?php echo $customer_group['name'] ?></option>
-                                        <?php else: ?>
-                                            <option value="<?php echo $customer_group['customer_group_id'] ?>"><?php echo $customer_group['name'] ?></option>
-                                        <?php endif; ?>
-                                    <?php endforeach; ?>
-                                </select>
-                            </td>
-                            <td class="left">
-                                <a class="button" onclick="$('#profile-row<?php echo $profileCount ?>').remove()"><?php echo $button_remove ?></a>
-                            </td>
-                        </tr>
-                    
-                    <?php endforeach; ?>
-                </tbody>
-                <tfoot>
-                    <tr>
-                        <td colspan="2"></td>
-                        <td class="left"><a onclick="addProfile()" class="button"><?php echo $button_add_profile ?></a></td>
-                    </tr>
-                </tfoot>
-            </table>
-        </div>
         <div id="tab-discount">
           <table id="discount" class="list">
             <thead>
@@ -768,16 +709,6 @@
 <script type="text/javascript"><!--
 <?php foreach ($languages as $language) { ?>
 CKEDITOR.replace('description<?php echo $language['language_id']; ?>', {
-	filebrowserBrowseUrl: 'index.php?route=common/filemanager&token=<?php echo $token; ?>',
-	filebrowserImageBrowseUrl: 'index.php?route=common/filemanager&token=<?php echo $token; ?>',
-	filebrowserFlashBrowseUrl: 'index.php?route=common/filemanager&token=<?php echo $token; ?>',
-	filebrowserUploadUrl: 'index.php?route=common/filemanager&token=<?php echo $token; ?>',
-	filebrowserImageUploadUrl: 'index.php?route=common/filemanager&token=<?php echo $token; ?>',
-	filebrowserFlashUploadUrl: 'index.php?route=common/filemanager&token=<?php echo $token; ?>'
-});
-<?php } ?>
-<?php foreach ($languages as $language) { ?>
-CKEDITOR.replace('grade<?php echo $language['language_id']; ?>', {
 	filebrowserBrowseUrl: 'index.php?route=common/filemanager&token=<?php echo $token; ?>',
 	filebrowserImageBrowseUrl: 'index.php?route=common/filemanager&token=<?php echo $token; ?>',
 	filebrowserFlashBrowseUrl: 'index.php?route=common/filemanager&token=<?php echo $token; ?>',
@@ -1329,63 +1260,5 @@ $('.time').timepicker({timeFormat: 'h:m'});
 $('#tabs a').tabs(); 
 $('#languages a').tabs(); 
 $('#vtab-option a').tabs();
-
-var profileCount = <?php echo $profileCount ?>;
-
-function addProfile() {
-    profileCount++;
-    
-    var html = '';
-    html += '<tr id="profile-row' + profileCount + '">';
-    html += '  <td class="left">';
-    html += '    <select name="product_profiles[' + profileCount + '][profile_id]">';
-    <?php foreach ($profiles as $profile): ?>
-    html += '      <option value="<?php echo $profile['profile_id'] ?>"><?php echo $profile['name'] ?></option>';
-    <?php endforeach; ?>
-    html += '    </select>';
-    html += '  </td>';
-    html += '  <td class="left">';
-    html += '    <select name="product_profiles[' + profileCount + '][customer_group_id]">';
-    <?php foreach ($customer_groups as $customer_group): ?>
-    html += '      <option value="<?php echo $customer_group['customer_group_id'] ?>"><?php echo $customer_group['name'] ?></option>';
-    <?php endforeach; ?>
-    html += '    <select>';
-    html += '  </td>';
-    html += '  <td class="left">';
-    html += '    <a class="button" onclick="$(\'#profile-row' + profileCount + '\').remove()"><?php echo $button_remove ?></a>';
-    html += '  </td>';
-    html += '</tr>';
-    
-    $('#tab-profile table tbody').append(html);
-}
-
-<?php if (isset($this->request->get['product_id'])) { ?>
-    function openbayLinkStatus(){
-        var product_id = '<?php echo $this->request->get['product_id']; ?>';
-        $.ajax({
-            type: 'GET',
-            url: 'index.php?route=extension/openbay/linkStatus&token=<?php echo $token; ?>&product_id='+product_id,
-            dataType: 'html',
-            success: function(data) {
-                //add the button to nav
-                $('<a href="#tab-openbay"><?php echo $tab_marketplace_links ?></a>').hide().appendTo("#tabs").fadeIn(1000);
-                $('#tab-general').before(data);
-                $('#tabs a').tabs();
-            },
-            failure: function(){
-
-            },
-            error: function() {
-
-            }
-        });
-    }
-
-    $(document).ready(function(){
-        openbayLinkStatus();
-    });
-<?php } ?>
-
-//--></script>
-
+//--></script> 
 <?php echo $footer; ?>

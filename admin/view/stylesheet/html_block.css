@@ -112,3 +112,18 @@ table.list .title {
 .include .form td {
 	border-top: 1px dotted #CCCCCC;
 }
+div.template-wrapper {
+	position: relative;
+	display: inline-block;
+}
+div.template-wrapper textarea {
+	resize: none;
+}
+div.template-wrapper a.js {
+	position: absolute;
+	top: 0;
+	right: -115px;
+}
+#tab-themes p.link {
+	margin-top: 0;
+}

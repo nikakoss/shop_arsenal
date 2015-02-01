@@ -8,7 +8,7 @@ class ControllerProductSearch extends Controller {
 		$this->load->model('catalog/product');
 		
 		$this->load->model('tool/image'); 
-		$this->load->model('catalog/review');
+		
 		if (isset($this->request->get['search'])) {
 			$search = $this->request->get['search'];
 		} else {
@@ -219,9 +219,9 @@ class ControllerProductSearch extends Controller {
 					
 			foreach ($results as $result) {
 				if ($result['image']) {
-				    $image = $this->model_tool_image->resize($result['image'], $this->config->get('config_image_product_width'), $this->config->get('config_image_product_height'));
+					$image = $this->model_tool_image->resize($result['image'], $this->config->get('config_image_product_width'), $this->config->get('config_image_product_height'));
 				} else {
-					$image = $this->model_tool_image->resize('data/no_image.jpg', $this->config->get('config_image_product_width'), $this->config->get('config_image_product_height'));
+					$image = false;
 				}
 				
 				if (($this->config->get('config_customer_price') && $this->customer->isLogged()) || !$this->config->get('config_customer_price')) {
@@ -247,23 +247,7 @@ class ControllerProductSearch extends Controller {
 				} else {
 					$rating = false;
 				}
-                                $attribute_groups = $this->model_catalog_product->getProductAttributes($result['product_id'], true);
-                                
-                                  $review_total = $this->model_catalog_review->getTotalReviewsByProductId($result['product_id']);
-
-                                $results = $this->model_catalog_review->getReviewsByProductId($result['product_id'], ($page - 1) * 5, 5);
-                                 $rait_s = 0;
-
-                                foreach ($results as $result_r) {
-                                    $rait_s += (int) $result_r['rating'];
-                                }
-                                if($review_total){
-                                    $rait_s_total = round($rait_s / $review_total);
-                                }
-                                else{
-                                    $rait_s_total = 0;
-                                }
-                                
+			
 				$this->data['products'][] = array(
 					'product_id'  => $result['product_id'],
 					'thumb'       => $image,
@@ -271,8 +255,6 @@ class ControllerProductSearch extends Controller {
 					'description' => utf8_substr(strip_tags(html_entity_decode($result['description'], ENT_QUOTES, 'UTF-8')), 0, 100) . '..',
 					'price'       => $price,
 					'special'     => $special,
-                                    'attributes'  => $attribute_groups,
-                                    'rait_s' =>   $rait_s_total, 
 					'tax'         => $tax,
 					'rating'      => $result['rating'],
 					'reviews'     => sprintf($this->language->get('text_reviews'), (int)$result['reviews']),
@@ -311,66 +293,57 @@ class ControllerProductSearch extends Controller {
 			$this->data['sorts'][] = array(
 				'text'  => $this->language->get('text_default'),
 				'value' => 'p.sort_order-ASC',
-				'href'  => $this->url->link('product/search', 'sort=p.sort_order&order=ASC' . $url),
-                                'need'  => 'no'
+				'href'  => $this->url->link('product/search', 'sort=p.sort_order&order=ASC' . $url)
 			);
 			
 			$this->data['sorts'][] = array(
 				'text'  => $this->language->get('text_name_asc'),
 				'value' => 'pd.name-ASC',
-				'href'  => $this->url->link('product/search', 'sort=pd.name&order=ASC' . $url),
-                                'need'  => 'no'
+				'href'  => $this->url->link('product/search', 'sort=pd.name&order=ASC' . $url)
 			); 
 	
 			$this->data['sorts'][] = array(
 				'text'  => $this->language->get('text_name_desc'),
 				'value' => 'pd.name-DESC',
-				'href'  => $this->url->link('product/search', 'sort=pd.name&order=DESC' . $url),
-                                'need'  => 'no'
+				'href'  => $this->url->link('product/search', 'sort=pd.name&order=DESC' . $url)
 			);
 	
 			$this->data['sorts'][] = array(
 				'text'  => $this->language->get('text_price_asc'),
 				'value' => 'p.price-ASC',
-				'href'  => $this->url->link('product/search', 'sort=p.price&order=ASC' . $url),
-                                'need'  => 'yes'
+				'href'  => $this->url->link('product/search', 'sort=p.price&order=ASC' . $url)
 			); 
 	
 			$this->data['sorts'][] = array(
 				'text'  => $this->language->get('text_price_desc'),
 				'value' => 'p.price-DESC',
-				'href'  => $this->url->link('product/search', 'sort=p.price&order=DESC' . $url),
-                                'need'  => 'yes'
+				'href'  => $this->url->link('product/search', 'sort=p.price&order=DESC' . $url)
 			); 
 			
 			if ($this->config->get('config_review_status')) {
 				$this->data['sorts'][] = array(
 					'text'  => $this->language->get('text_rating_desc'),
 					'value' => 'rating-DESC',
-					'href'  => $this->url->link('product/search', 'sort=rating&order=DESC' . $url),
-                                        'need'  => 'yes'
+					'href'  => $this->url->link('product/search', 'sort=rating&order=DESC' . $url)
 				); 
 				
 				$this->data['sorts'][] = array(
 					'text'  => $this->language->get('text_rating_asc'),
 					'value' => 'rating-ASC',
-					'href'  => $this->url->link('product/search', 'sort=rating&order=ASC' . $url),
-                                        'need'  => 'yes'
+					'href'  => $this->url->link('product/search', 'sort=rating&order=ASC' . $url)
 				);
 			}
 			
 			$this->data['sorts'][] = array(
 				'text'  => $this->language->get('text_model_asc'),
 				'value' => 'p.model-ASC',
-				'href'  => $this->url->link('product/search', 'sort=p.model&order=ASC' . $url),
-                                'need'  => 'no'
+				'href'  => $this->url->link('product/search', 'sort=p.model&order=ASC' . $url)
 			); 
 	
 			$this->data['sorts'][] = array(
 				'text'  => $this->language->get('text_model_desc'),
 				'value' => 'p.model-DESC',
-				'href'  => $this->url->link('product/search', 'sort=p.model&order=DESC' . $url),
-                                'need'  => 'no'
+				'href'  => $this->url->link('product/search', 'sort=p.model&order=DESC' . $url)
 			);
 	
 			$url = '';

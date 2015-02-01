@@ -5,7 +5,14 @@ class agooModelToolImage extends Controller
 
    public function __call($name, array $params)
    {
-        $object = 'ModelToolImage';
+       $object = 'ModelToolImage';
+
+       $loader_new = $this->registry->get('load');
+       $loader_old = $this->registry->get('load_old');
+       $this->registry->set('load', $loader_old);
+       $this->load->model('tool/image');
+       $this->registry->set('load', $loader_new);
+
 		$this->Layout =  new $object($this->registry);
 
         if ($this->config->get('blog_resize') && $name == 'resize' && ($this->registry->get("fseoblog") == 1 ||  $this->registry->get("blog_work"))) {

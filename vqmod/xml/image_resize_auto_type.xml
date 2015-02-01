@@ -1,0 +1,20 @@
+<modification>
+	<id>Auto-Type OpenCart resize Image</id>
+	<version>1.1</version>
+	<vqmver>2.2.1</vqmver>
+	<author>qahar [echothemes.com]</author>
+	<file name="catalog/model/tool/image.php">
+		<operation>
+			<search position="replace"><![CDATA[$image->resize($width, $height, $type);]]></search>
+			<add><![CDATA[
+				if ($width/$height == $width_orig/$height_orig) {
+					$image->resize($width, $height, 'w');
+				} elseif ($width/$height > $width_orig/$height_orig) {
+					$image->resize($width, $height, 'w');
+				} elseif ($width/$height < $width_orig/$height_orig) {
+					$image->resize($width, $height, 'h');
+				}
+			]]></add>
+		</operation>
+	</file>
+</modification>

@@ -281,7 +281,7 @@ body > #container {
 	border-right: 1px solid #CCCCCC;
 	border-bottom: 1px solid #CCCCCC;
 	min-height: 300px;
-  /*	overflow: auto; */
+	overflow: auto;
 }
 a.button, .list a.button {
 	text-decoration: none;
@@ -405,11 +405,11 @@ table.form > tbody > tr > td {
 	cursor: pointer;
 }
 .htabs {
-	/*padding: 0px 0px 0px 10px; */
+	padding: 0px 0px 0px 10px;
 	height: 30px;
 	line-height: 16px;
 	border-bottom: 1px solid #DDDDDD;
-	margin-bottom: 35px;
+	margin-bottom: 15px;
 }
 .htabs a {
 	border-top: 1px solid #DDDDDD;
@@ -428,7 +428,7 @@ table.form > tbody > tr > td {
 	display: none;
 }
 .htabs a.selected {
-	padding-bottom: 5px;
+	padding-bottom: 7px;
 	background: #FFFFFF;
 }
 .vtabs {

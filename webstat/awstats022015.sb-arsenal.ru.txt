@@ -1,0 +1,313 @@
+AWSTATS DATA FILE 7.1 (build 1.983)
+# If you remove this file, all statistics for date 201502 will be lost/reset.
+# Last config file used to build this data file was /etc/awstats/awstats.sb-arsenal.ru.conf.
+
+# Position (offset in bytes) in this file for beginning of each section for
+# direct I/O access. If you made changes somewhere in this file, you should
+# also remove completely the MAP section (AWStats will rewrite it at next
+# update).
+BEGIN_MAP 27
+POS_GENERAL 1993                
+POS_TIME 2658                
+POS_VISITOR 7001                
+POS_DAY 7994                
+POS_DOMAIN 3280                
+POS_LOGIN 3509                
+POS_ROBOT 3664                
+POS_WORMS 4047                
+POS_EMAILSENDER 4178                
+POS_EMAILRECEIVER 4321                
+POS_SESSION 8077                
+POS_SIDER 8224                
+POS_FILETYPES 4456                
+POS_DOWNLOADS 4648                
+POS_OS 4696                
+POS_BROWSER 4841                
+POS_SCREENSIZE 5225                
+POS_UNKNOWNREFERER 5299                
+POS_UNKNOWNREFERERBROWSER 5386                
+POS_ORIGIN 5468                
+POS_SEREFERRALS 5604                
+POS_PAGEREFS 5770                
+POS_SEARCHWORDS 6049                
+POS_KEYWORDS 6201                
+POS_MISC 2322                
+POS_ERRORS 6260                
+POS_CLUSTER 3365                
+POS_SIDER_404 6371                
+END_MAP
+
+# LastLine    = Date of last record processed - Last record line number in last log - Last record offset in last log - Last record signature value
+# FirstTime   = Date of first visit for history file
+# LastTime    = Date of last visit for history file
+# LastUpdate  = Date of last update - Nb of parsed records - Nb of parsed old records - Nb of parsed new records - Nb of parsed corrupted - Nb of parsed dropped
+# TotalVisits = Number of visits
+# TotalUnique = Number of unique visitors
+# MonthHostsKnown   = Number of hosts known
+# MonthHostsUnKnown = Number of hosts unknown
+BEGIN_GENERAL 8
+LastLine 20150201141301 611 135140 34507093406
+FirstTime 0
+LastTime 20150201133701
+LastUpdate 20150201141603 20 0 20 0 0
+TotalVisits 22                  
+TotalUnique 21                  
+MonthHostsKnown 0                   
+MonthHostsUnknown 24                  
+END_GENERAL
+
+# Misc ID - Pages - Hits - Bandwidth
+BEGIN_MISC 10
+QuickTimeSupport 0 0 0
+JavaEnabled 0 0 0
+JavascriptDisabled 0 0 0
+PDFSupport 0 0 0
+WindowsMediaPlayerSupport 0 0 0
+AddToFavourites 0 0 0
+RealPlayerSupport 0 0 0
+TotalMisc 0 0 0
+DirectorSupport 0 0 0
+FlashSupport 0 0 0
+END_MISC
+
+# Hour - Pages - Hits - Bandwidth - Not viewed Pages - Not viewed Hits - Not viewed Bandwidth
+BEGIN_TIME 24
+0 1 2 256637 19 37 281119
+1 1 1 53694 12 12 0
+2 1 2 132820 25 26 92334
+3 2 69 665116 14 15 24877
+4 2 3 196309 21 22 47904
+5 0 0 0 14 14 10125
+6 3 48 346644 23 23 63568
+7 0 0 0 19 20 202810
+8 2 2 64753 15 15 10064
+9 2 2 22118 25 26 383912
+10 3 46 341468 45 60 599178
+11 22 89 1283879 27 29 31892
+12 2 2 89206 22 22 62202
+13 1 1 53694 20 20 42152
+14 0 0 0 3 3 0
+15 0 0 0 0 0 0
+16 0 0 0 0 0 0
+17 0 0 0 0 0 0
+18 0 0 0 0 0 0
+19 0 0 0 0 0 0
+20 0 0 0 0 0 0
+21 0 0 0 0 0 0
+22 0 0 0 0 0 0
+23 0 0 0 0 0 0
+END_TIME
+
+# Domain - Pages - Hits - Bandwidth
+# The 10 first Pages must be first (order not required for others)
+BEGIN_DOMAIN 1
+ip 42 267 3506338
+END_DOMAIN
+
+# Cluster ID - Pages - Hits - Bandwidth
+BEGIN_CLUSTER 0
+END_CLUSTER
+
+# Login - Pages - Hits - Bandwidth - Last visit
+# The 10 first Pages must be first (order not required for others)
+BEGIN_LOGIN 0
+END_LOGIN
+
+# Robot ID - Hits - Bandwidth - Last visit - Hits on robots.txt
+# The 10 first Hits must be first (order not required for others)
+BEGIN_ROBOT 7
+robot 171 0 20150201141301 0
+yandex 47 512208 20150201135208 2
+no_user_agent 25 469533 20150201102751 0
+googlebot 19 657708 20150201135414 0
+slurp 8 54068 20150201045803 1
+favicon 2 11851 20150201113810 0
+bot[\s_+:,\.\;\/\\-] 2 11406 20150201102031 1
+END_ROBOT
+
+# Worm ID - Hits - Bandwidth - Last visit
+# The 5 first Hits must be first (order not required for others)
+BEGIN_WORMS 0
+END_WORMS
+
+# EMail - Hits - Bandwidth - Last visit
+# The 20 first Hits must be first (order not required for others)
+BEGIN_EMAILSENDER 0
+END_EMAILSENDER
+
+# EMail - Hits - Bandwidth - Last visit
+# The 20 first hits must be first (order not required for others)
+BEGIN_EMAILRECEIVER 0
+END_EMAILRECEIVER
+
+# Files type - Hits - Bandwidth - Bandwidth without compression - Bandwidth after compression
+BEGIN_FILETYPES 7
+css 90 149026 0 0
+png 53 454463 0 0
+html 40 793002 0 0
+jpg 10 952781 0 0
+js 68 1076506 0 0
+jpeg 4 36214 0 0
+Unknown 2 44346 0 0
+END_FILETYPES
+
+# Downloads - Hits - Bandwidth
+BEGIN_DOWNLOADS 0
+END_DOWNLOADS
+
+# OS ID - Hits
+BEGIN_OS ID - Hits - Pages 6
+linuxandroid 1 0
+winxp 7 7
+winlong 1 1
+linuxubuntu 1 1
+winvista 1 0
+win7 256 33
+END_OS
+
+# Browser ID - Hits - Pages
+BEGIN_BROWSER 18
+chrome37.0.2062.124 70 3
+msie6.0 2 2
+chrome40.0.2214.91 1 0
+firefox15.0 1 1
+firefox17.0 1 1
+android 1 0
+chrome22.0.1229.79 14 14
+opera9.80 1 1
+msie8.0 1 1
+chrome36.0.1985.143 47 2
+mozilla 3 3
+chrome39.0.2171.65 2 2
+msie10.0 2 2
+chrome37.0.2062.120 44 1
+firefox3.6.3 1 1
+firefox19.0 4 4
+chrome23.0.1271.97 1 1
+chrome40.0.2214.93 71 3
+END_BROWSER
+
+# Screen size - Hits
+BEGIN_SCREENSIZE 0
+END_SCREENSIZE
+
+# Unknown referer OS - Last visit date
+BEGIN_UNKNOWNREFERER 0
+END_UNKNOWNREFERER
+
+# Unknown referer Browser - Last visit date
+BEGIN_UNKNOWNREFERERBROWSER 0
+END_UNKNOWNREFERERBROWSER
+
+# Origin - Pages - Hits 
+BEGIN_ORIGIN 6
+From0 14 17
+From1 0 0
+From2 2 5
+From3 5 48
+From4 21 197
+From5 0 0
+END_ORIGIN
+
+# Search engine referers ID - Pages - Hits
+BEGIN_SEREFERRALS 2
+google 1 3
+yandex 1 2
+END_SEREFERRALS
+
+# External page referers - Pages - Hits
+# The 10 first Pages must be first (order not required for others)
+BEGIN_PAGEREFS 3
+http://buttons-for-website.com 2 2
+http://bluerobot.info/info/pragofofirovynoti 2 2
+http://topic935699.forum.adviceforum.info 1 44
+END_PAGEREFS
+
+# Search keyphrases - Number of search
+# The 10 first number of search must be first (order not required for others)
+BEGIN_SEARCHWORDS 0
+END_SEARCHWORDS
+
+# Search keywords - Number of search
+# The 10 first number of search must be first (order not required for others)
+BEGIN_KEYWORDS 0
+END_KEYWORDS
+
+# Errors - Hits - Bandwidth
+BEGIN_ERRORS 3
+302 35 540
+404 8 128177
+301 26 6646
+END_ERRORS
+
+# URL with 404 errors - Hits - Last URL referer
+BEGIN_SIDER_404 7
+/administrator/index.php 1 -
+/components/com_sexycontactform/fileupload/index.php 1 -
+/wp-login.php 2 -
+/user 1 -
+/admin.php 1 -
+/wp-content/plugins/formcraft/file-upload/server/php/ 1 -
+/shop/videonablyudenie/vspomogatelnoe_oborudovanie_dlya_peredachi_signalov/v1_elektroniks/kommutatory/kommutatory_dvi_audio/ds02/ 1 -
+END_SIDER_404
+
+# Host - Pages - Hits - Bandwidth - Last visit date - [Start date of last visit] - [Last page of last visit]
+# [Start date of last visit] and [Last page of last visit] are saved only if session is not finished
+# The 10 first Hits must be first (order not required for others)
+BEGIN_VISITOR 24
+95.46.124.195 14 14 141489 20150201115457
+176.99.6.237 4 4 44236 20150201115429
+95.134.94.16 2 2 21363 20150201115000
+31.23.77.135 2 2 21863 20150201103832
+72.46.136.178 2 2 22118 20150201094836
+37.229.205.127 2 2 89206 20150201125050
+194.126.183.176 2 2 20789 20150201115205
+109.234.156.66 1 1 53694 20150201043737
+91.124.74.34 1 68 654057 20150201031424
+85.10.229.73 1 1 35851 20150201001622
+58.97.232.131 1 1 11059 20150201033548
+31.184.238.238 1 1 53694 20150201043415
+83.149.21.193 0 1 220786 
+94.139.226.252 1 1 53694 20150201023922
+54.163.77.38 1 1 53694 20150201114453
+95.153.183.215 1 68 1024426 20150201115345
+109.174.112.202 1 1 11059 20150201080558
+79.165.124.150 0 1 79126 
+85.90.193.224 1 1 53694 20150201133701 20150201133701 /
+179.7.90.85 1 46 324526 20150201060053
+5.9.9.4 1 44 319605 20150201102117
+23.102.34.200 1 1 53694 20150201014225
+37.115.202.136 1 1 53694 20150201082240
+109.172.15.1 0 1 88921 
+END_VISITOR
+
+# Date - Pages - Hits - Bandwidth - Visits
+BEGIN_DAY 1
+20150201 42 267 3506338 22
+END_DAY
+
+# Session range - Number of visits
+BEGIN_SESSION 1
+0s-30s 21
+END_SESSION
+
+# URL - Pages - Bandwidth - Entry - Exit
+# The 10 first Pages must be first (order not required for others)
+BEGIN_SIDER 16
+/ 21 573319 15 15
+/uslugi/sistemy-videonablyudeniya/montazh-videonabljudenija/ 2 45343 1 1
+/news/ohrannye-datchiki/ 2 19634 1 0
+/prices 2 44346 1 0
+/uslugi/sistemy-videonablyudeniya/ 2 24092 0 1
+/uslugi/sistemy-videonablyudeniya/ip-videonabljudenie/ 2 19462 0 2
+/uslugi/sistemy-videonablyudeniya/hd-sdi-kamery/ 2 20646 1 1
+/news/izveschateli-pozharnye/ 1 9522 0 0
+/uslugi/sistemy-okhrany-imushchestva/ 1 11847 1 0
+/uslugi/ 1 7193 0 0
+/news/sistemy-ohrannoj-signalizatsii/ 1 9824 0 0
+/blog/videonabljudenie-dlja-kvartiry-ili-doma/ 1 10304 1 0
+/news/signalizatsija-dlja-doma/ 1 9813 0 0
+/uslugi/sistemy-kontrolya-dostupa/podkljuchenie-i-ustanovka-domofona/ 1 10016 1 1
+/uslugi/sistemy-videonablyudeniya/videoregistrator-dlja-videonabljudenija/ 1 9899 0 0
+/uslugi/sistemy-pozharnoy-bezopasnosti/ 1 12088 0 0
+END_SIDER

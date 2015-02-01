@@ -1,3 +1,6 @@
+ <div class="all_comments">
+        <div class="com_tt">Все Комментарии <span>(<?php echo count($mycomments);?>)</span></div>
+
 <div class="container_comments" id="container_comments_<?php echo $mark;?>_<?php echo $mark_id;?>">
 	<noindex>
 		<div class="container_comments_vars" id="container_comments_vars_<?php echo $mark;?>_<?php echo $mark_id;?>" style="display: none">
@@ -15,11 +18,13 @@
 			<div class="prefix"><?php echo $prefix;?></div>
 		</div>
 	</noindex>
-	<?php  if (isset($mycomments) && $mycomments) {  ?>
+
+	<?php  if (isset($mycomments) && $mycomments) {
+	?>
 
 	<?php
 	$opendiv=0;
-	foreach ($mycomments as $num => $comment) {
+	foreach ($mycomments as $number => $comment) {
 	$opendiv++;
 	?>
 
@@ -30,18 +35,15 @@
 		</div>
 
 		<div class="padding10">
-			<b><?php  echo $comment['author']; ?></b>
-			<?php if (isset($settings_widget['rating']) && $settings_widget['rating'] && $comment['rating_mark']==0 ) { ?>
-			<br>
-
+                    <div class="autor_comm"><?php  echo $comment['author']; ?><span class="date_comm"><?php echo $comment['date_added']; ?></span></div>
+                   
+       		<?php if (isset($settings_widget['rating']) && $settings_widget['rating'] && $comment['rating_mark']==0 ) { ?>			
 			<?php
 			$themeFile = $this->getThemeFile('image/blogstars-'.$comment['rating'].'.png');
 			if ($themeFile) {
 			?>
 			<img style="border: 0px;"  title="<?php echo $comment['rating']; ?>" alt="<?php echo $comment['rating']; ?>" src="catalog/view/theme/<?php echo $themeFile; ?>">
 			<?php } ?>
-
-
 			<?php } ?>
 
 			<?php  if (isset($record_comment['karma']) && $record_comment['karma']) { ?>
@@ -65,43 +67,8 @@
 				</div>
 			</div>
 			<?php } ?>
-			<br>
-			<div class="com_date_added"><?php echo $comment['date_added']; ?>&nbsp;&nbsp;<a href="<?php echo $url;?>#comment_link_<?php  echo $comment['comment_id']; ?>">#</a></div>
+			<div class="clr"></div>
 			<div class="com_text  color_<?php  if($comment['delta']>=0) {  echo '000'; } else {  echo 'AAA'; } ?>;">
-
-				<table style="width:100%;">
-					<?php
-					foreach ($comment['fields'] as $num =>$field) {
-					if($field['value']!="") {
-					?>
-					<tr>
-						<td style="width: 16px;">
-
-
-							<?php
-							$themeFile = $this->getThemeFile('image/'.$field['field_name'].'.png');
-							if ($themeFile) {
-							?>
-							<img src="catalog/view/theme/<?php echo $themeFile; ?>" title="<?php echo $field['field_description'][$this->config->get('config_language_id')]; ?>" alt="<?php echo $field['field_description'][$this->config->get('config_language_id')]; ?>">
-							<?php } ?>
-
-						</td>
-
-						<td>
-							<!--<b><ins class="color_entry_name"><?php echo $field['field_description']; ?></ins></b><br>-->
-							<ins class="field_title"><?php echo $field['field_description'][$this->config->get('config_language_id')]; ?>:&nbsp;</ins><ins class="field_text"><?php echo $field['value']; ?></ins>
-						</td>
-					</tr>
-
-
-
-
-
-					<?php
-					}
-					}
-					?>
-				</table>
 
 				<div class="bbcode-text" id="bbcode-text-<?php echo  $comment['comment_id']; ?>">
 					<?php echo $comment['text']; ?>
@@ -109,15 +76,12 @@
 
 			</div>
 
-			<div class="margintop10">
-				<a href="#" id="comment_id_reply_<?php echo $comment['comment_id']; ?>" class="comment_reply comment_buttons hrefajax"><?php
-					echo $text_reply_button;
-					?></a>
-			</div>
+			
 
 			<?php
 			// determine the actual setting the mark rollup
-			if (isset($mycomments[$num + 1]['parent_id']) && ($mycomments[$num + 1]['parent_id'] == $comment['comment_id'])) {
+			if (isset($mycomments[$number + 1]['parent_id']) && ($mycomments[$number + 1]['parent_id'] == $comment['comment_id']))
+			{
 			?>
 			<div class="floatright" >
 
@@ -160,21 +124,13 @@
 	{
 	?>
 </div>
+         
+     
 </div>
 <?php
 }
 }
 ?>
-
-
-<div class="floatright displayinline"><?php  echo $entry_sorting; ?>
-	<!-- <select name="sorting" class="comments_sorting" onchange="$('#comment').comments(this[this.selectedIndex].value);"> -->
-	<select name="sorting" class="comments_sorting" onchange="$('#comment').comments(this[this.selectedIndex].value);">
-		<option <?php if ($sorting == 'desc')  echo 'selected="selected"'; ?> value="desc"><?php echo $text_sorting_desc; ?></option>
-		<option <?php if ($sorting == 'asc')   echo 'selected="selected"'; ?> value="asc"><?php  echo $text_sorting_asc;  ?></option>
-	</select>
-
-</div>
 
 <div class="pagination"><?php echo $pagination; ?></div>
 
@@ -185,7 +141,22 @@
 ?>
 </div>
 
+<div class="com_tt">Оставить комментарий через соцсети</div>   
 
+<div class="vk_comments">
+  <!-- Put this script tag to the <head> of your page -->
+<script type="text/javascript" src="//vk.com/js/api/openapi.js?112"></script>
 
+<script type="text/javascript">
+  VK.init({apiId: 4350441, onlyWidgets: true});
+</script>
 
+<!-- Put this div tag to the place, where the Comments block will be -->
+<div id="vk_comments"></div>
+<script type="text/javascript">
+VK.Widgets.Comments("vk_comments", {limit: 15, width: "900", attach: "*"});
+</script>
+</div>
+
+ </div>
 

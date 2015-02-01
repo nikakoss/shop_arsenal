@@ -1,0 +1,14 @@
+.b{font-weight:bold;}
+.em{font-style:italic;}
+.fl{float:left;}
+.fr{float:right;}
+.tdu{text-decoration:underline;}
+.tdn{text-decoration:none;}
+.cur{cursor:pointer;}
+.ttu{text-transform:uppercase;}
+.tac{text-align:center;}
+.clr{clear:both;}
+.ma{margin:0 auto;}
+.pa{position:absolute;}
+.pr{position:relative;}
+.hid{overflow:hidden;}

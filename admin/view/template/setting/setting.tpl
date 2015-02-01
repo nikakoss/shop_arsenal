@@ -60,36 +60,6 @@
               <td><?php echo $entry_fax; ?></td>
               <td><input type="text" name="config_fax" value="<?php echo $config_fax; ?>" /></td>
             </tr>
-			<tr>
-				<td colspan="2"><h2>Реквизиты для шапки и вообще</h2></td>
-			</tr>
-			<tr>
-              <td>ICQ</td>
-              <td>
-				<input type="text" name="config_icq" value="<?php echo $config_icq; ?>" />
-			  </td>
-            </tr>
-			<tr>
-              <td>Skype</td>
-              <td>
-				<input type="text" name="config_skype" value="<?php echo $config_skype; ?>" />
-				
-			  </td>
-            </tr>
-			<tr>
-              <td>Время работы</td>
-              <td> 
-				  от <input type="text" name="config_header_from" value="<?php echo $config_header_from; ?>" /> 
-				  до <input type="text" name="config_header_to" value="<?php echo $config_header_to; ?>" />
-			  </td>
-            </tr>
-			<tr>
-              <td>Телефон</td>
-              <td> 
-				  код <input type="text" name="config_header_phone_1" value="<?php echo $config_header_phone_1; ?>" /> 
-				  телефон <input type="text" name="config_header_phone_2" value="<?php echo $config_header_phone_2; ?>" />
-			  </td>
-            </tr>
           </table>
         </div>
         <div id="tab-store">

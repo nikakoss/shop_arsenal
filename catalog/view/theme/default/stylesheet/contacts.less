@@ -1,0 +1,191 @@
+section.contacts_us{
+  background: url(../images/contacts_bg.png) center top no-repeat;
+  height: 835px;
+
+  .contacts_left{
+    float: left;
+    width: 470px;
+
+    .we_work{
+      width: 289px;
+      font-size: 14px;
+      line-height: 17px;
+      font-family: 'Open Sans', sans-serif;
+      font-weight: normal;
+      color: #000;
+      text-align: center;
+      margin-bottom: 56px;
+      margin-top: 22px;
+    }
+
+    .info_5{
+      position: relative;
+      width: 375px;
+      font-size: 14px;
+      font-family: 'Open Sans', sans-serif;
+      font-weight: normal;
+      color: #4c4c4c;
+      line-height: 22px;
+      margin-bottom: 40px;
+      z-index: 9;
+
+      .phone{
+        background: url(../images/phone_c.png) 1px 1px no-repeat;
+      }
+      .mail{
+        background: url(../images/mail_c.png) 0 5px no-repeat;
+        text-decoration: underline;
+      }
+      .icq{
+        background: url(../images/icq_c.png) 0 4px no-repeat;
+      }
+      .skype{
+        background: url(../images/skype_c.png) 1px 4px no-repeat;
+      }
+      .location{
+        background: url(../images/location_c.png) 3px 4px no-repeat;
+      }
+
+      .phone,.mail,.icq,.skype,.location{
+        padding-left: 27px;
+        margin-bottom: 12px;
+      }
+    }
+
+    .btn_form {
+      font-family: 'Open Sans', sans-serif;
+      font-weight: 600;
+      font-weight: normal;
+      font-size: 14px;
+      background: #4aace8;
+      width: auto;
+      height: 26px;
+      display: inline-block;
+      padding: 2px 12px;
+      margin-left: 5px;
+      margin-bottom: 47px;
+      text-transform: none;
+      text-align: center;
+      &:hover{
+        background: #515151;
+      }
+    }
+
+    .note{
+      position: relative;
+      width: 370px;
+      font-family: 'Open Sans', sans-serif;
+      font-weight: 600;
+      font-size: 12px;
+      color: #000;
+      line-height: 15px;
+      margin-bottom: 19px;
+      z-index: 9;
+    }
+
+    form.form_contacts{
+      position: relative;
+      z-index: 9;
+
+      input,textarea{
+        width: 336px;
+        margin-left: 1px;
+      }
+
+      textarea{
+        height: 61px;
+        margin-bottom: 20px;
+      }
+
+      .btn_form{
+        cursor: pointer;
+        font-family: 'Open Sans Condensed', sans-serif; 
+        font-size: 21px;
+        font-weight: bold;
+        font-style: normal;
+        width: 146px;
+        height: 45px;
+        background: #8a8a8a;
+        margin-left: 113px;
+        padding: 2px 20px;
+        text-align: center;
+        text-transform: uppercase;
+        &:hover{
+          background: #10253b;
+        }
+      }
+    }
+  }
+
+  .contacts_right{
+    float: right;
+    width: 473px;
+
+    .cut_b{
+      font-family: 'Open Sans Condensed', sans-serif;
+      text-transform: uppercase;
+      margin-top: 20px;
+      margin-bottom: 11px;
+
+      .contact_us_title{
+        font-size: 36px;
+        line-height: 37px;
+        color: #4c4c4c;
+      }
+      .cut_blue{
+        margin-left: 166px;
+        font-size: 24px;
+        line-height: 20px;
+        color: #4aace8;
+      }
+    }
+
+    .loc_map_cont{
+      position: relative;
+      right: 156px;
+      width: 642px;
+      height: 366px;
+      margin-bottom: 22px;
+
+      .map_bg_l{
+        position: absolute;
+        top: 0;
+        left: 1px;
+        width: 162px;
+        height: 366px;
+        background: url(../images/map_bg_l.png) no-repeat;
+        z-index: 2;
+      }
+      .map_bg_r{
+        position: absolute;
+        top: 0;
+        right: 0;
+        width: 480px;
+        height: 366px;
+        background: url(../images/map_bg_r.png) no-repeat;
+        z-index: 1;  
+      }
+
+      #map {
+        display: block;
+        float: right;
+        top: 20px;
+        right: 20px;
+        width: 561px;
+        height: 322px;
+        margin: 0;
+        padding: 0;
+        z-index: 1;
+      }
+    }
+
+    .single_team_c{
+      float: right;
+      right: 20px;
+      position: relative;
+      width: 294px;
+      height: 359px;
+    }
+  }
+
+}

@@ -22,6 +22,7 @@
           <thead>
             <tr>
 			  <td class="left">ID</td>
+              <td class="left">Имя</td>
               <td class="left">Email</td>
 			  <td class="left"></td>
             </tr>
@@ -31,6 +32,7 @@
             <?php foreach ($subscription as $subscript) { ?>
             <tr>
 			  <td class="left"><?php echo $subscript['id_sub']; ?></td>
+              <td class="left"><?php echo $subscript['name_sub']; ?></td>
               <td class="left"><?php echo $subscript['email_sub']; ?></td>
 			  <td class="left">
 			  <form action="<?php echo $action; ?>" method="post" enctype="multipart/form-data" id="form" >

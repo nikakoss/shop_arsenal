@@ -1,10 +1,11 @@
 <?php
 class ControllerRecordRecord extends Controller
-{
+{ 
 	private $error = array();
 	private $code;
 	public function index()
 	{
+	
 		$this->data['blog_version'] = '';
 		$this->load->model('setting/setting');
 		$settings_admin = $this->model_setting_setting->getSetting('blogversion', 'blog_version');
@@ -61,13 +62,13 @@ class ControllerRecordRecord extends Controller
 			} //$pos !== false
 		} //!$colorbox_flag
 		if (!$colorbox_flag) {
-			//$this->document->addScript('catalog/view/javascript/blog/colorbox/jquery.colorbox.js');
-			//$this->document->addScript('catalog/view/javascript/blog/colorbox/lang/jquery.colorbox-' . $this->config->get('config_language') . '.js');
-			//$this->document->addStyle('catalog/view/javascript/blog/colorbox/css/' . $this->data['settings_general']['colorbox_theme'] . '/colorbox.css');
+			$this->document->addScript('catalog/view/javascript/blog/colorbox/jquery.colorbox.js');
+			$this->document->addScript('catalog/view/javascript/blog/colorbox/lang/jquery.colorbox-' . $this->config->get('config_language') . '.js');
+			$this->document->addStyle('catalog/view/javascript/blog/colorbox/css/' . $this->data['settings_general']['colorbox_theme'] . '/colorbox.css');
 		} //!$colorbox_flag
 		$this->data['imagebox'] = 'colorbox';
 		if ($this->data['imagebox'] == 'colorbox') {
-			//$this->document->addScript('catalog/view/javascript/blog/blog.color.js');
+			$this->document->addScript('catalog/view/javascript/blog/blog.color.js');
 		} //$this->data['imagebox'] == 'colorbox'
 		$array_dir_image = str_split(DIR_IMAGE);
 		$array_dir_app   = str_split(DIR_APPLICATION);
@@ -490,12 +491,22 @@ class ControllerRecordRecord extends Controller
 			$this->data['attribute_groups'] = $this->model_catalog_record->getRecordAttributes($this->request->get['record_id']);
 			$this->data['products']         = array();
 			$results                        = $this->model_catalog_record->getProductRelated($this->request->get['record_id'], 'product_id');
-
-
-
+                        
 			foreach ($results as $result) {
 				if ($result['image']) {
-					$image = $this->model_tool_image->resize($result['image'], $this->config->get('config_image_related_width'), $this->config->get('config_image_related_height'));
+
+				if (isset($this->data['blog_design']['product_image']['width']) && $this->data['blog_design']['product_image']['width']!='') {
+				 $width = $this->data['blog_design']['product_image']['width'];
+				} else {
+				 $width = $this->config->get('config_image_related_width');
+				}
+
+				if (isset($this->data['blog_design']['product_image']['height']) && $this->data['blog_design']['product_image']['height']!='') {
+				 $height = $this->data['blog_design']['product_image']['height'];
+				} else {
+				 $height = $this->config->get('config_image_related_height');
+				}
+					$image = $this->model_tool_image->resize($result['image'], $width, $height);
 				} //$result['image']
 				else {
 					$image = false;
@@ -588,6 +599,7 @@ class ControllerRecordRecord extends Controller
 				'common/column_right',
 				'common/content_top',
 				'common/content_bottom',
+				'common/column_news_blog',
 				'common/footer',
 				'common/header'
 			);

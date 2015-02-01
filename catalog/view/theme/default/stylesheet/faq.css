@@ -1,0 +1,48 @@
+@import url(http://fonts.googleapis.com/css?family=Open+Sans:700,400&subset=latin,cyrillic-ext,cyrillic);
+section.faq{background:url(../images/faq_bg.png) repeat 0 0;line-height:17px;}
+section.faq p{color:#000000;}
+section.faq p.nomargin{padding-bottom:0;}
+section.faq .wrap{padding-bottom:14px;}
+section.faq .text{padding:20px 0 8px;border-bottom:1px solid #dcdcdc;margin-bottom:14px;}
+section.faq .faq_box_btn{width:293px;padding-left:21px;text-transform:uppercase;cursor:pointer;background:#ffffff;margin-bottom:6px;}
+section.faq .faq_box_btn,section.faq .vacancy_box_btn{-webkit-user-select:none;-moz-user-select:none;-o-user-select:none;user-select:none;}
+section.faq .vacancy_box_btn{width:786px;height:51px;padding-left:21px;text-transform:uppercase;cursor:pointer;background:#ffffff;margin-bottom:6px;}
+section.faq .faq_box_btn:hover,section.faq .faq_box_btn.opened,section.faq .vacancy_box_btn.opened,section.faq .vacancy_box_btn:hover{background:#8bcaf0;}
+section.faq .faq_box_btn h2,section.faq .vacancy_box_btn h2{display:inline-block;margin-top:10px;}
+section.faq .faq_box_btn:hover h2,section.faq .faq_box_btn.opened h2,section.faq .vacancy_box_btn:hover h2,section.faq .vacancy_box_btn.opened h2{color:#ffffff;background:url(../images/bg_white.png) repeat-x 0 bottom;}
+section.faq .faq_box_btn .upper,section.faq .vacancy_box_btn .upper{font-family:'Open Sans';font-size:11px;color:#959595;position:relative;top:-10px;left:5px;text-transform:capitalize;}
+.faq_box_btn h2{width:92%;}
+section.faq .faq_box_btn:hover .upper,section.faq .vacancy_box_btn:hover .upper,section.faq .faq_box_btn.opened .upper,section.faq .vacancy_box_btn.opened .upper{color:#ffffff;}
+section.faq .vacancy_box_btn .salary{font-size:18px;font-family:'Open Sans';font-style:italic;color:#5b5b5b;padding-left:20px;}
+section.faq .vacancy_box_btn.opened .salary,section.faq .vacancy_box_btn:hover .salary{color:#ffffff;}
+section.faq .hidden_box{background:#ffffff;border:1px solid #4aace8;padding:20px 20px 0;margin-top:11px;margin-bottom:7px;display:none;}
+section.faq .vacancy_box .hidden_box{padding:15px 20px 0px;line-height:15px;}
+section.faq .vacancy_box .hidden_box ul{font-size:12px;color:#000000;padding-bottom:13px;}
+section.faq ul.faq_list{font-size:14px;font-family:'Open Sans';color:#000000;padding-bottom:16px;}
+section.faq ul.faq_list li{padding-left:10px;background:url("../images/list-marker.png") no-repeat 0 6px;}
+section.faq .hidden_box .title{font-size:14px;font-family:'Open Sans',sans-serif;font-weight:700;color:#000000;text-transform:uppercase;}
+section.faq .hidden_box .sub_hidden_box{font-size:14px;color:#000000;border-top:1px solid #4aace8;position:relative;padding-top:15px;}
+section.faq .hidden_box .sub_hidden_box:before{content:"";border-top:1px solid #4aace8;width:20px;height:1px;position:absolute;left:-20px;top:-1px;}
+section.faq .hidden_box .sub_hidden_box:after{content:"";border-top:1px solid #4aace8;width:20px;height:1px;position:absolute;right:-20px;top:-1px;}
+section.faq .hidden_box .sub_hidden_box .contacts{padding-top:18px;padding-bottom:18px;line-height:17px;}
+section.faq .hidden_box .sub_hidden_box .contacts .blue{color:#4aace8;text-decoration:underline;}
+section.faq .hidden_box .sub_hidden_box .grey{color:#989898;}
+.feedback{padding-top:28px;}
+.feedback .left{float:left;}
+.feedback .right{width:370px;float:right;margin-right:105px;}
+.feedback .info_5{position:relative;width:375px;font-size:14px;font-family:'Open Sans';color:#4c4c4c;line-height:22px;margin-bottom:40px;z-index:9;}
+.feedback .info_5 .phone{background:url(../images/phone_c.png) 1px 1px no-repeat;}
+.feedback .info_5 .mail{background:url(../images/mail_c.png) 0 5px no-repeat;text-decoration:underline;}
+.feedback .info_5 .icq{background:url(../images/icq_c.png) 0 4px no-repeat;}
+.feedback .info_5 .skype{background:url(../images/skype_c.png) 1px 4px no-repeat;}
+.feedback .info_5 .location{background:url(../images/location_c.png) 3px 4px no-repeat;}
+.feedback .info_5 .phone,.feedback .info_5 .mail,.feedback .info_5 .icq,.feedback .info_5 .skype,.feedback .info_5 .location{padding-left:27px;margin-bottom:12px;}
+.feedback .btn_form{font-family:'Open Sans';font-weight:600;font-size:14px;background:#4aace8;width:192px;height:26px;display:block;padding:2px 12px;margin-left:5px;margin-bottom:47px;text-transform:none;}
+.feedback .btn_form:hover{background:#515151;}
+.feedback .note{position:relative;width:370px;font-family:'Open Sans';font-weight:600;font-size:12px;color:#000;line-height:15px;margin-bottom:19px;z-index:9;}
+.feedback form.form_contacts{position:relative;z-index:9;}
+.feedback form.form_contacts input,.feedback form.form_contacts textarea{width:336px;margin-left:1px;}
+.feedback form.form_contacts textarea{height:61px;margin-bottom:20px;}
+.feedback form.form_contacts .btn_form{cursor:pointer;font-family:'Open Sans Condensed',sans-serif;font-size:21px;font-weight:bold;width:146px;height:45px;background:#8a8a8a;margin-left:113px;padding:2px 20px;text-align:center;text-transform:uppercase;font-style:normal;}
+.feedback form.form_contacts .btn_form:hover{background:#10253b;}
+.clearfix:after{content:" ";visibility:hidden;display:block;height:0;clear:both;}

@@ -74,19 +74,6 @@
 										<?php } else { ?>
 										<option value="content_top"><?php echo $text_content_top; ?></option>
 										<?php } ?>
-                                                                                
-                                                                                <?php if ($module['position'] == 'footer_menu') { ?>
-										<option value="footer_menu" selected="selected">Футер контакты</option>
-										<?php } else { ?>
-										<option value="footer_menu">Футер контакты</option>
-										<?php } ?>
-										
-										<?php if ($module['position'] == 'header_contact') { ?>
-										<option value="header_contact" selected="selected">Хедер контакты</option>
-										<?php } else { ?>
-										<option value="header_contact">Slider Box</option>
-										<?php } ?>
-                                                                                
 										<?php if ($module['position'] == 'content_bottom') { ?>
 										<option value="content_bottom" selected="selected"><?php echo $text_content_bottom; ?></option>
 										<?php } else { ?>
@@ -201,6 +188,10 @@
 												</div>
 											</td>
 										</tr>
+										<tr>
+											<td><label for="html-block-<?php echo $block_id; ?>-reset"><?php echo $entry_reset; ?></label></td>
+											<td><input id="html-block-<?php echo $block_id; ?>-reset" type="checkbox" name="html_block_<?php echo $block_id; ?>[reset]" value="1" /></td>
+										</tr>
 									</tbody>
 								</table>
 							</div>
@@ -220,7 +211,7 @@
 										</tr>
 										<tr>
 											<td class="message">
-											<label for="content-<?php echo $content_row; ?>-<?php echo $language['language_id']; ?>"><?php echo $entry_content; ?></label><br /><a class="js show-hide-editor help"><?php echo ($content['editor'][$language['language_id']]) ? $text_disable_editor : $text_enabled_editor; ?></a></td>
+											<label for="content-<?php echo $content_row; ?>-<?php echo $language['language_id']; ?>"><?php echo $entry_content; ?></label><br /><a class="js show-hide-editor help"><?php echo (isset($content['editor'][$language['language_id']]) && $content['editor'][$language['language_id']]) ? $text_disable_editor : $text_enabled_editor; ?></a></td>
 										<td>
 											<p class="link">
 												<a class="js"><?php echo $text_tokens; ?></a>
@@ -293,7 +284,7 @@
 															<td class="left"><?php echo $text_token_customer_reward; ?></td>
 														</tr>
 														<tr>
-														<td class="l	eft" colspan="2"><span class="title"><?php echo $text_title_over; ?></span></td>
+														<td class="left" colspan="2"><span class="title"><?php echo $text_title_over; ?></span></td>
 														</tr>
 														<tr>
 															<td class="left">[currency::code]</td>
@@ -411,8 +402,11 @@
 												</tbody>
 											</table>
 										</div>
-										<textarea id="html-block-theme-<?php echo $theme_id; ?>-template" rows="10" cols="100" name="html_block_theme[<?php echo $theme_id; ?>][template]"><?php echo $theme_info['template']; ?></textarea>
-										<p class="help"><?php echo $text_php_help; ?></p>
+										<div class="template-wrapper">
+											<a class="js show-default"><?php echo $text_default_template; ?></a>
+											<textarea id="html-block-theme-<?php echo $theme_id; ?>-template" rows="10" cols="100" name="html_block_theme[<?php echo $theme_id; ?>][template]"><?php echo $theme_info['template']; ?></textarea>
+											<p class="help"><?php echo $text_php_help; ?></p>
+										</div>
 									</td>
 								</tr>
 							</tbody>
@@ -481,7 +475,7 @@ $('.content').delegate('.live-view', 'click', function(event){
 	
 	document.body.appendChild(preview_form);
 
-	preview_form.action = "/index.php?route=module/html_block/preview&key=dmkapd8qweuqiweqjwkeh123123123";
+	preview_form.action = "<?php echo HTTP_CATALOG; ?>index.php?route=module/html_block/preview&key=dmkapd8qweuqiweqjwkeh123123123";
 	preview_form.target = 'preview-iframe';
 	preview_form.setAttribute("target", 'preview-iframe');
 	preview_form.id = 'preview-form';
@@ -587,8 +581,6 @@ function addModule() {
 	html += '	</select></td>';
 	html += '	<td class="left"><select name="html_block_module[' + module_row + '][position]">';
 	html += '	  <option value="content_top"><?php echo $text_content_top; ?></option>';
-	html += '	  <option value="footer_menu">Футер контакты</option>';
-	html += '      <option value="content_slider">Хедер контакты</option>';
 	html += '	  <option value="content_bottom"><?php echo $text_content_bottom; ?></option>';
 	html += '	  <option value="column_left"><?php echo $text_column_left; ?></option>';
 	html += '	  <option value="column_right"><?php echo $text_column_right; ?></option>';
@@ -679,6 +671,10 @@ function addBlock() {
 	html += '								</table>';
 	html += '							</div>';
 	html += '						</td>';
+	html += '					</tr>';
+	html += '					<tr>';
+	html += '						<td><label for="html-block-' + block_id + '-reset"><?php echo $entry_reset; ?></label></td>';
+	html += '						<td><input id="html-block-' + block_id + '-reset" type="checkbox" name="html_block_' + block_id + '[reset]" value="1" /></td>';
 	html += '					</tr>';
 	html += '				</tbody>';
 	html += '			</table>';
@@ -896,9 +892,8 @@ function removeBlock(content_row) {
 var theme_row = <?php echo $theme_row; ?>;
 var theme_id = <?php echo $theme_id; ?>;
 
-function addTheme() {
-	
-	theme_id++;
+$('a.js.show-default').live('click', function(event){
+	event.preventDefault();
 	
 	var default_theme = '<div class="box">\n';
 	default_theme +=	'	<div class="box-heading">[title]</div>\n';
@@ -906,6 +901,14 @@ function addTheme() {
 	default_theme +=	'		[content]\n';
 	default_theme +=	'	</div>\n';
 	default_theme +=	'</div>\n';
+	
+	$(this).next('textarea').val(default_theme);
+	
+});
+
+function addTheme() {
+	
+	theme_id++;
 	
 	html  = '<div id="tab-theme-' + theme_row + '" class="vtabs-content" rel="' + theme_id + '">';
 	html += '	<table class="form no-margin-bottom" cols="2">';
@@ -915,7 +918,7 @@ function addTheme() {
 	html += '				<td><input class="machine-name" id="theme-' + theme_id + '-machine-name" type="text" name="html_block_theme[' + theme_id + '][machine_name]" value="" maxlength="127" size="50" /><p class="help"><?php echo $text_help_machine_name; ?> <b><?php echo $text_theme; ?> ' + theme_id + '</b></p></td>';
 	html += '			</tr>';
 	html += '			<tr>';
-	html += '				<td></td>';
+	html += '				<td style="vertical-align: top;"><label for="html-block-theme-' + theme_id + '-template"><?php echo $entry_theme; ?></label></td>';
 	html += '				<td>';
 	html += '					<p class="link">';
 	html += '						<a class="js"><?php echo $text_tokens; ?></a>';
@@ -940,7 +943,10 @@ function addTheme() {
 	html += '							</tbody>';
 	html += '						</table>';
 	html += '					</div>';
-	html += '					<textarea rows="10" cols="100" name="html_block_theme[' + theme_id + '][template]">' + default_theme + '</textarea><p class="help"><?php echo $text_php_help; ?></p>';
+	html += '					<div class="template-wrapper">';
+	html += '						<a class="js show-default"><?php echo $text_default_template; ?></a>';
+	html += '						<textarea rows="10" cols="100" name="html_block_theme[' + theme_id + '][template]"></textarea><p class="help"><?php echo $text_php_help; ?></p>';
+	html += '					</div>';
 	html += '				</td>';
 	html += '			</tr>';
 	html += '		</tbody>';

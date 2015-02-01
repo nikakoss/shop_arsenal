@@ -9,10 +9,6 @@ class ControllerModuleFeatured extends Controller {
 		
 		$this->load->model('catalog/product'); 
 		
-		$this->document->addScript('catalog/view/javascript/jquery/jquery.jcarousel.min.js');
-		$this->document->addStyle('catalog/view/theme/default/stylesheet/carousel.css');
-
-		
 		$this->load->model('tool/image');
 
 		$this->data['products'] = array();
@@ -52,8 +48,6 @@ class ControllerModuleFeatured extends Controller {
 				} else {
 					$rating = false;
 				}
-				
-				$unit = $product_info['unit'];
 					
 				$this->data['products'][] = array(
 					'product_id' => $product_info['product_id'],
@@ -63,8 +57,7 @@ class ControllerModuleFeatured extends Controller {
 					'special' 	 => $special,
 					'rating'     => $rating,
 					'reviews'    => sprintf($this->language->get('text_reviews'), (int)$product_info['reviews']),
-					'href'    	 => $this->url->link('product/product', 'product_id=' . $product_info['product_id']),
-					'unit'        => $unit
+					'href'    	 => $this->url->link('product/product', 'product_id=' . $product_info['product_id'])
 				);
 			}
 		}

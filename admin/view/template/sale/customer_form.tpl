@@ -29,12 +29,6 @@
             <?php } ?>
             <span id="address-add"><?php echo $button_add_address; ?>&nbsp;<img src="view/image/add.png" alt="" onclick="addAddress();" /></span></div>
           <div id="tab-customer" class="vtabs-content">
-		  <script type="text/javascript">
-                $(function(){
-                    $('#tab-customer table').after('<div id="simple_custom_customer"></div>');
-                    $('#simple_custom_customer').load('index.php?route=module/simple/custom&token=<?php echo $token; ?>&type=customer&id=<?php echo $customer_id; ?>');
-                });
-            </script>
             <table class="form">
               <tr>
                 <td><span class="required">*</span> <?php echo $entry_firstname; ?></td>
@@ -84,8 +78,7 @@
               </tr>
               <tr>
                 <td><?php echo $entry_newsletter; ?></td>
-                <td>
-                    <select name="newsletter">
+                <td><select name="newsletter">
                     <?php if ($newsletter) { ?>
                     <option value="1" selected="selected"><?php echo $text_enabled; ?></option>
                     <option value="0"><?php echo $text_disabled; ?></option>
@@ -93,22 +86,8 @@
                     <option value="1"><?php echo $text_enabled; ?></option>
                     <option value="0" selected="selected"><?php echo $text_disabled; ?></option>
                     <?php } ?>
-                  </select>
-                </td>
+                  </select></td>
               </tr>
-                <tr>
-                    <td>Статус клиента</td>
-                    <td>
-                        <select name="discount_status">
-                            <?php foreach($discountData2 as $discounts){ ?>
-                            <?php if ($discounts['id'] == $discount_status) { ?>
-                            <option value="<?php echo $discounts['id'];?>" selected="selected"><?php echo $discounts['name'];?></option>
-                            <?php } else { ?>
-                            <option value="<?php echo $discounts['id'];?>"><?php echo $discounts['name'];?></option>
-                            <?php } ?>
-                            <?php } ?>
-                        </select>
-                </tr>
               <tr>
                 <td><?php echo $entry_customer_group; ?></td>
                 <td><select name="customer_group_id">
@@ -139,12 +118,6 @@
           <?php foreach ($addresses as $address) { ?>
           <div id="tab-address-<?php echo $address_row; ?>" class="vtabs-content">
             <input type="hidden" name="address[<?php echo $address_row; ?>][address_id]" value="<?php echo $address['address_id']; ?>" />
-			<script type="text/javascript">
-                $(function(){
-                    $('#tab-address-<?php echo $address_row; ?> table').after('<div id="simple_custom_address_<?php echo $address_row; ?>"></div>');
-                    $('#simple_custom_address_<?php echo $address_row; ?>').load('index.php?route=module/simple/custom&token=<?php echo $token; ?>&type=address&id=<?php echo $address['address_id']; ?>');
-                });
-            </script>
             <table class="form">
               <tr>
                 <td><span class="required">*</span> <?php echo $entry_firstname; ?></td>

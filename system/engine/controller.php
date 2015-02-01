@@ -49,26 +49,6 @@ abstract class Controller {
 		}		
 	}
 	
-	protected function hasAction($child, $args = array()) {
-		$action = new Action($child, $args);
-	
-		if (file_exists($action->getFile())) {
-			require_once($action->getFile());
-
-			$class = $action->getClass();
-
-			$controller = new $class($this->registry);
-
-			if(method_exists($controller, $action->getMethod())){
-				return true;
-			}else{
-				return false;
-			}
-		} else {
-			return false;				
-		}		
-	}
-	
 	protected function render() {
 		foreach ($this->children as $child) {
 			$this->data[basename($child)] = $this->getChild($child);

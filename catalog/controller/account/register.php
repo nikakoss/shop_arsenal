@@ -474,46 +474,6 @@ class ControllerAccountRegister extends Controller {
 		}
 		
 		$this->response->setOutput(json_encode($json));
-	}
-    //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    public function indexAjax() {
-
-    	$this->language->load('account/register');
-		
-		$this->document->setTitle($this->language->get('heading_title'));
-		$this->document->addScript('catalog/view/javascript/jquery/colorbox/jquery.colorbox-min.js');
-		$this->document->addStyle('catalog/view/javascript/jquery/colorbox/colorbox.css');
-					
-		$this->load->model('account/customer');
-		
-    	if (($this->request->server['REQUEST_METHOD'] == 'POST')) {
-            if (isset($this->request->post['email'])) {
-                $this->data['email'] = $this->request->post['email'];
-            } else {
-                $this->data['email'] = '';
-            }
-            if (isset($this->request->post['password'])) {
-                $this->data['password'] = $this->request->post['password'];
-            } else {
-                $this->data['password'] = '';
-            }
-            $this->model_account_customer->addCustomerAjaxModel($this->request->post);
-        }
-    }
-    ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    public function indexAjaxY() {
-
-    	$this->language->load('account/register');
-		
-		$this->document->setTitle($this->language->get('heading_title'));
-		$this->document->addScript('catalog/view/javascript/jquery/colorbox/jquery.colorbox-min.js');
-		$this->document->addStyle('catalog/view/javascript/jquery/colorbox/colorbox.css');
-					
-		$this->load->model('account/customer');     
-    	if (($this->request->server['REQUEST_METHOD'] == 'POST')) {
-            $this->model_account_customer->addYCustomerAjaxModel($this->request->post);
-        }
-    }
-
+	}	
 }
 ?>

@@ -19,7 +19,7 @@
 
 <?php
 	$opendiv=0;
-	foreach ($mycomments as $num => $comment) {
+	foreach ($mycomments as $number => $comment) {
     	$opendiv++;
 ?>
 
@@ -116,7 +116,7 @@ echo $starpath;
 
 <?php
         // determine the actual setting the mark rollup
-        if (isset($mycomments[$num + 1]['parent_id']) && ($mycomments[$num + 1]['parent_id'] == $comment['comment_id'])) {
+        if (isset($mycomments[$number + 1]['parent_id']) && ($mycomments[$number + 1]['parent_id'] == $comment['comment_id'])) {
 ?>
 	 <div class="floatright" >
 

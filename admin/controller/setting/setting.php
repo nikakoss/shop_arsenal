@@ -373,43 +373,7 @@ class ControllerSettingSetting extends Controller {
 		} else {
 			$this->data['config_telephone'] = $this->config->get('config_telephone');
 		}
-		// add by cmd
-		if (isset($this->request->post['config_icq'])) {
-			$this->data['config_icq'] = $this->request->post['config_icq'];
-		} else {
-			$this->data['config_icq'] = $this->config->get('config_icq');
-		}
-		
-		if (isset($this->request->post['config_header_phone_1'])) {
-			$this->data['config_header_phone_1'] = $this->request->post['config_header_phone_1'];
-		} else {
-			$this->data['config_header_phone_1'] = $this->config->get('config_header_phone_1');
-		}
-		
-		if (isset($this->request->post['config_header_phone_2'])) {
-			$this->data['config_header_phone_2'] = $this->request->post['config_header_phone_2'];
-		} else {
-			$this->data['config_header_phone_2'] = $this->config->get('config_header_phone_2');
-		}
-		
-		if (isset($this->request->post['config_header_from'])) {
-			$this->data['config_header_from'] = $this->request->post['config_header_from'];
-		} else {
-			$this->data['config_header_from'] = $this->config->get('config_header_from');
-		}
-		
-		if (isset($this->request->post['config_header_to'])) {
-			$this->data['config_header_to'] = $this->request->post['config_header_phone_1'];
-		} else {
-			$this->data['config_header_to'] = $this->config->get('config_header_to');
-		}
-		
-		if (isset($this->request->post['config_skype'])) {
-			$this->data['config_skype'] = $this->request->post['config_skype'];
-		} else {
-			$this->data['config_skype'] = $this->config->get('config_skype');
-		}
-//
+
 		if (isset($this->request->post['config_fax'])) {
 			$this->data['config_fax'] = $this->request->post['config_fax'];
 		} else {

@@ -2,22 +2,6 @@
 class ControllerInformationContact extends Controller {
 	private $error = array(); 
 	    
-	public function callform() {
-	
-		if (isset($this->request->post['captcha'])) {
-			$this->data['captcha'] = $this->request->post['captcha'];
-		} else {
-			$this->data['captcha'] = '';
-		}		
-
-		if (file_exists(DIR_TEMPLATE . $this->config->get('config_template') . '/template/information/popup_call.tpl')) {
-			$this->template = $this->config->get('config_template') . '/template/information/popup_call.tpl';
-		} else {
-			$this->template = 'default/template/information/popup_call.tpl';
-		}
-				
- 		$this->response->setOutput($this->render());
-	}
   	public function index() {
 		$this->language->load('information/contact');
 
@@ -222,16 +206,206 @@ class ControllerInformationContact extends Controller {
 		$captcha->showImage();
 	}
         
-        public function emailFromRss() {
+        public function sendMail() {
 
         if (($this->request->server['REQUEST_METHOD'] == 'POST')) {
             
-            $email = $this->request->post['email'];
-			
-            $this->load->model('subscription/subscriptionmodel');
-                 
-            $this->model_subscription_subscriptionmodel->in_mail(htmlspecialchars($email));
+            $subject = $this->request->post['subject'].' (sb-arsenal.ru)';
+
+            if (isset($this->request->post['mail'])) {
+                $message = "Имя: ".$this->request->post['name']."\n"."Телефон: ".$this->request->post['phone']."\n".
+                "Комментарий: ".$this->request->post['comment']."\n"."Email: ".$this->request->post['mail']; 
+            } else {
+               $message = "Имя: ".$this->request->post['name']."\n"."Телефон: ".$this->request->post['phone'];
+            }
+            
+
+            $mail = new Mail();
+            $mail->protocol = $this->config->get('config_mail_protocol');
+            $mail->parameter = $this->config->get('config_mail_parameter');
+            $mail->hostname = $this->config->get('config_smtp_host');
+            $mail->username = $this->config->get('config_smtp_username');
+            $mail->password = $this->config->get('config_smtp_password');
+            $mail->port = $this->config->get('config_smtp_port');
+            $mail->timeout = $this->config->get('config_smtp_timeout');
+            $mail->setTo($this->config->get('config_email'));
+            $mail->setFrom($this->request->post['mail']);  // email 
+            $mail->setSender($this->request->post['name']);  // name
+            $mail->setSubject(html_entity_decode($subject, ENT_QUOTES, 'UTF-8'));
+            $mail->setText(html_entity_decode($message, ENT_QUOTES, 'UTF-8'));
+            $mail->send();
         }
     }
+    
+    public function sendPhone() {
+
+        if (($this->request->server['REQUEST_METHOD'] == 'POST')) {
+            
+            $subject = $this->request->post['subject'].' (sb-arsenal.ru)';
+
+            if (isset($this->request->post['name'])) {
+                $message = "Имя: ".$this->request->post['name']."\n"."Телефон: ".$this->request->post['phone'];
+            } else {
+                $message = "";
+            }
+            
+
+            $mail = new Mail();
+            $mail->protocol = $this->config->get('config_mail_protocol');
+            $mail->parameter = $this->config->get('config_mail_parameter');
+            $mail->hostname = $this->config->get('config_smtp_host');
+            $mail->username = $this->config->get('config_smtp_username');
+            $mail->password = $this->config->get('config_smtp_password');
+            $mail->port = $this->config->get('config_smtp_port');
+            $mail->timeout = $this->config->get('config_smtp_timeout');
+            $mail->setTo($this->config->get('config_email'));
+            $mail->setFrom("sales@sb-arsenal.ru");  // email 
+            $mail->setSender($this->request->post['name']);  // name
+            $mail->setSubject(html_entity_decode($subject, ENT_QUOTES, 'UTF-8'));
+            $mail->setText(html_entity_decode($message, ENT_QUOTES, 'UTF-8'));
+            $mail->send();
+        }
+    }
+    
+    public function sendMailFooter() {
+
+        if (($this->request->server['REQUEST_METHOD'] == 'POST')) {
+
+            $subject = $this->request->post['subject'].' (sb-arsenal.ru)';
+
+            if (isset($this->request->post['name'])) {
+                $message = "Имя: ".$this->request->post['name']."\n"."Телефон: ".$this->request->post['phone']."\n".
+                "Комментарий: ".$this->request->post['comment']."\n"."Email: ".$this->request->post['mail'];
+            } else {
+               $message = '';
+            }
+            $check = '';
+            if(isset($this->request->post['check'])) {
+                $check = 1;
+            } else {
+                $check = 0;
+            }
+            
+            $one = $this->request->post['name'];
+            $two = $this->request->post['mail'];
+
+            $mail = new Mail();
+            $mail->protocol = $this->config->get('config_mail_protocol');
+            $mail->parameter = $this->config->get('config_mail_parameter');
+            $mail->hostname = $this->config->get('config_smtp_host');
+            $mail->username = $this->config->get('config_smtp_username');
+            $mail->password = $this->config->get('config_smtp_password');
+            $mail->port = $this->config->get('config_smtp_port');
+            $mail->timeout = $this->config->get('config_smtp_timeout');
+            $mail->setTo($this->config->get('config_email'));
+            $mail->setFrom($this->request->post['mail']);  // email 
+            $mail->setSender($this->request->post['name']);  // name
+            $mail->setSubject(html_entity_decode($subject, ENT_QUOTES, 'UTF-8'));
+            $mail->setText(html_entity_decode($message, ENT_QUOTES, 'UTF-8'));
+            $yes = $mail->send();
+			
+            $this->load->model('Subscription/subscriptionmodel');
+            if($check == 1) {
+                 
+                 $this->model_Subscription_subscriptionmodel->in_mail(htmlspecialchars($one), htmlspecialchars($two));
+            }
+        }
+    }
+    
+    public function sendMailCall() {
+
+        if (($this->request->server['REQUEST_METHOD'] == 'POST')) {
+
+            $subject = $this->request->post['subject'].' (sb-arsenal.ru)';
+
+            if(isset($this->request->post['check1'])) {
+                $check1 = 1;
+            }else {
+                $check1 = 0;
+            }
+            if(isset($this->request->post['check2'])) {
+                $check2 = 1;
+            } else {
+                $check2 = 0;
+            }
+            if(isset($this->request->post['check3'])) {
+                $check3 = 1;
+            }else {
+                $check3 = 0;
+            }
+            if(isset($this->request->post['check4'])) {
+                $check4 = 1;
+            }else {
+                $check4 = 0;
+            }
+            
+            $usluga = "\n";
+            if($check1 == 1) {
+                $usluga .= "Cистемы видеонаблюдения \n";
+            }
+            if($check2 == 1) {
+                $usluga .= "Cистемы охраны имущества \n";
+            }
+            if($check3 == 1) {
+                $usluga .= "Cистемы пожарной безопасности \n";
+            }
+            if($check4 == 1) {
+                $usluga .= "Cистемы контроля доступа \n";
+            }
+            
+            if (isset($this->request->post['name'])) {
+                $message = "Имя: ".$this->request->post['name']."\n"."Телефон: ".$this->request->post['phone']."\n".
+                "Email: ".$this->request->post['mail']."\n"."Заказанные услуги: ".$usluga; 
+            } 
+
+            $mail = new Mail();
+            $mail->protocol = $this->config->get('config_mail_protocol');
+            $mail->parameter = $this->config->get('config_mail_parameter');
+            $mail->hostname = $this->config->get('config_smtp_host');
+            $mail->username = $this->config->get('config_smtp_username');
+            $mail->password = $this->config->get('config_smtp_password');
+            $mail->port = $this->config->get('config_smtp_port');
+            $mail->timeout = $this->config->get('config_smtp_timeout');
+            $mail->setTo($this->config->get('config_email'));
+            $mail->setFrom($this->request->post['mail']);  // email 
+            $mail->setSender($this->request->post['name']);  // name
+            $mail->setSubject(html_entity_decode($subject, ENT_QUOTES, 'UTF-8'));
+            $mail->setText(html_entity_decode($message, ENT_QUOTES, 'UTF-8'));
+            $yes = $mail->send();
+            
+        }
+    }
+    
+    public function sendMailCallHeader() {
+
+        if (($this->request->server['REQUEST_METHOD'] == 'POST')) {
+
+            $subject = $this->request->post['subject'].' (sb-arsenal.ru)';
+
+            if (isset($this->request->post['name'])) {
+                $message = "Имя: ".$this->request->post['name']."\n"."Телефон: ".$this->request->post['phone']."\n".
+                "Удобное время для звонка: ".$this->request->post['time'];
+                
+            } else {
+               $message = '';
+            }
+
+            $mail = new Mail();
+            $mail->protocol = $this->config->get('config_mail_protocol');
+            $mail->parameter = $this->config->get('config_mail_parameter');
+            $mail->hostname = $this->config->get('config_smtp_host');
+            $mail->username = $this->config->get('config_smtp_username');
+            $mail->password = $this->config->get('config_smtp_password');
+            $mail->port = $this->config->get('config_smtp_port');
+            $mail->timeout = $this->config->get('config_smtp_timeout');
+            $mail->setTo($this->config->get('config_email'));
+            $mail->setFrom($this->request->post['mail']);  // email 
+            $mail->setSender($this->request->post['name']);  // name
+            $mail->setSubject(html_entity_decode($subject, ENT_QUOTES, 'UTF-8'));
+            $mail->setText(html_entity_decode($message, ENT_QUOTES, 'UTF-8'));
+            $mail->send();
+        }
+    }
+
 }
 ?>

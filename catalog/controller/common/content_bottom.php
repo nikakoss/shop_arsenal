@@ -34,10 +34,10 @@ class ControllerCommonContentBottom extends Controller {
 						
 		if (!$layout_id) {
 			$layout_id = $this->config->get('config_layout_id');
-		}                
-           
+		}
+
 		$module_data = array();
-                	
+		
 		$this->load->model('setting/extension');
 		
 		$extensions = $this->model_setting_extension->getExtensions('module');		
@@ -57,7 +57,7 @@ class ControllerCommonContentBottom extends Controller {
 				}
 			}
 		}
-                
+		
 		$sort_order = array(); 
 	  
 		foreach ($module_data as $key => $value) {
@@ -75,14 +75,7 @@ class ControllerCommonContentBottom extends Controller {
 				$this->data['modules'][] = $module;
 			}
 		}
-           /*     
-                //if($layout_id==8){
-                 $this->load->model('catalog/information');		
-		$this->data['informations']= array();
-                $contact_info=$this->model_catalog_information->getInformation(13);                
-                $this->data['modules'][]=htmlspecialchars_decode($contact_info['description']);
-               // }
-*/
+
 		if (file_exists(DIR_TEMPLATE . $this->config->get('config_template') . '/template/common/content_bottom.tpl')) {
 			$this->template = $this->config->get('config_template') . '/template/common/content_bottom.tpl';
 		} else {

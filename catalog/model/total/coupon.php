@@ -86,53 +86,7 @@ class ModelTotalCoupon extends Model {
 				$total -= $discount_total;
 			} 
 		}
-              /**/
-                $discount_price=null;
-        if ($this->customer->isLogged()) { // logget user
-             $this->load->model('checkout/coupon'); // include model
-             //
-              $getStatusAcount = $this->model_checkout_coupon->getStatusAcount();              
-              $total_discount=FALSE;
-            foreach ($this->cart->getProducts() as $product) {              
-                
-                 // coupon products
-                $coupon = $this->model_checkout_coupon->getCouponProducts($product['product_id']);
-                
-                // coupon category
-                if(!$coupon){
-                   $coupon=$this->model_checkout_coupon->getCouponCategory($product['product_id']);
-                }
-               //&& isset($coupon[0]['status_client']) && (int)$coupon[0]['status_client']==(int)$customer_info['id']
-                if ($coupon && $getStatusAcount['id']==$coupon[0]['status_client']) {
-                    
-                    
-                    if ($coupon[0]['type'] == 'P') {
-                          //  $discount_price = $product['price'] - (($product['price'] / 100) * $coupon[0]['discount']);                       
-                            $discount_price = (($product['price'] / 100) * $coupon[0]['discount'])*(int)$product['quantity'];                       
-                    }
-
-                    if ($coupon[0]['type'] == 'F') {                           
-                            //$discount_price = $product['price'] - $coupon[0]['discount'];   
-                            $discount_price = $coupon[0]['discount']*(int)$product['quantity'];   
-                    }
-                   // $total-=$discount_price*(int)$product['quantity'];
-                    $total-=$discount_price;
-                }                
-                $total_discount+=$discount_price;
-                
-            }
-         if($total_discount){
-          $total_data[] = array(
-                'code' => 'coupon',
-                'title' => "Cкидка",
-                'text' => round($total_discount,2)." руб",
-                'value' => max(0, $total),
-                'sort_order' => $this->config->get('total_sort_order')-1
-            );    
-         }
-           
-        } // logget user
-    }
+	}
 	
 	public function confirm($order_info, $order_total) {
 		$code = '';

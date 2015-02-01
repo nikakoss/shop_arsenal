@@ -29,26 +29,12 @@
                 <span class="error"><?php echo $error_name; ?></span>
                 <?php } ?></td>
             </tr>
-            <tr style="display:none;">
+            <tr>
               <td><span class="required">*</span> <?php echo $entry_code; ?></td>
-              <td><input type="text" name="code" value="<?php echo time(); ?>" />
+              <td><input type="text" name="code" value="<?php echo $code; ?>" />
                 <?php if ($error_code) { ?>
                 <span class="error"><?php echo $error_code; ?></span>
                 <?php } ?></td>
-            </tr>
-            <tr>
-              <td>Статус клиента</td>
-              <td>
-                  <select name="status_client">
-                  <?php foreach($discountData2 as $discounts){ ?>                  
-                   <?php if ($discounts['id'] == $status_client) { ?>
-                       <option value="<?php echo $discounts['id'];?>" selected="selected"><?php echo $discounts['name'];?></option>
-                  <?php } else { ?>
-                  <option value="<?php echo $discounts['id'];?>"><?php echo $discounts['name'];?></option>
-                  <?php } ?>                  
-                 <?php } ?>
-                  </select>
-             </td>
             </tr>
             <tr>
               <td><?php echo $entry_type; ?></td>
@@ -69,11 +55,11 @@
               <td><?php echo $entry_discount; ?></td>
               <td><input type="text" name="discount" value="<?php echo $discount; ?>" /></td>
             </tr>
-            <tr style="display:none;">
+            <tr>
               <td><?php echo $entry_total; ?></td>
               <td><input type="text" name="total" value="<?php echo $total; ?>" /></td>
             </tr>
-            <tr style="display:none;">
+            <tr>
               <td><?php echo $entry_logged; ?></td>
               <td><?php if ($logged) { ?>
                 <input type="radio" name="logged" value="1" checked="checked" />
@@ -87,7 +73,7 @@
                 <?php echo $text_no; ?>
                 <?php } ?></td>
             </tr>
-            <tr style="display:none;">
+            <tr>
               <td><?php echo $entry_shipping; ?></td>
               <td><?php if ($shipping) { ?>
                 <input type="radio" name="shipping" value="1" checked="checked" />
@@ -133,19 +119,19 @@
                   <?php } ?>
                 </div></td>
             </tr>           
-            <tr style="display:none;">
+            <tr>
               <td><?php echo $entry_date_start; ?></td>
               <td><input type="text" name="date_start" value="<?php echo $date_start; ?>" size="12" id="date-start" /></td>
             </tr>
-            <tr style="display:none;">
+            <tr>
               <td><?php echo $entry_date_end; ?></td>
               <td><input type="text" name="date_end" value="<?php echo $date_end; ?>" size="12" id="date-end" /></td>
             </tr>
-            <tr style="display:none;">
+            <tr>
               <td><?php echo $entry_uses_total; ?></td>
               <td><input type="text" name="uses_total" value="<?php echo $uses_total; ?>" /></td>
             </tr>
-            <tr style="display:none;">
+            <tr>
               <td><?php echo $entry_uses_customer; ?></td>
               <td><input type="text" name="uses_customer" value="<?php echo $uses_customer; ?>" /></td>
             </tr>

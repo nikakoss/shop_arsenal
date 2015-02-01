@@ -1,0 +1,128 @@
+/* colors */
+@colorBlack: #000;
+@colorBlue: #004185;
+@colorGray: #515151;
+@colorBlueLink: #4aace8;
+@colorBlueForm: #003165;
+
+
+/* fonts size */
+@fontSizeP: 14px;
+@fontSizeH1: 24px;
+
+/* font-family */
+@firstFont: 'Open Sans';
+@secondFont: 'Open Sans Condensed';
+//@thirdFont: 'OpenSansItalic';
+
+
+
+
+h1{
+    font-size: @fontSizeH1;
+    font-family: @secondFont;
+    color: @colorBlack;
+    line-height: 28px;
+    margin-bottom: 10px;
+    text-transform: uppercase;
+}
+h2{
+    font-size: @fontSizeH1;
+    font-family: @secondFont;
+    color: @colorBlue;
+    line-height: 28px;
+    text-transform: uppercase;
+    background: url(../images/h2_lina.png) repeat-x bottom;
+    padding-bottom: 2px;
+    margin-bottom: 10px;
+}
+h3{
+    font-size: 21px;
+    font-family: @secondFont;
+    color: @colorBlue;
+    line-height: 25px;
+    margin-bottom: 4px;
+    text-transform: uppercase;
+}
+h4{
+    font-size: 15px;
+    font-family: @secondFont;
+    color: @colorBlue;
+    line-height: 20px;
+    margin-bottom: 16px;
+    text-transform: uppercase;
+}
+p{
+    font-size: @fontSizeP;
+    font-family: @firstFont;
+    color: @colorGray;
+    padding-bottom: 16px;
+}
+a{
+    color: @colorBlueLink;
+    text-decoration: underline;
+
+    &:hover{
+        color: @colorBlueLink;
+        text-decoration: none;
+    }
+}
+
+input[type="text"],
+input[type="password"]{
+    font-size: 16px;
+    font-family: @firstFont;
+    font-style: italic;
+    color: @colorBlueForm;
+    line-height: 20px;
+    height: 20px;
+    padding: 8px 16px; 
+    border: 1px solid;
+    border-color: @colorBlueLink;
+    margin-bottom: 15px;
+
+    &::-webkit-input-placeholder { 
+        color: @colorBlueForm; 
+    } 
+    &:-moz-placeholder{color:@colorBlueForm; opacity: 1;}
+    &::-moz-placeholder{color:@colorBlueForm; opacity: 1;}
+    &:-ms-input-placeholder{color:@colorBlueForm;}
+}
+
+textarea{
+    font-size: 16px;
+    font-family: @firstFont;
+    font-style: italic;
+    color: @colorBlueForm;
+    line-height: 20px;
+    height: 64px;
+    padding: 8px 16px; 
+    border: 1px solid;
+    border-color: @colorBlueLink;
+    margin-bottom: 28px;
+    resize: none;
+
+    &::-webkit-input-placeholder { 
+        color: @colorBlueForm; 
+    } 
+    &:-moz-placeholder{color:@colorBlueForm; opacity: 1;}
+    &::-moz-placeholder{color:@colorBlueForm; opacity: 1;}
+    &:-ms-input-placeholder{color:@colorBlueForm;}
+}
+
+.btn_form{
+    font-size: 21px;
+    font-family: @secondFont;
+    color: #fff;
+    line-height: 25px;
+    text-transform: uppercase;
+    background: #8a8a8a;
+    border: 2px #80d2ff solid;
+    box-shadow: 4px 4px 0 0 rgba(128,210,255, .46);
+    text-decoration: none;
+    padding: 6px 22px;
+
+    &:hover{
+        color: #fff;
+    }
+}

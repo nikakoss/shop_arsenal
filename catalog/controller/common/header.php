@@ -1,47 +1,20 @@
 <?php   
 class ControllerCommonHeader extends Controller {
 	protected function index() {
-        
-        $this->load->model('account/customer');
-        
-        if(isset($this->session->data['customer_id'])){
-            $myData = $this->model_account_customer->getCustomer($this->session->data['customer_id']);
-			if($myData['lastname'] != '' && $myData['firstname'] != '' && $myData['firstname'] != 'Юридическое' && $myData['lastname'] != 'лицо'){
-			$this->data['customer_email'] = $myData['firstname'].' '.$myData['lastname'];
-			}
-			else if ($myData['email'] != ''){
-			$this->data['customer_email'] = $myData['email'];
-			}
-			else {
-			$this->data['customer_email'] = 'Вы зашли через: '.$myData['loginza2_provider'];
-			}
-        } 
-
-       
 		$this->data['title'] = $this->document->getTitle();
-		$this->document->addScript('catalog/view/javascript/jquery/colorbox/jquery.colorbox-min.js');
-		$this->document->addStyle('catalog/view/javascript/jquery/colorbox/colorbox.css');
-		//$this->document->addScript('catalog/view/javascript/jquery.maskedinput.min.js');
+		
 		if (isset($this->request->server['HTTPS']) && (($this->request->server['HTTPS'] == 'on') || ($this->request->server['HTTPS'] == '1'))) {
 			$server = $this->config->get('config_ssl');
 		} else {
 			$server = $this->config->get('config_url');
 		}
-        
-        if (isset($this->session->data['error']) && !empty($this->session->data['error'])) {
-            $this->data['error'] = $this->session->data['error'];
-            
-            unset($this->session->data['error']);
-        } else {
-            $this->data['error'] = '';
-        }
 
 		$this->data['base'] = $server;
 		$this->data['description'] = $this->document->getDescription();
 		$this->data['keywords'] = $this->document->getKeywords();
 		$this->data['links'] = $this->document->getLinks();	 
 		$this->data['styles'] = $this->document->getStyles();
-		$this->data['scripts'] = $this->document->getScripts();
+
 		$this->data['lang'] = $this->language->get('code');
 		$this->data['direction'] = $this->language->get('direction');
 		$this->data['google_analytics'] = html_entity_decode($this->config->get('config_google_analytics'), ENT_QUOTES, 'UTF-8');
@@ -61,7 +34,6 @@ class ControllerCommonHeader extends Controller {
 		
 		$this->language->load('common/header');
 		
-		$this->data['text_compare'] = sprintf($this->language->get('text_compare'), (isset($this->session->data['compare']) ? count($this->session->data['compare']) : 0));
 		$this->data['text_home'] = $this->language->get('text_home');
 		$this->data['text_wishlist'] = sprintf($this->language->get('text_wishlist'), (isset($this->session->data['wishlist']) ? count($this->session->data['wishlist']) : 0));
 		$this->data['text_shopping_cart'] = $this->language->get('text_shopping_cart');
@@ -122,8 +94,8 @@ class ControllerCommonHeader extends Controller {
 		
 		$this->data['categories'] = array();
 					
-		$categories = $this->model_catalog_category->getCategories(0);        
-        
+		$categories = $this->model_catalog_category->getCategories(0);
+		
 		foreach ($categories as $category) {
 			if ($category['top']) {
 				// Level 2
@@ -159,8 +131,10 @@ class ControllerCommonHeader extends Controller {
 			'module/language',
 			'module/currency',
 			'module/cart',
-			'common/header_contact'
+                        'common/column_header',
 		);
+                
+                	
 				
 		if (file_exists(DIR_TEMPLATE . $this->config->get('config_template') . '/template/common/header.tpl')) {
 			$this->template = $this->config->get('config_template') . '/template/common/header.tpl';

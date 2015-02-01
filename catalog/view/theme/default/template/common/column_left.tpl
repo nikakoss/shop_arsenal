@@ -1,7 +1,7 @@
 <?php if ($modules) { ?>
-<article class="clearfix">
-	<?php foreach ($modules as $module) { ?>
-		<?php echo $module; ?>
-	<?php } ?>
-</article> <!-- article -->
+<div id="column-left">
+  <?php foreach ($modules as $module) { ?>
+  <?php echo $module; ?>
+  <?php } ?>
+</div>
 <?php } ?> 
